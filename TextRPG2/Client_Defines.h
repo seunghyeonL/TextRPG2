@@ -15,6 +15,7 @@ namespace Client
 	const int MAP_WIDTH = 20; 
 	const int MAP_HEIGHT = 20;
 
+	const int MAX_HEALTH = 200;
 }
 
 using namespace std;

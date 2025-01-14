@@ -11,6 +11,7 @@ private:
 public:
 	virtual void Initialize(string name, int health, int attack) override;
 	virtual void Update() override;
+	virtual void Interact() override;
 
 public:
 	static Orc* Create(string name, int health, int attack);

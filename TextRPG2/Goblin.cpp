@@ -18,6 +18,10 @@ void Goblin::Update()
 {
 }
 
+void Goblin::Interact() {
+
+}
+
 Goblin *Goblin::Create(string name, int health, int attack)
 {
 	Goblin *pGoblin = new Goblin();

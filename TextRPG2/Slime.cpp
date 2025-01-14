@@ -18,6 +18,10 @@ void Slime::Update()
 
 }
 
+void Slime::Interact() {
+
+}
+
 Slime* Slime::Create(string name, int health, int attack)
 {
 	Slime* pSlime = new Slime();

@@ -14,6 +14,7 @@ private:
 public: /* IMonster �θ� Ŭ�������� �޾ƿ� �Լ��� */
 	virtual void Initialize(string name, int health, int attack) override;
 	virtual void Update() override;
+	virtual void Interact() override;
 
 public: /* ���� �����Ҵ��� ������ִ� �Լ� */
 	static Slime* Create(string name, int health, int attack);

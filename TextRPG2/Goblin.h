@@ -14,6 +14,7 @@ private:
 public: 
 	virtual void Initialize(string name, int health, int attack) override;
 	virtual void Update() override;
+	virtual void Interact() override;
 
 public: /* 실제 동적할당을 대신해주는 함수 */
 	static Goblin *Create(string name = "", int health = 10, int attack = 5);
