@@ -16,6 +16,7 @@ public:
 	virtual string GetName() const { return mName; }
 
 	virtual int GetHealth() const { return mHealth; }
+	virtual int GetDamage(int attack) { mHealth -= attack; }
 	virtual int GetAttack() const { return mAttack; }
 
 protected:

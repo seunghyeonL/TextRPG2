@@ -193,7 +193,7 @@ void GameManager::Battle(IMonster* Monster)
 	AttackBoost* boost = new AttackBoost();
 
 	// 몬스터의 위치와 캐릭터의 위치가 일치할 때
-	while (true)
+	while (Player->GetHealth() > 0 && Monster->GetHealth() > 0)
 	{
 		cout << "\n전투가 시작되었습니다.\n이번에 싸울 몬스터는 " << Monster->GetName()
 			<< " (체력: " << Monster->GetHealth() << ", 공격력: " << Monster->GetAttack() << ")\n";
@@ -215,7 +215,7 @@ void GameManager::Battle(IMonster* Monster)
 				int index;
 				cin >> index;
 				Player->UseItem(index);
-				double IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약 사용 시 체크할 변수
+				double IncreasedAttack = Player->GetAttack() - OriginalAttack;
 			}
 		case 2:
 			// 전투 진행
@@ -231,53 +231,54 @@ void GameManager::Battle(IMonster* Monster)
 						int index;
 						cin >> index;
 						Player->UseItem(index);
-						double IncreasedAttack = Player->GetAttack() - OriginalAttack;
+						double IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
 					}
 					break;
 				case 2:
+					// 플레이어의 공격
+					Monster->GetDamage(Player->GetAttack());
+					cout << Player->GetName() << " 플레이어가 공격했습니다.\n"
+						<< Player->GetAttack() << "의 피해를 입혀 몬스터의 체력은 " << Monster->GetHealth() << "입니다.\n";
+
+					// 몬스터의 반격
+					if (Monster->GetHealth() > 0) {
+						Player->SetHealth(Monster->GetAttack());
+						cout << Monster->GetName() << " 몬스터가 공격했습니다.\n"
+						<< Monster->GetAttack() << "의 피해를 입혀 플레이어의 체력은 " << Player->GetHealth() << "입니다.\n";
+					}
 					
+					// 전투 결과 처리
+					if (Player->GetHealth() <= 0) {
+						cout << "\n전투에서 패배했습니다.\n게임 오버!\n";
+						// cout << "1. Retry     2. Exit";
+						exit(0);
+					}
+					else if(Monster->GetHealth() <= 0){
+						// 전투 승리 처리
+
+						// 30퍼 확률로 아이템 드랍
+						if (rand() % 100 < 30)
+						{
+							//IItem* DroppedItem = Monster->DropItem();
+							//if (DroppedItem) {
+							//	Player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
+							//	cout << "몬스터가 " << DroppedItem->GetName() << "을 떨어뜨렸습니다.\n";
+							//}
+						}
+
+						Player->AddExperience(50);
+						int gold = 10 + rand() % 10;
+						Player->AddGold(gold);
+						cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
+
+						Player->SetAttack(OriginalAttack);
+						Player->LevelUp();
+					}
 					break;
 				case 3:
 					cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
 					// 레벨 메인 띄우기
 					break;
-				}
-
-				// 전투 결과 처리
-				if (Player->GetHealth() <= 0) {
-					cout << "\n전투에서 패배했습니다.\n게임 오버!\n";
-					cout << "1. Retry     2. Exit";
-					cin >> choice;
-					while (true)
-					{
-						switch (choice)
-						{
-						case 1:
-							StartGame(); break;
-						case 2:
-							exit(0); break;
-						default:
-							cout << "잘못된 입력입니다. 다시 시도해주세요.\n"; break;
-						}
-					}
-				}
-				else {
-					// 전투 승리 처리
-					Player->AddExperience(50);
-					int gold = 10 + rand() % 10;
-					Player->AddGold(gold);
-					cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
-
-					if (rand() % 100 < 30)
-					{
-						//IItem* DroppedItem = Monster->DropItem();
-						//if (DroppedItem) {
-						//	Player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
-						//	cout << "몬스터가 " << DroppedItem->GetName() << "을 떨어뜨렸습니다.\n";
-						//}
-					}
-					Player->SetAttack(OriginalAttack);
-					Player->LevelUp();
 				}
 			}
 			break;
@@ -288,9 +289,8 @@ void GameManager::Battle(IMonster* Monster)
 		default:
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
 		}
-		break;
 	}
-	boost->IsAlredyUseOne = false;
+	boost->IsAlredyUseOne = false; // 공격력 증가 물약 사용 시 체크할 변수
 	delete hp;
 	delete boost;
 	Monster->Free();
