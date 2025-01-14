@@ -26,6 +26,15 @@ Troll* Troll::Create(string name, int health, int attack)
 	return pTroll;
 }
 
+Troll* Troll::CreateBoss(string name, int health, int attack)
+{
+	Troll* pTroll = new Troll();
+
+	pTroll->Initialize(name, health, attack);
+
+	return pTroll;
+}
+
 void Troll::Free()
 {
 }

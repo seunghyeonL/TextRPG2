@@ -27,6 +27,15 @@ Orc* Orc::Create(string name, int health, int attack)
 	return pOrc;
 }
 
+Orc* Orc::CreateBoss(string name, int health, int attack)
+{
+	Orc* pOrc = new Orc();
+
+	pOrc->Initialize(name, health, attack);
+
+	return pOrc;
+}
+
 void Orc::Free()
 {
 }

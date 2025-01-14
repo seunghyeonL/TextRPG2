@@ -6,16 +6,17 @@ class Slime : public IMonster
 {
 private:
 	/*
-	»ý¼ºÀÚ¸¦ private À¸·Î ÇØ¹ö¸®¸é µ¿ÀûÇÒ´çÀÌ ¸·Èù´Ù. °³³ä¼÷Áö
-	±×·¡¼­ Create¶ó´Â ÇÔ¼ö¸¦ ¸¸µé¾î¼­ Á÷Á¢ »ý¼ºÇÏ°Ô ÇÒ ¼ö ÀÖ´Ù.	*/
+	ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ private ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	ï¿½×·ï¿½ï¿½ï¿½ Createï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.	*/
 	Slime();
 	virtual ~Slime() = default;
 
-public: /* IMonster ºÎ¸ð Å¬·¡½º¿¡¼­ ¹Þ¾Æ¿Â ÇÔ¼öµé */
+public: /* IMonster ï¿½Î¸ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ */
 	virtual void Initialize(string name, int health, int attack) override;
 	virtual void Update() override;
 
-public: /* ½ÇÁ¦ µ¿ÀûÇÒ´çÀ» ´ë½ÅÇØÁÖ´Â ÇÔ¼ö */
-	static Slime* Create(string name = "", int health = 10, int attack = 5);
+public: /* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ô¼ï¿½ */
+	static Slime* Create(string name, int health, int attack);
+	static Slime* CreateBoss(string name, int health, int attack);
 	virtual void Free() override;
 };
