@@ -5,8 +5,7 @@ Slime::Slime()
 {
 }
 
-/* �̷��� �̴ϼȶ������ ���� �ʱ�ȭ �ص� �ǰ� ������ �����ڷ� �ʱ�ȭ �ص� ��*/
-void Slime::Initialize(string name, int health, int attack)
+void Slime::Initialize(string name, double health, double attack)
 {
 	mName = name;
 	mHealth = health;
@@ -18,7 +17,11 @@ void Slime::Update()
 
 }
 
-Slime* Slime::Create(string name, int health, int attack)
+void Slime::Interact() {
+
+}
+
+Slime* Slime::Create(string name, double health, double attack)
 {
 	Slime* pSlime = new Slime();
 
@@ -27,7 +30,7 @@ Slime* Slime::Create(string name, int health, int attack)
 	return pSlime;
 }
 
-Slime* Slime::CreateBoss(string name, int health, int attack)
+Slime* Slime::CreateBoss(string name, double health, double attack)
 {
 	Slime* pSlime = new Slime();
 

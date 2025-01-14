@@ -5,8 +5,7 @@ Orc::Orc()
 {
 }
 
-/* �̷��� �̴ϼȶ������ ���� �ʱ�ȭ �ص� �ǰ� ������ �����ڷ� �ʱ�ȭ �ص� ��*/
-void Orc::Initialize(string name, int health, int attack)
+void Orc::Initialize(string name, double health, double attack)
 {
 	mName = name;
 	mHealth = health;
@@ -18,7 +17,11 @@ void Orc::Update()
 
 }
 
-Orc* Orc::Create(string name, int health, int attack)
+void Orc::Interact() {
+
+}
+
+Orc* Orc::Create(string name, double health, double attack)
 {
 	Orc* pOrc = new Orc();
 
@@ -27,7 +30,7 @@ Orc* Orc::Create(string name, int health, int attack)
 	return pOrc;
 }
 
-Orc* Orc::CreateBoss(string name, int health, int attack)
+Orc* Orc::CreateBoss(string name, double health, double attack)
 {
 	Orc* pOrc = new Orc();
 

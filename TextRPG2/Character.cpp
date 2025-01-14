@@ -3,15 +3,15 @@
 #include "HealthPotion.h"
 #include "AttackBoost.h"
 
-Character* Character::Instance = nullptr;
+Character *Character::Instance = nullptr;
 
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
-    MaxHealth(200), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>())
+      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_unique<Inventory>())
 {
 }
 
-Character* Character::GetInstance(string name)
+Character *Character::GetInstance(string name)
 {
 
     if (Instance == nullptr)
@@ -69,7 +69,8 @@ void Character::SetAttack(double attack)
 void Character::TakeDamage(double damage)
 {
     Health -= damage;
-    if (Health < 0) Health = 0;
+    if (Health < 0)
+        Health = 0;
 }
 
 double Character::GetExperience()
@@ -88,7 +89,7 @@ double Character::GetGold()
 }
 
 void Character::DisplayStatus()
-{  
+{
     cout << "\n현재 레벨 : " << Level << "레벨 " << Experience / MaxExperience * 100 << "% 경험치\n";
     cout << "현재 체력 : " << Health << " / " << MaxHealth << " (" << Health / MaxHealth * 100 << "%)\n";
     cout << "현재 공격력 : " << Attack << "\n";
@@ -97,16 +98,17 @@ void Character::DisplayStatus()
 
 void Character::DisplayInventory()
 {
-    HealthPotion* potion = new HealthPotion();
-    AttackBoost* AB = new AttackBoost();
+    HealthPotion *potion = new HealthPotion();
+    AttackBoost *AB = new AttackBoost();
     Inven->AddItem(potion);
     Inven->AddItem(AB);
     if (Inven->GetInventory().empty())
-        cout << "인벤토리는 비어있다." "\n";
+        cout << "인벤토리는 비어있다."
+                "\n";
 
     for (int i = 0; i < Inven->GetInventory().size(); i++)
         cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
-    
+
     int index;
     cin >> index;
     Inven->UseItem(index);
@@ -126,7 +128,10 @@ void Character::LevelUp()
         MaxExperience += 10;
         cout << "\nLevel up! 현재 레벨은 " << Level << "입니다.\n";
     }
-    if (Level == MaxLevel) { cout << "\n현재 최대 레벨입니다.\n"; }
+    if (Level == MaxLevel)
+    {
+        cout << "\n현재 최대 레벨입니다.\n";
+    }
 }
 
 void Character::AddExperience(double amount) { Experience += amount; }
