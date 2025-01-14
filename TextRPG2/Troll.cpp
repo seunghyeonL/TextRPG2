@@ -5,7 +5,7 @@ Troll::Troll()
 {
 }
 
-void Troll::Initialize(string name, int health, int attack)
+void Troll::Initialize(string name, double health, double attack)
 {
 	mName = name;
 	mHealth = health;
@@ -21,7 +21,7 @@ void Troll::Interact() {
 
 }
 
-Troll* Troll::Create(string name, int health, int attack)
+Troll* Troll::Create(string name, double health, double attack)
 {
 	Troll* pTroll = new Troll();
 
@@ -30,7 +30,7 @@ Troll* Troll::Create(string name, int health, int attack)
 	return pTroll;
 }
 
-Troll* Troll::CreateBoss(string name, int health, int attack)
+Troll* Troll::CreateBoss(string name, double health, double attack)
 {
 	Troll* pTroll = new Troll();
 

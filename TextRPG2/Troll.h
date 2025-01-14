@@ -5,19 +5,16 @@
 class Troll : public IMonster
 {
 private:
-	/*
-	�����ڸ� private ���� �ع����� �����Ҵ��� ������. �������
-	�׷��� Create��� �Լ��� ���� ���� �����ϰ� �� �� �ִ�.	*/
 	Troll();
 	virtual ~Troll() = default;
 
-public: /* IMonster �θ� Ŭ�������� �޾ƿ� �Լ��� */
-	virtual void Initialize(string name, int health, int attack) override;
+public:
+	virtual void Initialize(string name, double health, double attack) override;
 	virtual void Update() override;
 	virtual void Interact() override;
 
-public: /* ���� �����Ҵ��� ������ִ� �Լ� */
-	static Troll* Create(string name, int health, int attack);
-	static Troll* CreateBoss(string name, int health, int attack);
+public:
+	static Troll* Create(string name, double health, double attack);
+	static Troll* CreateBoss(string name, double health, double attack);
 	virtual void Free() override;
 };

@@ -12,13 +12,13 @@ protected:
 	virtual ~IMonster() = default;
 
 public:
-	virtual void Initialize(string name, int health, int attack) = 0;
+	virtual void Initialize(string name, double health, double attack) = 0;
 	
 	virtual string GetName() const { return mName; }
 
-	virtual int GetHealth() const { return mHealth; }
-	virtual int GetDamage(int attack) { mHealth -= attack; }
-	virtual int GetAttack() const { return mAttack; }
+	virtual double GetHealth() const { return mHealth; }
+	virtual void GetDamage(double attack) { mHealth -= attack;}
+	virtual double GetAttack() const { return mAttack; }
 
 protected:
 	string		mName{};

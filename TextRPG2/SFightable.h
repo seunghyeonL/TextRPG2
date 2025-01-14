@@ -6,8 +6,8 @@
 class SFightable : public IInteractable
 {
 protected:
-	int	mHealth{ 0 };
-	int	mAttack{ 0 };
+	double	mHealth{ 0 };
+	double	mAttack{ 0 };
 
 public:
 	virtual ~SFightable() = default;

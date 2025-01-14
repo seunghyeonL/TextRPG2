@@ -110,6 +110,7 @@ void GameManager::Free()
 {
 
 }
+
 IMonster* GameManager::GenerateMonster(int level)
 {
 	Troll* troll;
@@ -133,6 +134,9 @@ IMonster* GameManager::GenerateMonster(int level)
 		case 30:
 			orc = Orc::CreateBoss("오크 족장", level + 30, level + 10);
 			return orc;
+		default:
+			cout << "몬스터가 도망갔습니다.\n";
+			return nullptr; // 기본 반환값
 		}
 	}
 	else
@@ -156,6 +160,9 @@ IMonster* GameManager::GenerateMonster(int level)
 			orc = Orc::Create("일반 오크", level + 30, level + 10);
 			return orc;
 			break;
+		default:
+			cout << "몬스터가 도망갔습니다.\n";
+			return nullptr; // 기본 반환값
 		}
 	}
 };
@@ -203,7 +210,8 @@ void GameManager::Battle(IMonster* Monster)
 		cin >> choice;
 
 		double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
-		double IncreasedAttack = 0;
+		double IncreasedAttack = 0; // 공격력 증가 부분을 추적할 변수
+
 		switch (choice)
 		{
 		case 1:
@@ -215,11 +223,9 @@ void GameManager::Battle(IMonster* Monster)
 				int index;
 				cin >> index;
 				Player->GetInven()->UseItem(index);
-				double IncreasedAttack = Player->GetAttack() - OriginalAttack;
+				IncreasedAttack = Player->GetAttack() - OriginalAttack;
 			}
 		case 2:
-			double originalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
-			double increasedAttack = 0; // 공격력 증가 부분을 추적할 변수
 			// 전투 진행
 			while (Player->GetHealth() > 0 && Monster->GetHealth() > 0) {
 				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
@@ -233,9 +239,9 @@ void GameManager::Battle(IMonster* Monster)
 						int index;
 						cin >> index;
 						Player->GetInven()->UseItem(index);
-						double IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
+						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
+						break;
 					}
-					break;
 				case 2:
 					// 플레이어의 공격
 					Monster->GetDamage(Player->GetAttack());
@@ -273,43 +279,19 @@ void GameManager::Battle(IMonster* Monster)
 						Player->GetInven()->AddGold(gold);
 						cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
 
-						Player->SetAttack(OriginalAttack);
+						Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹기 전 공격력으로 세팅
 						Player->LevelUp();
 					}
 					break;
 				case 3:
 					cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
-					// 레벨 메인 띄우기
 					break;
-				}
-
-				// 전투 결과 처리
-				if (Player->GetHealth() <= 0) {
-					cout << "\n전투에서 패배했습니다.\n게임 오버!\n";
-					exit(0);
-				}
-				else {
-					// 전투 승리 처리
-					Player->AddExperience(50);
-					int gold = 10 + rand() % 10;
-					Player->GetInven()->AddGold(gold);
-					cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
-
-					//IItem* DroppedItem = Monster->DropItem();
-					//if (DroppedItem) {
-					//	player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
-					//	cout << "몬스터가 " << DroppedItem->getName() << "을 떨어뜨렸습니다.\n";
-					//}
-
-					Player->LevelUp();
-					Player->DisplayStatus();
 				}
 				Monster->Free();
 			}
 			break;
 		case 3:
 			cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
-			// 레벨 메인 띄우기
 			break;
 		default:
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
@@ -319,4 +301,5 @@ void GameManager::Battle(IMonster* Monster)
 	delete hp;
 	delete boost;
 	Monster->Free();
+	// 레벨 메인 띄우기
 }
