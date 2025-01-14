@@ -20,7 +20,7 @@ private:
     double Attack; // 공격력
     double Experience; // 경험치
     double MaxExperience; // 최대 경험치
-    unique_ptr<Inventory> Inven;
+    shared_ptr<Inventory> Inven;
 
     Character(string name);
     Character(const Character&) = delete;
@@ -42,5 +42,5 @@ public:
     void DisplayInventory();
     void LevelUp();
     void AddExperience(double amount);
-    void AddGold(double amount);
+    shared_ptr<Inventory> GetInven();
 };

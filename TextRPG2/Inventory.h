@@ -13,7 +13,7 @@ public:
     Inventory();
     vector<pair<IItem*, int>> GetInventory();
     int GetGold();
-    void SetGold(int gold);
+    void AddGold(int gold);
     void AddItem(IItem* item);
     void RemoveItem(IItem* item);
     void UseItem(int index);
