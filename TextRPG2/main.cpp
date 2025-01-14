@@ -7,6 +7,8 @@ bool IsAnyKeyPressed();
 
 int main()
 {
+	std::wcout.imbue(std::locale(""));
+	SetConsoleOutputCP(CP_UTF8);
 	DisableCursorBlinking();
 
 	MainApp *pMainApp = MainApp::Create();
