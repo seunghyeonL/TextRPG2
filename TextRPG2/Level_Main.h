@@ -6,7 +6,7 @@
 class Level_Main final : public Level
 {
 public:
-	enum VIEW { VIEW_STATUS, VIEW_MAP, VIEW_END };
+	enum VIEW { VIEW_STATUS, VIEW_MAP, VIEW_END, VIEW_INVENTORY };
 	enum MAP { MAP_VILLAGE, MAP_DUNGEON, MAP_SHOP, MAP_END };
 private:
 	Level_Main();

@@ -1,11 +1,13 @@
 #include <iostream>
 #include "Character.h"
+#include "HealthPotion.h"
+#include "AttackBoost.h"
 
 Character* Character::Instance = nullptr;
 
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
-    MaxHealth(200), MaxExperience(100), Attack(30), Experience(0), Gold(0)
+    MaxHealth(200), MaxExperience(100), Attack(30), Experience(0), Gold(0), Inven(make_unique<Inventory>())
 {
 }
 
@@ -95,10 +97,21 @@ void Character::DisplayStatus()
 
 void Character::DisplayInventory()
 {
-    for (int i = 0; i < Inventory.size(); i++)
-    {
-        cout << i << ". " << Inventory[i].first->GetName() << ": " << Inventory[i].second << "개\n";
-    }
+    HealthPotion* potion = new HealthPotion();
+    AttackBoost* AB = new AttackBoost();
+    Inven->AddItem(potion);
+    Inven->AddItem(AB);
+    if (Inven->GetInventory().empty())
+        cout << "인벤토리는 비어있다." "\n";
+
+    for (int i = 0; i < Inven->GetInventory().size(); i++)
+        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+    
+    int index;
+    cin >> index;
+    Inven->UseItem(index);
+    for (int i = 0; i < Inven->GetInventory().size(); i++)
+        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
 }
 
 void Character::LevelUp()
@@ -116,26 +129,5 @@ void Character::LevelUp()
     if (Level == MaxLevel) { cout << "\n현재 최대 레벨입니다.\n"; }
 }
 
-void Character::UseItem(int index)
-{
-    if (index >= 0 && index < Inventory.size())
-    {
-        cout << Inventory[index].first->GetName() << "을(를) 사용합니다.\n";
-        Inventory[index].first->Use(GetInstance(Name));
-        // 수량 소모
-    }
-}
-
 void Character::AddExperience(double amount) { Experience += amount; }
 void Character::AddGold(double amount) { Gold += amount; }
-
-void Character::AddItem(IItem* item)
-{
-    for (int i = 0; i < Inventory.size(); i++) {
-        if (Inventory[i].first->GetName() == item->GetName()) {
-            Inventory[i].second++;
-            delete item;
-            return;
-        }
-    }
-}

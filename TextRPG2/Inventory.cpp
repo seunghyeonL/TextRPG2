@@ -1,4 +1,16 @@
 #include "Inventory.h"
+#include "Character.h"
+
+Inventory::Inventory()
+    : Gold(0)
+{
+
+}
+
+vector<pair<IItem*, int>> Inventory::GetInventory()
+{
+    return Inven;
+}
 
 int Inventory::GetGold()
 {
@@ -12,13 +24,24 @@ void Inventory::SetGold(int gold)
 
 void Inventory::AddItem(IItem* item)
 {
-    for (int i = 0; i < Inven.size(); ++i)
+    if (Inven.empty())
+        Inven.push_back(make_pair(item, 1));
+
+    else
     {
-        if (Inven[i].first->GetName() == item->GetName())
+        for (int i = 0; i < Inven.size(); ++i)
         {
-            Inven[i].second++;
-            delete item;
-            return;
+            if (Inven[i].first->GetName() == item->GetName())
+            {
+                Inven[i].second++;
+                delete item;
+                return;
+            }
+            else
+            {
+                Inven.push_back(make_pair(item, 1));
+                return;
+            }
         }
     }
 }
@@ -41,5 +64,15 @@ void Inventory::RemoveItem(IItem* item)
                 return;
             }
         }
+    }
+}
+
+void Inventory::UseItem(int index)
+{
+    if (index >= 0 && index < Inven.size())
+    {
+        cout << Inven[index].first->GetName() << "을(를) 사용합니다.\n";
+        Inven[index].first->Use(Character::GetInstance());
+        RemoveItem(Inven[index].first);
     }
 }
