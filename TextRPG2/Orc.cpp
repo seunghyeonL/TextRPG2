@@ -17,6 +17,10 @@ void Orc::Update()
 
 }
 
+void Orc::Interact() {
+
+}
+
 Orc* Orc::Create(string name, int health, int attack)
 {
 	Orc* pOrc = new Orc();
