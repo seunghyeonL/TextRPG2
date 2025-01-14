@@ -7,7 +7,7 @@ Character* Character::Instance = nullptr;
 
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
-    MaxHealth(200), MaxExperience(100), Attack(30), Experience(0), Gold(0), Inven(make_unique<Inventory>())
+    MaxHealth(200), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>())
 {
 }
 
