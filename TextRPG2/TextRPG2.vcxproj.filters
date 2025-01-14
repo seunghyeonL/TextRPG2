@@ -45,29 +45,41 @@
     <Filter Include="소스 파일\06.Inventory">
       <UniqueIdentifier>{d63346e2-037a-41c8-9cea-98470e635134}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\07.Observer">
+    <Filter Include="소스 파일\07.InventoryObserver">
       <UniqueIdentifier>{c0608c12-f22b-4106-bea3-b118bea99948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable">
+      <UniqueIdentifier>{9052e147-f2fa-4673-b8e8-92215eb1e99f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Character">
+      <UniqueIdentifier>{e9106dc8-299c-49b6-bd57-266e44555a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Monster">
+      <UniqueIdentifier>{100dfc9f-796c-42d1-ba56-7ec725de9c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Monster\Goblin">
+      <UniqueIdentifier>{07089f1a-1345-4588-97c9-d8a31a6b21b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Monster\Slime">
+      <UniqueIdentifier>{e731f06e-faef-41cb-87d3-553ee8ee17ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Monster\Orc">
+      <UniqueIdentifier>{3510501a-f1ee-44c8-a6eb-172b392da933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Monster\Troll">
+      <UniqueIdentifier>{1c58bb5c-d91a-4c21-8c02-a4fb9f9e0063}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04.FightObserver">
+      <UniqueIdentifier>{3610c649-05ee-4c40-ba52-48c3bc3c3c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04.FightObserver\HealthObserver">
+      <UniqueIdentifier>{3dbca213-97ae-427e-959b-789371efdc07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Manager">
+      <UniqueIdentifier>{3589eca2-e0b8-4a9b-8428-d597ca023d8d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Orc.cpp">
-      <Filter>소스 파일\03. Interactable\Monster\Orc</Filter>
-    </ClCompile>
-    <ClCompile Include="Goblin.cpp">
-      <Filter>소스 파일\03. Interactable\Monster\Goblin</Filter>
-    </ClCompile>
-    <ClCompile Include="Slime.cpp">
-      <Filter>소스 파일\03. Interactable\Monster\Slime</Filter>
-    </ClCompile>
-    <ClCompile Include="IMonster.cpp">
-      <Filter>소스 파일\03. Interactable\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Troll.cpp">
-      <Filter>소스 파일\03. Interactable\Monster\Troll</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>소스 파일\03. Interactable\Character</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일\02.GameManager</Filter>
     </ClCompile>
@@ -86,9 +98,6 @@
     <ClCompile Include="Level.cpp">
       <Filter>소스 파일\01.Level</Filter>
     </ClCompile>
-    <ClCompile Include="Level_Manager.cpp">
-      <Filter>소스 파일\01.Level\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Level_Logo.cpp">
       <Filter>소스 파일\01.Level\Level_Logo</Filter>
     </ClCompile>
@@ -105,34 +114,49 @@
       <Filter>소스 파일\06.Inventory</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
-      <Filter>소스 파일\07.Observer</Filter>
+      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClCompile>
     <ClCompile Include="Subject.cpp">
-      <Filter>소스 파일\07.Observer</Filter>
+      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClCompile>
     <ClCompile Include="UIObserver.cpp">
-      <Filter>소스 파일\07.Observer</Filter>
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Dungeon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Shop.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>소스 파일\03.Interactable\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="IMonster.cpp">
+      <Filter>소스 파일\03.Interactable\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Goblin.cpp">
+      <Filter>소스 파일\03.Interactable\Monster\Goblin</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>소스 파일\03.Interactable\Monster\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="Orc.cpp">
+      <Filter>소스 파일\03.Interactable\Monster\Orc</Filter>
+    </ClCompile>
+    <ClCompile Include="Troll.cpp">
+      <Filter>소스 파일\03.Interactable\Monster\Troll</Filter>
+    </ClCompile>
+    <ClCompile Include="SFightable.cpp">
+      <Filter>소스 파일\04.FightObserver</Filter>
+    </ClCompile>
+    <ClCompile Include="FullObserver.h">
+      <Filter>소스 파일\04.FightObserver\HealthObserver</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Manager.cpp">
+      <Filter>소스 파일\01.Level\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Orc.h">
-      <Filter>소스 파일\03. Interactable\Monster\Orc</Filter>
-    </ClInclude>
-    <ClInclude Include="Goblin.h">
-      <Filter>소스 파일\03. Interactable\Monster\Goblin</Filter>
-    </ClInclude>
-    <ClInclude Include="Slime.h">
-      <Filter>소스 파일\03. Interactable\Monster\Slime</Filter>
-    </ClInclude>
-    <ClInclude Include="IMonster.h">
-      <Filter>소스 파일\03. Interactable\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Troll.h">
-      <Filter>소스 파일\03. Interactable\Monster\Troll</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>소스 파일\03. Interactable\Character</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일\02.GameManager</Filter>
     </ClInclude>
@@ -154,9 +178,6 @@
     <ClInclude Include="Level.h">
       <Filter>소스 파일\01.Level</Filter>
     </ClInclude>
-    <ClInclude Include="Level_Manager.h">
-      <Filter>소스 파일\01.Level\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Level_Logo.h">
       <Filter>소스 파일\01.Level\Level_Logo</Filter>
     </ClInclude>
@@ -173,13 +194,48 @@
       <Filter>소스 파일\06.Inventory</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
-      <Filter>소스 파일\07.Observer</Filter>
+      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClInclude>
     <ClInclude Include="Subject.h">
-      <Filter>소스 파일\07.Observer</Filter>
+      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClInclude>
     <ClInclude Include="UIObserver.h">
-      <Filter>소스 파일\07.Observer</Filter>
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Dungeon.h" />
+    <ClInclude Include="Level_Shop.h" />
+    <ClInclude Include="Character.h">
+      <Filter>소스 파일\03.Interactable\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="IMonster.h">
+      <Filter>소스 파일\03.Interactable\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Goblin.h">
+      <Filter>소스 파일\03.Interactable\Monster\Goblin</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>소스 파일\03.Interactable\Monster\Slime</Filter>
+    </ClInclude>
+    <ClInclude Include="Orc.h">
+      <Filter>소스 파일\03.Interactable\Monster\Orc</Filter>
+    </ClInclude>
+    <ClInclude Include="Troll.h">
+      <Filter>소스 파일\03.Interactable\Monster\Troll</Filter>
+    </ClInclude>
+    <ClInclude Include="IInteractable.h">
+      <Filter>소스 파일\03.Interactable</Filter>
+    </ClInclude>
+    <ClInclude Include="SFightable.h">
+      <Filter>소스 파일\04.FightObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="DangerObserver.h">
+      <Filter>소스 파일\04.FightObserver\HealthObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathObserver.h">
+      <Filter>소스 파일\04.FightObserver\HealthObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Manager.h">
+      <Filter>소스 파일\01.Level\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

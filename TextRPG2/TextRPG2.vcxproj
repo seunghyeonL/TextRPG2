@@ -165,7 +165,6 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="HealthPotion.h" />
-    <ClInclude Include="IObserver.h" />
     <ClInclude Include="SFightable.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IMonster.h" />
