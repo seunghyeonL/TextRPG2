@@ -1,7 +1,6 @@
 #include "Level_Main.h"
 #include "Character.h"
 #include "GameManager.h"
-
 Level_Main::Level_Main()
 	: Level{}
 {
@@ -62,8 +61,17 @@ void Level_Main::Update()
 
 	if (m_pGameManager->Key_Down(VK_TAB))
 	{
-		if(m_eCurView == VIEW_MAP)
+		if(m_eCurView == VIEW_MAP || m_eCurView == VIEW_INVENTORY)
 			m_eCurView = VIEW_STATUS;
+		else
+			m_eCurView = VIEW_MAP;
+		system("cls");
+	}
+
+	if (m_pGameManager->Key_Down(0x49))
+	{
+		if (m_eCurView == VIEW_MAP || m_eCurView == VIEW_STATUS)
+			m_eCurView = VIEW_INVENTORY;
 		else
 			m_eCurView = VIEW_MAP;
 		system("cls");
@@ -99,9 +107,12 @@ void Level_Main::Render()
 	case VIEW_STATUS:
 		Character::GetInstance()->DisplayStatus();
 		break;
+	case VIEW_INVENTORY:
+		Character::GetInstance()->DisplayInventory();
+		break;
 	}
 	
-	cout << "TAB : 스탯창\tESC : 종료" << endl;
+	cout << "TAB : 스탯창\tI : 인벤토리\tESC : 종료" << endl;
 	buffer.clear();
 }
 

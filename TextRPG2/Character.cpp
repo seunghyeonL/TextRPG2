@@ -1,11 +1,13 @@
 #include <iostream>
 #include "Character.h"
+#include "HealthPotion.h"
+#include "AttackBoost.h"
 
 Character *Character::Instance = nullptr;
 
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
-      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Gold(0)
+      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_unique<Inventory>())
 {
 }
 
@@ -83,7 +85,7 @@ double Character::GetMaxExperience()
 
 double Character::GetGold()
 {
-    return Gold;
+    return Inven->GetGold();
 }
 
 void Character::DisplayStatus()
@@ -91,15 +93,27 @@ void Character::DisplayStatus()
     cout << "\n현재 레벨 : " << Level << "레벨 " << Experience / MaxExperience * 100 << "% 경험치\n";
     cout << "현재 체력 : " << Health << " / " << MaxHealth << " (" << Health / MaxHealth * 100 << "%)\n";
     cout << "현재 공격력 : " << Attack << "\n";
-    cout << "현재 보유 골드 : " << Gold << "\n\n";
+    cout << "현재 보유 골드 : " << Inven->GetGold() << "\n\n";
 }
 
 void Character::DisplayInventory()
 {
-    for (int i = 0; i < Inventory.size(); i++)
-    {
-        cout << i << ". " << Inventory[i].first->GetName() << ": " << Inventory[i].second << "개\n";
-    }
+    HealthPotion *potion = new HealthPotion();
+    AttackBoost *AB = new AttackBoost();
+    Inven->AddItem(potion);
+    Inven->AddItem(AB);
+    if (Inven->GetInventory().empty())
+        cout << "인벤토리는 비어있다."
+                "\n";
+
+    for (int i = 0; i < Inven->GetInventory().size(); i++)
+        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+
+    int index;
+    cin >> index;
+    Inven->UseItem(index);
+    for (int i = 0; i < Inven->GetInventory().size(); i++)
+        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
 }
 
 void Character::LevelUp()
@@ -120,28 +134,9 @@ void Character::LevelUp()
     }
 }
 
-void Character::UseItem(int index)
-{
-    if (index >= 0 && index < Inventory.size())
-    {
-        cout << Inventory[index].first->GetName() << "을(를) 사용합니다.\n";
-        Inventory[index].first->Use(GetInstance(Name));
-        Inventory[index].second--;
-    }
-}
-
 void Character::AddExperience(double amount) { Experience += amount; }
-void Character::AddGold(double amount) { Gold += amount; }
 
-void Character::AddItem(IItem *item)
+shared_ptr<Inventory> Character::GetInven()
 {
-    for (int i = 0; i < Inventory.size(); i++)
-    {
-        if (Inventory[i].first->GetName() == item->GetName())
-        {
-            Inventory[i].second++;
-            delete item;
-            return;
-        }
-    }
+    return Inven;
 }

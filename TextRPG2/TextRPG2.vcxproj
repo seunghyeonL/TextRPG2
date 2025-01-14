@@ -131,6 +131,7 @@
     <ClCompile Include="AttackBoost.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="FullObserver.h" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="IItem.cpp" />
     <ClCompile Include="IMonster.cpp" />
     <ClCompile Include="Input_Manager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level_Dungeon.cpp" />
     <ClCompile Include="Level_Logo.cpp" />
@@ -148,7 +150,9 @@
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Troll.cpp" />
+    <ClCompile Include="UIObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackBoost.h" />
@@ -157,6 +161,7 @@
     <ClInclude Include="Client_Macro.h" />
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="HealthPotion.h" />
@@ -166,6 +171,7 @@
     <ClInclude Include="IMonster.h" />
     <ClInclude Include="Input_Manager.h" />
     <ClInclude Include="IInteractable.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level_Dungeon.h" />
     <ClInclude Include="Level_Logo.h" />
@@ -175,7 +181,9 @@
     <ClInclude Include="MainApp.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="Troll.h" />
+    <ClInclude Include="UIObserver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -213,7 +213,7 @@ void GameManager::Battle(IMonster* Monster)
 			Player->DisplayInventory();
 			int index;
 			cin >> index;
-			Player->UseItem(index);
+			Player->GetInven()->UseItem(index);
 
 			break;
 		}
@@ -252,7 +252,7 @@ void GameManager::Battle(IMonster* Monster)
 					// 전투 승리 처리
 					Player->AddExperience(50);
 					int gold = 10 + rand() % 10;
-					Player->AddGold(gold);
+					Player->GetInven()->AddGold(gold);
 					cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
 
 					//IItem* DroppedItem = Monster->DropItem();

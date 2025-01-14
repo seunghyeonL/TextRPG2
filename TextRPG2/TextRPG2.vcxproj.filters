@@ -42,35 +42,11 @@
     <Filter Include="소스 파일\01.Level\Level_Main">
       <UniqueIdentifier>{d620cfaa-abfd-48dd-87d2-789921d933db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Level\Level_Dungeon">
-      <UniqueIdentifier>{3d2fff7c-baed-480f-b7ac-80f48e7335a6}</UniqueIdentifier>
+    <Filter Include="소스 파일\06.Inventory">
+      <UniqueIdentifier>{d63346e2-037a-41c8-9cea-98470e635134}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Level\Manager">
-      <UniqueIdentifier>{92636ea1-2e0e-4b1f-bc26-4bcd3271ff6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Level\Level_Shop">
-      <UniqueIdentifier>{19c3c8ad-2765-4655-b31c-b3fbf9833618}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03. Interactable">
-      <UniqueIdentifier>{48fb1808-8cbb-4b63-8274-76502f549236}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03. Interactable\Character">
-      <UniqueIdentifier>{88d11e32-6195-454d-b25b-0fe5b5bba72f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03. Interactable\Monster">
-      <UniqueIdentifier>{84f2f628-0155-4228-9185-61686564ddab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03. Interactable\Monster\Orc">
-      <UniqueIdentifier>{8cb07ebe-9bc9-4c65-9695-74bfcfa6fbbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03. Interactable\Monster\Goblin">
-      <UniqueIdentifier>{32ec205c-3128-4f16-b9fb-a4b555a3a14e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03. Interactable\Monster\Slime">
-      <UniqueIdentifier>{2721665d-3fad-462e-aa56-27376b4d2723}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\03. Interactable\Monster\Troll">
-      <UniqueIdentifier>{40c71262-4c41-49aa-ae30-b2cb6288cc7a}</UniqueIdentifier>
+    <Filter Include="소스 파일\07.Observer">
+      <UniqueIdentifier>{c0608c12-f22b-4106-bea3-b118bea99948}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -125,11 +101,17 @@
     <ClCompile Include="Level_Main.cpp">
       <Filter>소스 파일\01.Level\Level_Main</Filter>
     </ClCompile>
-    <ClCompile Include="Level_Dungeon.cpp">
-      <Filter>소스 파일\01.Level\Level_Dungeon</Filter>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>소스 파일\06.Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="Level_Shop.cpp">
-      <Filter>소스 파일\01.Level\Level_Shop</Filter>
+    <ClCompile Include="Observer.cpp">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObserver.cpp">
+      <Filter>소스 파일\07.Observer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,11 +169,17 @@
     <ClInclude Include="Level_Main.h">
       <Filter>소스 파일\01.Level\Level_Main</Filter>
     </ClInclude>
-    <ClInclude Include="Level_Dungeon.h">
-      <Filter>소스 파일\01.Level\Level_Dungeon</Filter>
+    <ClInclude Include="Inventory.h">
+      <Filter>소스 파일\06.Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="Level_Shop.h">
-      <Filter>소스 파일\01.Level\Level_Shop</Filter>
+    <ClInclude Include="Observer.h">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObserver.h">
+      <Filter>소스 파일\07.Observer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
