@@ -210,7 +210,7 @@ void GameManager::Battle(IMonster* Monster)
 			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
 			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
 			Player->DisplayInventory();
-			if (Player->Inventory.size())
+			if (Player->GetInven()->GetInventory().size())
 			{
 				int index;
 				cin >> index;
@@ -228,7 +228,7 @@ void GameManager::Battle(IMonster* Monster)
 				{
 				case 1:
 					Player->DisplayInventory();
-					if (Player->Inventory.size())
+					if (Player->GetInven()->GetInventory().size())
 					{
 						int index;
 						cin >> index;
