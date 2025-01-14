@@ -232,7 +232,7 @@ void GameManager::Battle(IMonster* Monster)
 					{
 						int index;
 						cin >> index;
-						Player->UseItem(index);
+						Player->GetInven()->UseItem(index);
 						double IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
 					}
 					break;
@@ -270,7 +270,7 @@ void GameManager::Battle(IMonster* Monster)
 
 						Player->AddExperience(50);
 						int gold = 10 + rand() % 10;
-						Player->AddGold(gold);
+						Player->GetInven()->AddGold(gold);
 						cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
 
 						Player->SetAttack(OriginalAttack);
