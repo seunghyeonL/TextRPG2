@@ -214,17 +214,19 @@ void GameManager::Battle(IMonster* Monster)
 			{
 				int index;
 				cin >> index;
-				Player->UseItem(index);
+				Player->GetInven()->UseItem(index);
 				double IncreasedAttack = Player->GetAttack() - OriginalAttack;
 			}
 		case 2:
+			double originalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
+			double increasedAttack = 0; // 공격력 증가 부분을 추적할 변수
 			// 전투 진행
 			while (Player->GetHealth() > 0 && Monster->GetHealth() > 0) {
 				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
 				cin >> choice;
 				switch (choice)
 				{
-				case 1:			
+				case 1:
 					Player->DisplayInventory();
 					if (Player->Inventory.size())
 					{
@@ -244,16 +246,16 @@ void GameManager::Battle(IMonster* Monster)
 					if (Monster->GetHealth() > 0) {
 						Player->SetHealth(Monster->GetAttack());
 						cout << Monster->GetName() << " 몬스터가 공격했습니다.\n"
-						<< Monster->GetAttack() << "의 피해를 입혀 플레이어의 체력은 " << Player->GetHealth() << "입니다.\n";
+							<< Monster->GetAttack() << "의 피해를 입혀 플레이어의 체력은 " << Player->GetHealth() << "입니다.\n";
 					}
-					
+
 					// 전투 결과 처리
 					if (Player->GetHealth() <= 0) {
 						cout << "\n전투에서 패배했습니다.\n게임 오버!\n";
 						// cout << "1. Retry     2. Exit";
 						exit(0);
 					}
-					else if(Monster->GetHealth() <= 0){
+					else if (Monster->GetHealth() <= 0) {
 						// 전투 승리 처리
 
 						// 30퍼 확률로 아이템 드랍
@@ -280,6 +282,29 @@ void GameManager::Battle(IMonster* Monster)
 					// 레벨 메인 띄우기
 					break;
 				}
+
+				// 전투 결과 처리
+				if (Player->GetHealth() <= 0) {
+					cout << "\n전투에서 패배했습니다.\n게임 오버!\n";
+					exit(0);
+				}
+				else {
+					// 전투 승리 처리
+					Player->AddExperience(50);
+					int gold = 10 + rand() % 10;
+					Player->GetInven()->AddGold(gold);
+					cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
+
+					//IItem* DroppedItem = Monster->DropItem();
+					//if (DroppedItem) {
+					//	player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
+					//	cout << "몬스터가 " << DroppedItem->getName() << "을 떨어뜨렸습니다.\n";
+					//}
+
+					Player->LevelUp();
+					Player->DisplayStatus();
+				}
+				Monster->Free();
 			}
 			break;
 		case 3:

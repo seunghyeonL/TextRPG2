@@ -17,9 +17,9 @@ int Inventory::GetGold()
     return Gold;
 }
 
-void Inventory::SetGold(int gold)
+void Inventory::AddGold(int gold)
 {
-    Gold = gold;
+    Gold += gold;
 }
 
 void Inventory::AddItem(IItem* item)

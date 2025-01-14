@@ -82,6 +82,11 @@ double Character::GetMaxExperience()
     return MaxExperience;
 }
 
+double Character::GetGold()
+{
+    return Inven->GetGold();
+}
+
 void Character::DisplayStatus()
 {  
     cout << "\n현재 레벨 : " << Level << "레벨 " << Experience / MaxExperience * 100 << "% 경험치\n";
@@ -125,4 +130,8 @@ void Character::LevelUp()
 }
 
 void Character::AddExperience(double amount) { Experience += amount; }
-void Character::AddGold(double amount) { Inven->SetGold(amount); }
+
+shared_ptr<Inventory> Character::GetInven()
+{
+    return Inven;
+}
