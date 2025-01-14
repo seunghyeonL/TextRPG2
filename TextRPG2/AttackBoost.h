@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class Character;
+
 class AttackBoost : IItem
 {
 private:

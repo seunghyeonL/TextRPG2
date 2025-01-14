@@ -11,9 +11,10 @@ Character::Character(string name)
 
 Character* Character::GetInstance(string name)
 {
-    if (!Instance && !name.empty()) {
+
+    if (Instance == nullptr)
         Instance = new Character(name);
-    }
+
     return Instance;
 }
 
@@ -85,7 +86,7 @@ double Character::GetGold()
 }
 
 void Character::DisplayStatus()
-{
+{  
     cout << "\n현재 레벨 : " << Level << "레벨 " << Experience / MaxExperience * 100 << "% 경험치\n";
     cout << "현재 체력 : " << Health << " / " << MaxHealth << " (" << Health / MaxHealth * 100 << "%)\n";
     cout << "현재 공격력 : " << Attack << "\n";

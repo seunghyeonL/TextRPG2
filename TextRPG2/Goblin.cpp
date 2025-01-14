@@ -5,7 +5,8 @@ Goblin::Goblin()
 {
 }
 
-/* �̷��� �̴ϼȶ������ ���� �ʱ�ȭ �ص� �ǰ� ������ �����ڷ� �ʱ�ȭ �ص� ��*/
+/* 이렇게 이니셜라이즈에서 직접 초기화 해도 되고 위에서 생성자로 초기화 해도 됨*/
+
 void Goblin::Initialize(string name, int health, int attack)
 {
 	mName = name;
@@ -15,21 +16,20 @@ void Goblin::Initialize(string name, int health, int attack)
 
 void Goblin::Update()
 {
-
 }
 
-Goblin* Goblin::Create(string name, int health, int attack)
+Goblin *Goblin::Create(string name, int health, int attack)
 {
-	Goblin* pGoblin = new Goblin();
+	Goblin *pGoblin = new Goblin();
 
 	pGoblin->Initialize(name, health, attack);
 
 	return pGoblin;
 }
 
-Goblin* Goblin::CreateBoss(string name, int health, int attack)
+Goblin *Goblin::CreateBoss(string name, int health, int attack)
 {
-	Goblin* pGoblin = new Goblin();
+	Goblin *pGoblin = new Goblin();
 
 	pGoblin->Initialize(name, health, attack);
 
