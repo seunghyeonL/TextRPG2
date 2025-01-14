@@ -63,6 +63,12 @@
     <Filter Include="소스 파일\01.Level\Level_Main">
       <UniqueIdentifier>{d620cfaa-abfd-48dd-87d2-789921d933db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\06.Inventory">
+      <UniqueIdentifier>{d63346e2-037a-41c8-9cea-98470e635134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\07.Observer">
+      <UniqueIdentifier>{c0608c12-f22b-4106-bea3-b118bea99948}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Orc.cpp">
@@ -115,6 +121,18 @@
     </ClCompile>
     <ClCompile Include="Level_Main.cpp">
       <Filter>소스 파일\01.Level\Level_Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>소스 파일\06.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObserver.cpp">
+      <Filter>소스 파일\07.Observer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +189,18 @@
     </ClInclude>
     <ClInclude Include="Level_Main.h">
       <Filter>소스 파일\01.Level\Level_Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>소스 파일\06.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>소스 파일\07.Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObserver.h">
+      <Filter>소스 파일\07.Observer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

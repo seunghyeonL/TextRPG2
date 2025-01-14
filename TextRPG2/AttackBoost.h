@@ -7,7 +7,7 @@ using namespace std;
 
 class Character;
 
-class AttackBoost : IItem
+class AttackBoost : public IItem
 {
 private:
     string Name;

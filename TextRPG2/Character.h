@@ -1,9 +1,10 @@
 #pragma once
 
-#include "IItem.h"
+#include "Inventory.h"
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 using namespace std;
 
@@ -19,8 +20,7 @@ private:
     double Attack; // 공격력
     double Experience; // 경험치
     double MaxExperience; // 최대 경험치
-    double Gold; // 돈
-
+    unique_ptr<Inventory> Inven;
 
     Character(string name);
     Character(const Character&) = delete;
@@ -41,9 +41,6 @@ public:
     void DisplayStatus();
     void DisplayInventory();
     void LevelUp();
-    void UseItem(int index);
-    vector<pair<IItem*, int>> Inventory;
     void AddExperience(double amount);
     void AddGold(double amount);
-    void AddItem(IItem* item);
 };
