@@ -148,7 +148,10 @@ void GameManager::StartGame()
 	cout << "캐릭터를 생성하기 위해 이름을 입력해주세요.\n";
 	getline(cin, name);
 	Character* Player = Character::GetInstance(name);
-	cout << "\n메뉴\n1. 스탯 창 보기     2. 전투 지역으로 이동\n";
+	// 레벨 메인 띄우기
+
+
+	/*cout << "\n메뉴\n1. 스탯 창 보기     2. 전투 지역으로 이동\n";
 	string choice;
 	getline(cin, choice);
 	switch (stoi(choice))
@@ -161,16 +164,20 @@ void GameManager::StartGame()
 			break;
 		default:
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
-	}
+	}*/
 }
 
 void GameManager::Battle(IMonster* Monster)
 {
 	Character* Player = Character::GetInstance();
 
-	HealthPotion* hp = new HealthPotion();
+	// HealthPotion* hp = new HealthPotion(); 지울거
+	// 몬스터의 위치와 캐릭터의 위치가 일치할 때 - 승현님 작업
 	while (true)
 	{
+		cout << "\n전투가 시작되었습니다.\n이번에 싸울 몬스터는 " << Monster->GetName()
+			<< " (체력: " << Monster->GetHealth() << ", 공격력: " << Monster->GetAttack() << ")\n";
+
 		cout << "\n메뉴\n1. 스탯 창 보기     2. 아이템 사용     3. 전투하기     4.도망가기\n";
 		int choice;
 		cin >> choice;
@@ -179,7 +186,7 @@ void GameManager::Battle(IMonster* Monster)
 		{
 		case 1:
 		{
-			Player->DisplayStatus();
+			//Player->DisplayStatus();
 			break;
 		}
 		case 2:
@@ -195,8 +202,7 @@ void GameManager::Battle(IMonster* Monster)
 		}
 		case 3:
 		{
-			cout << "\n전투가 시작되었습니다.\n이번에 싸울 몬스터는 " << Monster->GetName()
-				<< " (체력: " << Monster->GetHealth() << ", 공격력: " << Monster->GetAttack() << ")\n";
+			
 			
 			double originalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
 			double increasedAttack = 0; // 공격력 증가 부분을 추적할 변수
