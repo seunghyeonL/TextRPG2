@@ -5,17 +5,14 @@
 class Slime : public IMonster
 {
 private:
-	/*
-	�����ڸ� private ���� �ع����� �����Ҵ��� ������. �������
-	�׷��� Create��� �Լ��� ���� ���� �����ϰ� �� �� �ִ�.	*/
 	Slime();
 	virtual ~Slime() = default;
 
-public: /* IMonster �θ� Ŭ�������� �޾ƿ� �Լ��� */
+public:
 	virtual void Initialize(string name, int health, int attack) override;
 	virtual void Update() override;
 
-public: /* ���� �����Ҵ��� ������ִ� �Լ� */
+public:
 	static Slime* Create(string name, int health, int attack);
 	static Slime* CreateBoss(string name, int health, int attack);
 	virtual void Free() override;

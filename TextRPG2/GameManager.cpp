@@ -2,6 +2,7 @@
 #include "Character.h"
 #include "GameManager.h"
 #include "HealthPotion.h"
+#include "AttackBoost.h"
 #include "Level_Manager.h"
 #include "Input_Manager.h"
 #include "IMonster.h"
@@ -161,6 +162,7 @@ IMonster* GameManager::GenerateMonster(int level)
 
 void GameManager::StartGame()
 {
+	srand(static_cast<unsigned int>(time(NULL)));
 	string name;
 	cout << "캐릭터를 생성하기 위해 이름을 입력해주세요.\n";
 	getline(cin, name);
@@ -187,66 +189,77 @@ void GameManager::StartGame()
 void GameManager::Battle(IMonster* Monster)
 {
 	Character* Player = Character::GetInstance();
+	HealthPotion* hp = new HealthPotion();
+	AttackBoost* boost = new AttackBoost();
 
-	// HealthPotion* hp = new HealthPotion(); 지울거
-	// 몬스터의 위치와 캐릭터의 위치가 일치할 때 - 승현님 작업
+	// 몬스터의 위치와 캐릭터의 위치가 일치할 때
 	while (true)
 	{
 		cout << "\n전투가 시작되었습니다.\n이번에 싸울 몬스터는 " << Monster->GetName()
 			<< " (체력: " << Monster->GetHealth() << ", 공격력: " << Monster->GetAttack() << ")\n";
 
-		cout << "\n메뉴\n1. 스탯 창 보기     2. 아이템 사용     3. 전투하기     4.도망가기\n";
+		cout << "\n메뉴\n1. 아이템 사용     2. 전투하기     3.도망가기\n";
 		int choice;
 		cin >> choice;
-		
+
+		double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
+		double IncreasedAttack = 0;
 		switch (choice)
 		{
 		case 1:
-		{
-			//Player->DisplayStatus();
-			break;
-		}
-		case 2:
-		{
 			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
 			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
 			Player->DisplayInventory();
-			int index;
-			cin >> index;
-			Player->UseItem(index);
-
-			break;
-		}
-		case 3:
-		{
-			
-			
-			double originalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
-			double increasedAttack = 0; // 공격력 증가 부분을 추적할 변수
-
+			if (Player->Inventory.size())
+			{
+				int index;
+				cin >> index;
+				Player->UseItem(index);
+				double IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약 사용 시 체크할 변수
+			}
+		case 2:
 			// 전투 진행
 			while (Player->GetHealth() > 0 && Monster->GetHealth() > 0) {
-				cout << "\n메뉴\n1. 스탯 창 보기     2. 아이템 사용     3. 전투하기     4.도망가기\n";
-				int choice;
+				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
 				cin >> choice;
-
 				switch (choice)
 				{
-				case 1:
-					Player->DisplayStatus();
+				case 1:			
+					Player->DisplayInventory();
+					if (Player->Inventory.size())
+					{
+						int index;
+						cin >> index;
+						Player->UseItem(index);
+						double IncreasedAttack = Player->GetAttack() - OriginalAttack;
+					}
 					break;
 				case 2:
-					// 아이템 사용
+					
 					break;
-				case 3:break;
-
-				case 4:break;
+				case 3:
+					cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
+					// 레벨 메인 띄우기
+					break;
 				}
 
 				// 전투 결과 처리
 				if (Player->GetHealth() <= 0) {
 					cout << "\n전투에서 패배했습니다.\n게임 오버!\n";
-					exit(0);
+					cout << "1. Retry     2. Exit";
+					cin >> choice;
+					while (true)
+					{
+						switch (choice)
+						{
+						case 1:
+							StartGame(); break;
+						case 2:
+							exit(0); break;
+						default:
+							cout << "잘못된 입력입니다. 다시 시도해주세요.\n"; break;
+						}
+					}
 				}
 				else {
 					// 전투 승리 처리
@@ -255,27 +268,30 @@ void GameManager::Battle(IMonster* Monster)
 					Player->AddGold(gold);
 					cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
 
-					//IItem* DroppedItem = Monster->DropItem();
-					//if (DroppedItem) {
-					//	player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
-					//	cout << "몬스터가 " << DroppedItem->getName() << "을 떨어뜨렸습니다.\n";
-					//}
-
+					if (rand() % 100 < 30)
+					{
+						//IItem* DroppedItem = Monster->DropItem();
+						//if (DroppedItem) {
+						//	Player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
+						//	cout << "몬스터가 " << DroppedItem->GetName() << "을 떨어뜨렸습니다.\n";
+						//}
+					}
+					Player->SetAttack(OriginalAttack);
 					Player->LevelUp();
-					Player->DisplayStatus();
 				}
-				Monster->Free();
 			}
 			break;
-		}
-		case 4:
-		{
-
+		case 3:
+			cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
+			// 레벨 메인 띄우기
 			break;
-		}
 		default:
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
 		}
+		break;
 	}
-
+	boost->IsAlredyUseOne = false;
+	delete hp;
+	delete boost;
+	Monster->Free();
 }

@@ -95,9 +95,16 @@ void Character::DisplayStatus()
 
 void Character::DisplayInventory()
 {
-    for (int i = 0; i < Inventory.size(); i++)
+    if (!Inventory.size())
     {
-        cout << i << ". " << Inventory[i].first->GetName() << ": " << Inventory[i].second << "개\n";
+        cout << "현재 인벤토리에 물건이 없습니다.\n";
+    }
+    else
+    {
+        for (int i = 0; i < Inventory.size(); i++)
+        {
+            cout << i << ". " << Inventory[i].first->GetName() << ": " << Inventory[i].second << "개\n";
+        }
     }
 }
 
