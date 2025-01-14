@@ -135,6 +135,11 @@
     <ClCompile Include="IITem.cpp" />
     <ClCompile Include="IMonster.cpp" />
     <ClCompile Include="main.cpp" />
+<<<<<<< Updated upstream
+=======
+    <ClCompile Include="MainApp.cpp" />
+    <ClCompile Include="Market.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Troll.cpp" />
@@ -147,6 +152,17 @@
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IMonster.h" />
+<<<<<<< Updated upstream
+=======
+    <ClInclude Include="Input_Manager.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="Level_BattleField.h" />
+    <ClInclude Include="Level_Logo.h" />
+    <ClInclude Include="Level_Main.h" />
+    <ClInclude Include="Level_Manager.h" />
+    <ClInclude Include="MainApp.h" />
+    <ClInclude Include="Market.h" />
+>>>>>>> Stashed changes
     <ClInclude Include="Orc.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Troll.h" />

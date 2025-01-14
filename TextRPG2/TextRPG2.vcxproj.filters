@@ -46,6 +46,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="소스 파일\08.Market">
+      <UniqueIdentifier>{38b9d99c-4ffd-4a80-aa02-d0dc0737d59c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Orc.cpp">
@@ -81,6 +84,12 @@
     <ClCompile Include="IITem.cpp">
       <Filter>소스 파일\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Level_BattleField.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Market.cpp">
+      <Filter>소스 파일\08.Market</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Orc.h">
@@ -112,6 +121,10 @@
     </ClInclude>
     <ClInclude Include="IItem.h">
       <Filter>소스 파일\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_BattleField.h" />
+    <ClInclude Include="Market.h">
+      <Filter>소스 파일\08.Market</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
