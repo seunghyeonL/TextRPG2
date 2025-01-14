@@ -82,17 +82,12 @@ double Character::GetMaxExperience()
     return MaxExperience;
 }
 
-double Character::GetGold()
-{
-    return Gold;
-}
-
 void Character::DisplayStatus()
 {  
     cout << "\n현재 레벨 : " << Level << "레벨 " << Experience / MaxExperience * 100 << "% 경험치\n";
     cout << "현재 체력 : " << Health << " / " << MaxHealth << " (" << Health / MaxHealth * 100 << "%)\n";
     cout << "현재 공격력 : " << Attack << "\n";
-    cout << "현재 보유 골드 : " << Gold << "\n\n";
+    cout << "현재 보유 골드 : " << Inven->GetGold() << "\n\n";
 }
 
 void Character::DisplayInventory()
@@ -130,4 +125,4 @@ void Character::LevelUp()
 }
 
 void Character::AddExperience(double amount) { Experience += amount; }
-void Character::AddGold(double amount) { Gold += amount; }
+void Character::AddGold(double amount) { Inven->SetGold(amount); }
