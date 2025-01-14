@@ -78,6 +78,12 @@
     <Filter Include="소스 파일\01.Level\Manager">
       <UniqueIdentifier>{3589eca2-e0b8-4a9b-8428-d597ca023d8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Level\Level_Dungeon">
+      <UniqueIdentifier>{3cc8b73e-b499-429c-91f1-fa785d4dd7e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Level_Shop">
+      <UniqueIdentifier>{e2c7a1cd-34e2-4746-b306-01f2b523a393}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -122,12 +128,6 @@
     <ClCompile Include="UIObserver.cpp">
       <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClCompile>
-    <ClCompile Include="Level_Dungeon.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Level_Shop.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>소스 파일\03.Interactable\Character</Filter>
     </ClCompile>
@@ -154,6 +154,12 @@
     </ClCompile>
     <ClCompile Include="Level_Manager.cpp">
       <Filter>소스 파일\01.Level\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Dungeon.cpp">
+      <Filter>소스 파일\01.Level\Level_Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Shop.cpp">
+      <Filter>소스 파일\01.Level\Level_Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,8 +208,6 @@
     <ClInclude Include="UIObserver.h">
       <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClInclude>
-    <ClInclude Include="Level_Dungeon.h" />
-    <ClInclude Include="Level_Shop.h" />
     <ClInclude Include="Character.h">
       <Filter>소스 파일\03.Interactable\Character</Filter>
     </ClInclude>
@@ -236,6 +240,12 @@
     </ClInclude>
     <ClInclude Include="Level_Manager.h">
       <Filter>소스 파일\01.Level\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Dungeon.h">
+      <Filter>소스 파일\01.Level\Level_Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Shop.h">
+      <Filter>소스 파일\01.Level\Level_Shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

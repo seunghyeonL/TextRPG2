@@ -2,7 +2,6 @@
 #include "Subject.h"
 #include "IItem.h"
 
-
 class Inventory : public Subject
 {
 private:

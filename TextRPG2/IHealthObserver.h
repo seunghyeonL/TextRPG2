@@ -6,3 +6,5 @@ public:
 	virtual ~IHealthObserver() = default;
 	virtual void Update(int health) = 0;
 };
+
+
