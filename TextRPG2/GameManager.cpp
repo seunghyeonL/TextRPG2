@@ -208,8 +208,8 @@ void GameManager::Battle(IMonster* Monster)
 		}
 		case 2:
 		{
-			Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
-			Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
+			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
+			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
 			Player->DisplayInventory();
 			int index;
 			cin >> index;
