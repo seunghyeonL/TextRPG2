@@ -15,6 +15,9 @@ public: /* For.Base */
 	void Update();
 	void Render();
 
+	void DisableEcho();
+	void EnableEcho();
+
 	int* GetPlayerPosX() { return &m_iPlayerPosX; }
 	int* GetPlayerPosY() { return &m_iPlayerPosY; }
 

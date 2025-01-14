@@ -139,6 +139,7 @@
     <ClCompile Include="Input_Manager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Level_BattleField.cpp" />
     <ClCompile Include="Level_Logo.cpp" />
     <ClCompile Include="Level_Main.cpp" />
     <ClCompile Include="Level_Manager.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Input_Manager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Level_BattleField.h" />
     <ClInclude Include="Level_Logo.h" />
     <ClInclude Include="Level_Main.h" />
     <ClInclude Include="Level_Manager.h" />

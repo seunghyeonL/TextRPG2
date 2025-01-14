@@ -5,7 +5,7 @@ Goblin::Goblin()
 {
 }
 
-/* ÀÌ·¸°Ô ÀÌ´Ï¼È¶óÀÌÁî¿¡¼­ Á÷Á¢ ÃÊ±âÈ­ ÇØµµ µÇ°í À§¿¡¼­ »ý¼ºÀÚ·Î ÃÊ±âÈ­ ÇØµµ µÊ*/
+/* ì´ë ‡ê²Œ ì´ë‹ˆì…œë¼ì´ì¦ˆì—ì„œ ì§ì ‘ ì´ˆê¸°í™” í•´ë„ ë˜ê³  ìœ„ì—ì„œ ìƒì„±ìžë¡œ ì´ˆê¸°í™” í•´ë„ ë¨*/
 void Goblin::Initialize(string name, int health, int attack)
 {
 	mName = name;
@@ -15,12 +15,11 @@ void Goblin::Initialize(string name, int health, int attack)
 
 void Goblin::Update()
 {
-
 }
 
-Goblin* Goblin::Create(string name, int health, int attack)
+Goblin *Goblin::Create(string name, int health, int attack)
 {
-	Goblin* pGoblin = new Goblin();
+	Goblin *pGoblin = new Goblin();
 
 	pGoblin->Initialize(name, health, attack);
 

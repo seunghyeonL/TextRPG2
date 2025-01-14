@@ -6,16 +6,16 @@ class Goblin : public IMonster
 {
 private:
 	/*
-	»ı¼ºÀÚ¸¦ private À¸·Î ÇØ¹ö¸®¸é µ¿ÀûÇÒ´çÀÌ ¸·Èù´Ù. °³³ä¼÷Áö
-	±×·¡¼­ Create¶ó´Â ÇÔ¼ö¸¦ ¸¸µé¾î¼­ Á÷Á¢ »ı¼ºÇÏ°Ô ÇÒ ¼ö ÀÖ´Ù.	*/
+	ìƒì„±ìë¥¼ private ìœ¼ë¡œ í•´ë²„ë¦¬ë©´ ë™ì í• ë‹¹ì´ ë§‰íŒë‹¤. ê°œë…ìˆ™ì§€
+	ê·¸ë˜ì„œ Createë¼ëŠ” í•¨ìˆ˜ë¥¼ ë§Œë“¤ì–´ì„œ ì§ì ‘ ìƒì„±í•˜ê²Œ í•  ìˆ˜ ìˆë‹¤.	*/
 	Goblin();
 	virtual ~Goblin() = default;
 
-public: /* IMonster ºÎ¸ğ Å¬·¡½º¿¡¼­ ¹Ş¾Æ¿Â ÇÔ¼öµé */
+public: /* IMonster ë¶€ëª¨ í´ë˜ìŠ¤ì—ì„œ ë°›ì•„ì˜¨ í•¨ìˆ˜ë“¤ */
 	virtual void Initialize(string name, int health, int attack) override;
 	virtual void Update() override;
 
-public: /* ½ÇÁ¦ µ¿ÀûÇÒ´çÀ» ´ë½ÅÇØÁÖ´Â ÇÔ¼ö */
-	static Goblin* Create(string name = "", int health = 10, int attack = 5);
+public: /* ì‹¤ì œ ë™ì í• ë‹¹ì„ ëŒ€ì‹ í•´ì£¼ëŠ” í•¨ìˆ˜ */
+	static Goblin *Create(string name = "", int health = 10, int attack = 5);
 	virtual void Free() override;
 };
