@@ -17,6 +17,10 @@ void Troll::Update()
 
 }
 
+void Troll::Interact() {
+
+}
+
 Troll* Troll::Create(string name, int health, int attack)
 {
 	Troll* pTroll = new Troll();
