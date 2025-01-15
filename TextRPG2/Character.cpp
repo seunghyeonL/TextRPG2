@@ -69,6 +69,15 @@ double Character::GetAttack()
     return Attack;
 }
 
+void Character::GetDamage(double attack)
+{
+    Health -= attack;
+    if (Health <= 0)
+    {
+        Health = 0;
+    }
+}
+
 void Character::SetAttack(double attack)
 {
     Attack = attack;
@@ -112,7 +121,7 @@ void Character::DisplayInventory()
                 "\n";
 
     for (int i = 0; i < Inven->GetInventory().size(); i++)
-        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+        cout << i + 1 << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
 
     /* 루프돌면서 키감지 */
     for (int i = 0; i < Inven->GetInventory().size(); ++i)
@@ -129,7 +138,7 @@ void Character::DisplayInventory()
                 cout << "인벤토리는 비어있다." << endl;
 
             for (int i = 0; i < Inven->GetInventory().size(); i++)
-                cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+                cout << i + 1 << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
 
             break;
         }

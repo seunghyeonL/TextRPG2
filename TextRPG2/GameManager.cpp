@@ -113,10 +113,14 @@ void GameManager::Free()
 
 IMonster* GameManager::GenerateMonster(int level)
 {
+	srand(static_cast<unsigned int>(time(NULL)));
 	Troll* troll;
 	Slime* slime;
 	Goblin* goblin;
 	Orc* orc;
+	int random_number;
+	random_number = rand() % 10;
+
 	if (level % 10 == 0)
 	{
 		cout << "보스 몬스터를 조우했습니다.\n";
@@ -149,7 +153,7 @@ IMonster* GameManager::GenerateMonster(int level)
 			return troll;
 			break;
 		case 1:
-			slime = Slime::Create("일반 슬라임", level + 30, level + 10);
+			slime = Slime::Create("일반 슬라임", 50 + level + random_number, level + 10 + random_number);
 			return slime;
 			break;
 		case 2:
@@ -169,7 +173,6 @@ IMonster* GameManager::GenerateMonster(int level)
 
 void GameManager::StartGame()
 {
-	srand(static_cast<unsigned int>(time(NULL)));
 	string name;
 	cout << "캐릭터를 생성하기 위해 이름을 입력해주세요.\n";
 	getline(cin, name);
@@ -199,30 +202,29 @@ void GameManager::Battle(IMonster* Monster)
 	HealthPotion* hp = new HealthPotion();
 	AttackBoost* boost = new AttackBoost();
 
-	// 몬스터의 위치와 캐릭터의 위치가 일치할 때
+	double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
+	double IncreasedAttack = 0; // 공격력 증가 부분을 추적할 변수
+
+	cout << "\n전투가 시작되었습니다.\n이번에 싸울 몬스터는 " << Monster->GetName()
+		<< " (체력: " << Monster->GetHealth() << ", 공격력: " << Monster->GetAttack() << ")\n";
+
 	while (Player->GetHealth() > 0 && Monster->GetHealth() > 0)
 	{
-		cout << "\n전투가 시작되었습니다.\n이번에 싸울 몬스터는 " << Monster->GetName()
-			<< " (체력: " << Monster->GetHealth() << ", 공격력: " << Monster->GetAttack() << ")\n";
 
 		cout << "\n메뉴\n1. 아이템 사용     2. 전투하기     3.도망가기\n";
 		int choice;
 		cin >> choice;
-
-		double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
-		double IncreasedAttack = 0; // 공격력 증가 부분을 추적할 변수
-
 		switch (choice)
 		{
 		case 1:
-			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
-			//Player->Inventory.push_back(pair<IItem*, int>(hp, 1));
+			cout << "\n";
 			Player->DisplayInventory();
 			if (Player->GetInven()->GetInventory().size())
 			{
 				int index;
+				cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 				cin >> index;
-				Player->GetInven()->UseItem(index);
+				Player->GetInven()->UseItem(index - 1);
 				IncreasedAttack = Player->GetAttack() - OriginalAttack;
 			}
 		case 2:
@@ -230,6 +232,7 @@ void GameManager::Battle(IMonster* Monster)
 			while (Player->GetHealth() > 0 && Monster->GetHealth() > 0) {
 				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
 				cin >> choice;
+				cout << "\n";
 				switch (choice)
 				{
 				case 1:
@@ -237,11 +240,12 @@ void GameManager::Battle(IMonster* Monster)
 					if (Player->GetInven()->GetInventory().size())
 					{
 						int index;
+						cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 						cin >> index;
-						Player->GetInven()->UseItem(index);
+						Player->GetInven()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
-						break;
 					}
+					break;
 				case 2:
 					// 플레이어의 공격
 					Monster->GetDamage(Player->GetAttack());
@@ -250,8 +254,8 @@ void GameManager::Battle(IMonster* Monster)
 
 					// 몬스터의 반격
 					if (Monster->GetHealth() > 0) {
-						Player->SetHealth(Monster->GetAttack());
-						cout << Monster->GetName() << " 몬스터가 공격했습니다.\n"
+						Player->GetDamage(Monster->GetAttack());
+						cout << "\n" << Monster->GetName() << " 몬스터가 공격했습니다.\n"
 							<< Monster->GetAttack() << "의 피해를 입혀 플레이어의 체력은 " << Player->GetHealth() << "입니다.\n";
 					}
 
@@ -279,20 +283,32 @@ void GameManager::Battle(IMonster* Monster)
 						Player->GetInven()->AddGold(gold);
 						cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
 
+						Sleep(5000); // 임시
 						Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹기 전 공격력으로 세팅
 						Player->LevelUp();
 					}
 					break;
 				case 3:
 					cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
-					break;
+					Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹고 도망갈 수 있어서
+					delete hp;
+					delete boost;
+					Monster->Free();
+					Sleep(3000); // 임시
+					return;
+				default:
+					cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
 				}
-				Monster->Free();
 			}
 			break;
 		case 3:
-			cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
-			break;
+			cout << "\n" << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
+			Player->SetAttack(OriginalAttack);
+			delete hp;
+			delete boost;
+			Monster->Free();
+			Sleep(3000); // 임시
+			return;
 		default:
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
 		}
@@ -303,5 +319,4 @@ void GameManager::Battle(IMonster* Monster)
 	delete hp;
 	delete boost;
 	Monster->Free();
-	// 레벨 메인 띄우기
 }
