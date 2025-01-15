@@ -25,9 +25,9 @@ void Level_Manager::Render()
 	m_pCurrentLevel->Render();
 }
 
-void Level_Manager::Change_Level(Level* pNewLevel)
+void Level_Manager::Change_Level(Level *pNewLevel)
 {
-	if(m_pCurrentLevel != nullptr)
+	if (m_pCurrentLevel != nullptr)
 		m_pCurrentLevel->Free();
 
 	cout << flush;
@@ -36,9 +36,9 @@ void Level_Manager::Change_Level(Level* pNewLevel)
 	m_pCurrentLevel = pNewLevel;
 }
 
-Level_Manager* Level_Manager::Create()
+Level_Manager *Level_Manager::Create()
 {
-	Level_Manager* pInstance = new Level_Manager();
+	Level_Manager *pInstance = new Level_Manager();
 
 	pInstance->Initialize();
 
@@ -47,4 +47,5 @@ Level_Manager* Level_Manager::Create()
 
 void Level_Manager::Free()
 {
+	delete this;
 }

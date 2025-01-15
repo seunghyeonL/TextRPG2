@@ -40,6 +40,11 @@ int main()
 		}
 	}
 
+	Character* pCharacter = Character::GetInstance();
+
+	delete pCharacter;
+	pMainApp->Free();
+
 	return 0;
 }
 

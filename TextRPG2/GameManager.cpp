@@ -107,8 +107,11 @@ GameManager* GameManager::Create()
 
 void GameManager::Free()
 {
-
+	m_pLevel_Manager->Free();
+	m_pInput_Manager->Free();
+	delete this;
 }
+
 IMonster* GameManager::GenerateMonster(int level)
 {
 	Troll* troll;
@@ -117,12 +120,13 @@ IMonster* GameManager::GenerateMonster(int level)
 	Orc* orc;
 	if (level % 10 == 0)
 	{
-		cout << "보스 몬스터를 조우했습니다.\n";
+		wcout << "보스 몬스터를 조우했습니다.\n";
 		switch (level % 40)
 		{
-		case 0:
-			troll = Troll::CreateBoss("트롤 대장", level + 30, level + 10);
+		case 0: {
+			troll = Troll::CreateBoss("트롤대장", level + 30, level + 10);
 			return troll;
+		}
 		case 10:
 			slime = Slime::CreateBoss("빨간 슬라임", level + 30, level + 10);
 			return slime;
