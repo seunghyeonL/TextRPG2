@@ -108,7 +108,7 @@ GameManager* GameManager::Create()
 
 void GameManager::Free()
 {
-
+	delete this;
 }
 
 IMonster* GameManager::GenerateMonster(int level)

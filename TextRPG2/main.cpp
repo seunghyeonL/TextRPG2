@@ -31,6 +31,9 @@ int main()
 			bIsInit = true;
 		}
 	}
+
+	pMainApp->Free();
+	pGameManager->Destroy_Instance();
 }
 
 bool IsAnyKeyPressed()
