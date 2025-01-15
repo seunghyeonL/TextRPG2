@@ -86,6 +86,13 @@ void Level_Main::Update()
 
 void Level_Main::Render()
 {
+	if (m_eCurMap == MAP_DUNGEON) { // 여기부터
+		system("cls");
+		auto character = Character::GetInstance();
+		auto monster = m_pGameManager->GenerateMonster(character->GetLevel());
+		m_pGameManager->Battle(monster);
+		system("cls");
+	} // 여기까지 임시임
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
 		for (int j = 0; j < MAP_WIDTH; j++) {

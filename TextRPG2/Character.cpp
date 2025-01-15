@@ -69,6 +69,15 @@ double Character::GetAttack()
     return Attack;
 }
 
+void Character::GetDamage(double attack)
+{
+    Health -= attack;
+    if (Health <= 0)
+    {
+        Health = 0;
+    }
+}
+
 void Character::SetAttack(double attack)
 {
     Attack = attack;
