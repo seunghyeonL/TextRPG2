@@ -152,4 +152,8 @@ void Inventory::RemoveToEtc(IEtcItem* item, int quantity)
             }
         }
     }
+    else
+    {
+        cout << "\n해당 번호의 아이템이 없습니다.\n";
+    }
 }

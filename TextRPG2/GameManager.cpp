@@ -119,10 +119,7 @@ IMonster* GameManager::GenerateMonster(int level)
 	Goblin* goblin;
 	Orc* orc;
 	int random_number;
-
-	for (int i = 0; i < 5; ++i) {
-		random_number = rand() % 6;  // 0부터 5까지의 값
-	}
+	random_number = rand() % 10;
 
 	if (level % 10 == 0)
 	{
@@ -156,7 +153,7 @@ IMonster* GameManager::GenerateMonster(int level)
 			return troll;
 			break;
 		case 1:
-			slime = Slime::Create("일반 슬라임", 50 + level + random_number, level + 10);
+			slime = Slime::Create("일반 슬라임", 50 + level + random_number, level + 10 + random_number);
 			return slime;
 			break;
 		case 2:
@@ -204,6 +201,7 @@ void GameManager::Battle(IMonster* Monster)
 	Character* Player = Character::GetInstance();
 	HealthPotion* hp = new HealthPotion();
 	AttackBoost* boost = new AttackBoost();
+	Inventory* inventory = new Inventory();
 
 	double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
 	double IncreasedAttack = 0; // 공격력 증가 부분을 추적할 변수
@@ -217,14 +215,15 @@ void GameManager::Battle(IMonster* Monster)
 		cout << "\n메뉴\n1. 아이템 사용     2. 전투하기     3.도망가기\n";
 		int choice;
 		cin >> choice;
-
 		switch (choice)
 		{
 		case 1:
+			cout << "\n";
 			Player->DisplayInventory();
 			if (Player->GetInventory()->GetConsumptionInven().size())
 			{
 				int index;
+				cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 				cin >> index;
 				Player->GetInventory()->UseItem(index - 1);
 				IncreasedAttack = Player->GetAttack() - OriginalAttack;
@@ -234,6 +233,7 @@ void GameManager::Battle(IMonster* Monster)
 			while (Player->GetHealth() > 0 && Monster->GetHealth() > 0) {
 				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
 				cin >> choice;
+				cout << "\n";
 				switch (choice)
 				{
 				case 1:
@@ -241,8 +241,10 @@ void GameManager::Battle(IMonster* Monster)
 					if (Player->GetInventory()->GetConsumptionInven().size())
 					{
 						int index;
+						cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 						cin >> index;
 						Player->GetInventory()->UseItem(index);
+						Player->GetInven()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
 					}
 					break;
@@ -255,7 +257,7 @@ void GameManager::Battle(IMonster* Monster)
 					// 몬스터의 반격
 					if (Monster->GetHealth() > 0) {
 						Player->GetDamage(Monster->GetAttack());
-						cout <<"\n" << Monster->GetName() << " 몬스터가 공격했습니다.\n"
+						cout << "\n" << Monster->GetName() << " 몬스터가 공격했습니다.\n"
 							<< Monster->GetAttack() << "의 피해를 입혀 플레이어의 체력은 " << Player->GetHealth() << "입니다.\n";
 					}
 
@@ -268,14 +270,11 @@ void GameManager::Battle(IMonster* Monster)
 					else if (Monster->GetHealth() <= 0) {
 						// 전투 승리 처리
 
-						// 30퍼 확률로 아이템 드랍
-						if (rand() % 100 < 30)
+						vector<IItem*> DroppedItem = Monster->DropRandomItem();
+						for (IItem* Dropped : DroppedItem)
 						{
-							//IItem* DroppedItem = Monster->DropItem();
-							//if (DroppedItem) {
-							//	Player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
-							//	cout << "몬스터가 " << DroppedItem->GetName() << "을 떨어뜨렸습니다.\n";
-							//}
+							inventory->AddItem(Dropped); // 플레이어의 인벤토리에 아이템 추가
+							cout << "몬스터가 " << Dropped->GetName() << "을 떨어뜨렸습니다.\n";
 						}
 
 						Player->AddExperience(50);
@@ -294,6 +293,7 @@ void GameManager::Battle(IMonster* Monster)
 					delete hp;
 					delete boost;
 					Monster->Free();
+					Sleep(3000); // 임시
 					return;
 				default:
 					cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
@@ -301,11 +301,12 @@ void GameManager::Battle(IMonster* Monster)
 			}
 			break;
 		case 3:
-			cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
+			cout << "\n" << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
 			Player->SetAttack(OriginalAttack);
 			delete hp;
 			delete boost;
 			Monster->Free();
+			Sleep(3000); // 임시
 			return;
 		default:
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";

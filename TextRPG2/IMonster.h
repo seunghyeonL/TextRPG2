@@ -2,23 +2,28 @@
 #include "GameManager.h"
 #include "SFightable.h"
 #include <string>
+#include <vector>
+#include <unordered_set>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 class IMonster: public SFightable
 {
 public:
-	enum class DropItem {
-		None,       // 아무것도 떨어지지 않음
-		Gold,       // 골드
-		Potion,     // 물약
-		Weapon,     // 무기
-		Armor,      // 방어구
+	enum class DropTable {
+		장비,
+		소비,
+		기타
 	};
 
 protected:
 	IMonster();
 	virtual ~IMonster() = default;
+	vector<IEquipmentItem*> EquipmentItems;   // 장비 아이템들
+	vector<IConsumptionItem*> ConsumableItems;  // 소비 아이템들
+	vector<IEtcItem*> OtherItems;       // 기타 아이템들
 
 public:
 	virtual void Initialize(string name, double health, double attack) = 0;
@@ -35,6 +40,7 @@ public:
 		}
 	}
 	virtual double GetAttack() const { return mAttack; }
+	virtual vector<IItem*> DropRandomItem();
 
 	string		mName{};
 	
