@@ -131,10 +131,12 @@
     <ClCompile Include="AttackBoost.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="FullObserver.h" />
+    <ClCompile Include="IMapObject.h" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="SFightable.cpp" />
     <ClCompile Include="IItem.cpp" />
     <ClCompile Include="IMonster.cpp" />
@@ -161,10 +163,12 @@
     <ClInclude Include="Client_Macro.h" />
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
+    <ClInclude Include="DefaultMapObejct.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="HealthPotion.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="SFightable.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IMonster.h" />

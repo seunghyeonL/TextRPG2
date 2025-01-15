@@ -84,6 +84,9 @@
     <Filter Include="소스 파일\01.Level\Level_Shop">
       <UniqueIdentifier>{e2c7a1cd-34e2-4746-b306-01f2b523a393}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03.Interactable\Protal">
+      <UniqueIdentifier>{1f31bae7-b365-4b8d-95d5-1a2e2cf46a21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -160,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="Level_Shop.cpp">
       <Filter>소스 파일\01.Level\Level_Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>소스 파일\03.Interactable\Protal</Filter>
+    </ClCompile>
+    <ClCompile Include="IMapObject.h">
+      <Filter>소스 파일\01.Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +255,12 @@
     </ClInclude>
     <ClInclude Include="Level_Shop.h">
       <Filter>소스 파일\01.Level\Level_Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>소스 파일\03.Interactable\Protal</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultMapObejct.h">
+      <Filter>소스 파일\01.Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
