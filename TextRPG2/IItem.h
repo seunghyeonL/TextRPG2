@@ -6,16 +6,14 @@
 using namespace std;
 
 class Character;
+class Inventory;
 
-class IItem
+class IItem abstract
 {
-protected:
-	bool IsAlreadyUseOne;
 public:
-	IItem();
-	~IItem() = default;
+	virtual ~IItem() = default;
 	virtual string GetName() = 0;
-	virtual bool Use(class Character *character) = 0;
-	void SetIsAlreadyUseOne();
+	virtual void AddToInventory(shared_ptr<Inventory> inventory, int quantity) = 0;
+	virtual void RemoveToInventory(shared_ptr<Inventory> inventory, int quantity) = 0;
 };
 

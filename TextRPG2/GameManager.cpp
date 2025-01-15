@@ -220,12 +220,12 @@ void GameManager::Battle(IMonster* Monster)
 		case 1:
 			cout << "\n";
 			Player->DisplayInventory();
-			if (Player->GetInven()->GetInventory().size())
+			if (Player->GetInventory()->GetConsumptionInven().size())
 			{
 				int index;
 				cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 				cin >> index;
-				Player->GetInven()->UseItem(index - 1);
+				Player->GetInventory()->UseItem(index - 1);
 				IncreasedAttack = Player->GetAttack() - OriginalAttack;
 			}
 		case 2:
@@ -238,7 +238,7 @@ void GameManager::Battle(IMonster* Monster)
 				{
 				case 1:
 					Player->DisplayInventory();
-					if (Player->GetInven()->GetInventory().size())
+					if (Player->GetInventory()->GetConsumptionInven().size())
 					{
 						int index;
 						cout << "\n사용할 아이템 번호를 입력해주세요.\n";
@@ -278,7 +278,7 @@ void GameManager::Battle(IMonster* Monster)
 
 						Player->AddExperience(50);
 						int gold = 10 + rand() % 10;
-						Player->GetInven()->AddGold(gold);
+						Player->GetInventory()->AddGold(gold);
 						cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
 
 						Sleep(5000); // 임시
@@ -311,8 +311,8 @@ void GameManager::Battle(IMonster* Monster)
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
 		}
 	}
-	for (int i = 0; i < Character::GetInstance()->GetInven()->GetInventory().size(); ++i)
-		Character::GetInstance()->GetInven()->GetInventory()[i].first->SetIsAlreadyUseOne();
+	for (int i = 0; i < Character::GetInstance()->GetInventory()->GetConsumptionInven().size(); ++i)
+		Character::GetInstance()->GetInventory()->GetConsumptionInven()[i].first->SetIsAlreadyUseOne();
 	//boost->IsAlredyUseOne = false; // 공격력 증가 물약 사용 시 체크할 변수
 	delete hp;
 	delete boost;
