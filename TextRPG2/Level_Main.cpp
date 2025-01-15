@@ -17,8 +17,7 @@ void Level_Main::Initialize()
 
 	for (int i = 0; i < MAP_HEIGHT; i++) {
 		for (int j = 0; j < MAP_WIDTH; j++) {
-			m_Map.insert({ PosStruct{ i, j }, { ". ", nullptr}});
-			cout << "출력되나?" << m_Map[PosStruct{i, j}].first;
+			m_Map.insert({ PosStruct{ i, j }, { ". ", nullptr} });
 		}
 	}
 
@@ -34,83 +33,79 @@ void Level_Main::Initialize()
 	DungeonPortal->SetDestination(DungeonMap);
 	ShopPortal->SetDestination(ShopMap);
 
-	m_Map[PosStruct{ 0, MAP_WIDTH / 2 }] = { ". ", DungeonPortal };
-	m_Map[PosStruct{ 0, MAP_WIDTH / 2 + 1 }] = { ". ", DungeonPortal };
+	m_Map[PosStruct{ 0, MAP_WIDTH / 2 }] = { "던", DungeonPortal };
+	m_Map[PosStruct{ 0, MAP_WIDTH / 2 + 1 }] = { "전", DungeonPortal };
 
 
-	m_Map[PosStruct{ MAP_HEIGHT / 2, 0 }] = { ". ", ShopPortal };
-	m_Map[PosStruct{ MAP_HEIGHT / 2, 1 }] = { ". ", ShopPortal };
+	m_Map[PosStruct{ MAP_HEIGHT / 2, 0 }] = { "상", ShopPortal };
+	m_Map[PosStruct{ MAP_HEIGHT / 2, 1 }] = { "점", ShopPortal };
 
 	Character* character = Character::GetInstance();
 
 	PosStruct cPos = character->GetPosition();
 
-	m_Map[cPos] = { "A ", nullptr};
+	m_Map[cPos] = { "A ", nullptr };
 }
 
 void Level_Main::Update() {
 	auto character = Character::GetInstance();
 	PosStruct CurPos = character->GetPosition();
 
-	m_Map[CurPos] = {". ", nullptr};
+	m_Map[CurPos] = { ". ", nullptr };
 
-	if (m_pGameManager->Key_Down(VK_LEFT))
+	if (m_pGameManager->Key_Down(VK_UP))
 	{
 		if (CurPos.X > 0) {
 			auto Interactable = m_Map[PosStruct{ CurPos.X - 1, CurPos.Y }].second;
 			if (Interactable) {
 				Interactable->Interact();
+				return;
 			}
 			else {
 				CurPos.X--;
 				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
 			}
 		}
 	}
-	else if (m_pGameManager->Key_Down(VK_UP))
+	else if (m_pGameManager->Key_Down(VK_LEFT))
 	{
 		if (CurPos.Y > 0) {
-			auto Interactable = m_Map[PosStruct{CurPos.X, CurPos.Y - 1}].second;
+			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y - 1 }].second;
 			if (Interactable) {
 				Interactable->Interact();
+				return;
 			}
 			else {
 				CurPos.Y--;
 				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
-			}
-		}
-	}
-	else if (m_pGameManager->Key_Down(VK_DOWN))
-	{
-		if (CurPos.Y < MAP_HEIGHT - 1) {
-			auto Interactable = m_Map[PosStruct{CurPos.X, CurPos.Y + 1}].second;
-			if (Interactable) {
-				Interactable->Interact();
-			}
-			else {
-				CurPos.Y++;
-				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
 			}
 		}
 	}
 	else if (m_pGameManager->Key_Down(VK_RIGHT))
 	{
-		if (CurPos.X < MAP_WIDTH - 1) {
-			auto Interactable = m_Map[PosStruct{CurPos.X + 1, CurPos.Y}].second;
+		if (CurPos.Y < MAP_HEIGHT - 1) {
+			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y + 1 }].second;
 			if (Interactable) {
 				Interactable->Interact();
+				return;
+			}
+			else {
+				CurPos.Y++;
+				character->SetPosition(CurPos.X, CurPos.Y);
+			}
+		}
+	}
+	else if (m_pGameManager->Key_Down(VK_DOWN))
+	{
+		if (CurPos.X < MAP_WIDTH - 1) {
+			auto Interactable = m_Map[PosStruct{ CurPos.X + 1, CurPos.Y }].second;
+			if (Interactable) {
+				Interactable->Interact();
+				return;
 			}
 			else {
 				CurPos.X++;
 				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
 			}
 		}
 	}
@@ -131,6 +126,7 @@ void Level_Main::Update() {
 		system("cls");
 	}
 
+
 	m_Map[CurPos] = { "A ", nullptr };
 }
 
@@ -139,7 +135,7 @@ void Level_Main::Render()
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
 		for (int j = 0; j < MAP_WIDTH; j++) {
-			Buffer += m_Map[PosStruct{i, j}].first;
+			Buffer += m_Map[PosStruct{ i, j }].first;
 			//wcout << Buffer;
 			//cout << i << " " << j << '\n';
 		}

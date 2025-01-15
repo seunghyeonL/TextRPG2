@@ -13,6 +13,5 @@ public:
 public:
 	Level_Dungeon();
 	~Level_Dungeon() {};
-	static Level_Dungeon* Create();
 	virtual void Free() override;
 };

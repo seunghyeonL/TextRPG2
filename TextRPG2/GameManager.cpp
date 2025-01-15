@@ -11,6 +11,7 @@
 #include "Level.h"
 #include "Orc.h"
 #include <windows.h>
+#include "Level_Dungeon.h"
 
 IMPLEMENT_SINGLETON(GameManager)
 

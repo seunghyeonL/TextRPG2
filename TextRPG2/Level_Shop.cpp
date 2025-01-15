@@ -7,6 +7,7 @@
 Level_Shop::Level_Shop()
 	: Map{}
 {
+	Initialize();
 }
 void Level_Shop::Initialize()
 {
@@ -17,25 +18,6 @@ void Level_Shop::Initialize()
 			m_Map.insert({ PosStruct{ i, j }, { ". ", nullptr} });
 		}
 	}
-
-	Portal* DungeonPortal = new Portal(0, MAP_WIDTH / 2, MAP_HEIGHT - 2, MAP_WIDTH / 2);
-	Portal* ShopPortal = new Portal(MAP_HEIGHT / 2, 0, MAP_HEIGHT / 2, MAP_WIDTH - 3);
-
-	Interactables.push_back(DungeonPortal);
-	Interactables.push_back(ShopPortal);
-
-	Level_Dungeon* DungeonMap = new Level_Dungeon();
-	Level_Shop* ShopMap = new Level_Shop();
-
-	DungeonPortal->SetDestination(DungeonMap);
-	ShopPortal->SetDestination(ShopMap);
-
-	m_Map[PosStruct{ 0, MAP_WIDTH / 2 }] = { ". ", DungeonPortal };
-	m_Map[PosStruct{ 0, MAP_WIDTH / 2 + 1 }] = { ". ", DungeonPortal };
-
-
-	m_Map[PosStruct{ MAP_HEIGHT / 2, 0 }] = { ". ", ShopPortal };
-	m_Map[PosStruct{ MAP_HEIGHT / 2, 1 }] = { ". ", ShopPortal };
 
 	Character* character = Character::GetInstance();
 
@@ -58,8 +40,6 @@ void Level_Shop::Update() {
 			else {
 				CurPos.X--;
 				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
 			}
 		}
 	}
@@ -73,8 +53,6 @@ void Level_Shop::Update() {
 			else {
 				CurPos.Y--;
 				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
 			}
 		}
 	}
@@ -88,8 +66,6 @@ void Level_Shop::Update() {
 			else {
 				CurPos.Y++;
 				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
 			}
 		}
 	}
@@ -103,8 +79,6 @@ void Level_Shop::Update() {
 			else {
 				CurPos.X++;
 				character->SetPosition(CurPos.X, CurPos.Y);
-				cout << CurPos.X << " " << CurPos.Y << '\n';
-				system("cls");
 			}
 		}
 	}

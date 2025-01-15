@@ -14,6 +14,5 @@ public:
 public:
 	Level_Shop();
 	virtual ~Level_Shop() = default;
-	static Level_Shop* Create();
 	virtual void Free() override;
 };

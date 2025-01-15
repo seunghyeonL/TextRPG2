@@ -1,5 +1,7 @@
 #include "Portal.h"
+#include "GameManager.h"
 #include "Character.h"
+#include "EventLoop.h"
 
 Portal::Portal(int PosX, int PosY, int DestPosX, int DestPosY) {
 	Pos.X = PosX;
@@ -16,7 +18,7 @@ Portal::~Portal()
 
 void Portal::Initialize()
 {
-	m_pGameManager = GameManager::Get_Instance();
+	
 }
 
 void Portal::SetDestination(Level* Level_Dest)
@@ -26,9 +28,14 @@ void Portal::SetDestination(Level* Level_Dest)
 
 void Portal::Interact()
 {
-	auto character = Character::GetInstance();
+	auto m_pGameManager = GameManager::Get_Instance();
+	Character* character = Character::GetInstance();
 	character->SetPosition(DestPos.X, DestPos.Y);
-	m_pGameManager->Change_Level(Destination);
-	m_pGameManager->Update();
+	EventLoop* eventLoop = EventLoop::Get_Instance();
+	eventLoop->AddTask([m_pGameManager, this]()->void {
+		m_pGameManager->Change_Level(this->Destination);
+		//m_pGameManager->Update();
+	});
+	
 }
 

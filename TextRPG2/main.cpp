@@ -6,6 +6,7 @@
 #include "GameManager.h"
 #include "MainApp.h"
 #include "Character.h"
+#include "EventLoop.h"
 #include <locale>
 
 void DisableCursorBlinking();
@@ -20,16 +21,20 @@ int main()
 	SetConsoleOutputCP(CP_UTF8);
 	DisableCursorBlinking();
 
-	MainApp *pMainApp = MainApp::Create();
+	MainApp* pMainApp = MainApp::Create();
 
-	GameManager *pGameManager = GameManager::Get_Instance();
+	GameManager* pGameManager = GameManager::Get_Instance();
+	EventLoop* pEventLoop = EventLoop::Get_Instance();
 	pGameManager->DisableEcho();
 
 	bool bIsInit = false;
 	while (true)
 	{
 		pMainApp->Update();
+		
 		pMainApp->Render();
+
+		pEventLoop->Run();
 
 		if (pGameManager->KeyPressedThisFrame())
 			system("pause");

@@ -31,8 +31,6 @@ void Level_Manager::Change_Level(Level *pNewLevel)
 	if (m_pCurrentLevel != nullptr)
 		m_pCurrentLevel->Free();
 
-	cout << flush;
-	cout.clear();
 	system("cls");
 	m_pCurrentLevel = pNewLevel;
 }
@@ -48,5 +46,8 @@ Level_Manager *Level_Manager::Create()
 
 void Level_Manager::Free()
 {
+	if (nullptr != m_pCurrentLevel) {
+		m_pCurrentLevel->Free();
+	}
 	delete this;
 }

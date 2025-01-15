@@ -13,7 +13,5 @@ public:
 public:
 	Level_Main();
 	~Level_Main() {};
-
-	static Level_Main* Create();
 	virtual void Free() override;
 };

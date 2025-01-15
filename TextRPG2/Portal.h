@@ -1,5 +1,4 @@
 #pragma once
-#include "GameManager.h"
 #include "IInteractable.h"
 #include "Level.h"
 
@@ -21,7 +20,6 @@ public:
 protected:
 	PosStruct Pos{ 0, 0 };
 	PosStruct DestPos{ 0, 0 };
-	class GameManager* m_pGameManager{ nullptr };
 	Level* Destination{ nullptr };
 };
 

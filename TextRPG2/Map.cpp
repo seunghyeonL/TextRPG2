@@ -30,6 +30,5 @@ void Map::Free()
 		delete el;
 	}
 	Level::Free();
-	delete this;
 }
 

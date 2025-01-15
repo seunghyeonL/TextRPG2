@@ -75,9 +75,6 @@
     <Filter Include="소스 파일\01.Level\Manager">
       <UniqueIdentifier>{3589eca2-e0b8-4a9b-8428-d597ca023d8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\03.Interactable\Protal">
-      <UniqueIdentifier>{1f31bae7-b365-4b8d-95d5-1a2e2cf46a21}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\01.Level\Map">
       <UniqueIdentifier>{5bcee990-33cf-451a-865d-ab4728ef2da7}</UniqueIdentifier>
     </Filter>
@@ -89,6 +86,12 @@
     </Filter>
     <Filter Include="소스 파일\01.Level\Map\Level_Main">
       <UniqueIdentifier>{d620cfaa-abfd-48dd-87d2-789921d933db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\08. EventLoop">
+      <UniqueIdentifier>{68a97274-6412-4669-bc9e-f2d9e4997903}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Portal">
+      <UniqueIdentifier>{1f31bae7-b365-4b8d-95d5-1a2e2cf46a21}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +168,7 @@
       <Filter>소스 파일\01.Level\Map\Level_Shop</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">
-      <Filter>소스 파일\03.Interactable\Protal</Filter>
+      <Filter>소스 파일\03.Interactable\Portal</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>소스 파일\01.Level\Map</Filter>
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="Level_Main.cpp">
       <Filter>소스 파일\01.Level\Map\Level_Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EventLoop.cpp">
+      <Filter>소스 파일\08. EventLoop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,13 +266,16 @@
       <Filter>소스 파일\01.Level\Map\Level_Shop</Filter>
     </ClInclude>
     <ClInclude Include="Portal.h">
-      <Filter>소스 파일\03.Interactable\Protal</Filter>
+      <Filter>소스 파일\03.Interactable\Portal</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>소스 파일\01.Level\Map</Filter>
     </ClInclude>
     <ClInclude Include="Level_Main.h">
       <Filter>소스 파일\01.Level\Map\Level_Main</Filter>
+    </ClInclude>
+    <ClInclude Include="EventLoop.h">
+      <Filter>소스 파일\08. EventLoop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
