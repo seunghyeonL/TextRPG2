@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <sstream>
 #include "Character.h"
 #include "HealthPotion.h"
 #include "AttackBoost.h"
@@ -7,7 +9,7 @@ Character *Character::Instance = nullptr;
 
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
-      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_unique<Inventory>())
+      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>())
 {
 }
 
@@ -108,12 +110,30 @@ void Character::DisplayInventory()
 
     for (int i = 0; i < Inven->GetInventory().size(); i++)
         cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
-
+    
+    string input;
     int index;
-    cin >> index;
+
+    while (true) {
+        cout << "사용할 아이템 번호를 입력하세요: ";
+        getline(cin, input); // 한 줄 입력 받기
+        // 문자열을 정수로 변환 시도
+        stringstream ss(input);
+        if (!(ss >> index) || !(ss.eof())) {
+            // 변환 실패 또는 남은 데이터가 있는 경우
+            cout << "잘못된 입력입니다. 정수를 입력하세요.\n";
+            continue;
+        }
+
+        // 유효한 범위 확인
+        if (index < 0 || index >= Inven->GetInventory().size()) {
+            cout << "입력한 번호가 유효하지 않습니다. 다시 시도하세요.\n";
+        }
+        else {
+            break; // 유효한 입력이면 루프 종료
+        }
+    }
     Inven->UseItem(index);
-    for (int i = 0; i < Inven->GetInventory().size(); i++)
-        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
 }
 
 void Character::LevelUp()
