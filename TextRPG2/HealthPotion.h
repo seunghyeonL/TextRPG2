@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IItem.h"
+#include "IConsumptionItem.h"
 #include "Character.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class HealthPotion : public IItem
+class HealthPotion : public IConsumptionItem
 {
 private:
     const string Name;

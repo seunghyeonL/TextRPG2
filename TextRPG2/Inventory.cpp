@@ -7,9 +7,19 @@ Inventory::Inventory()
 
 }
 
-vector<pair<IItem*, int>> Inventory::GetInventory()
+vector<IEquipmentItem*> Inventory::GetEquipmentInven()
 {
-    return Inven;
+    return EquipmentInven;
+}
+
+vector<pair<IConsumptionItem*, int>> Inventory::GetConsumptionInven()
+{
+    return ConsumptionInven;
+}
+
+vector<pair<IEtcItem*, int>> Inventory::GetEtcInven()
+{
+    return EtcInven;
 }
 
 int Inventory::GetGold()
@@ -22,54 +32,124 @@ void Inventory::AddGold(int gold)
     Gold += gold;
 }
 
-void Inventory::AddItem(IItem* item)
+void Inventory::UseItem(int index)
 {
-    if (Inven.empty())
-        Inven.push_back(make_pair(item, 1));
+    if (index >= 0 && index < ConsumptionInven.size())
+    {
+        cout << ConsumptionInven[index].first->GetName() << "을(를) 사용합니다.\n";
+        bool IsCanUse = ConsumptionInven[index].first->Use(Character::GetInstance());
+        if(IsCanUse)
+            RemoveToConsumption(ConsumptionInven[index].first);
+    }
+}
+
+void Inventory::AddToEquipment(IEquipmentItem* item)
+{
+    if (EquipmentInven.empty())
+        EquipmentInven.push_back(item);
 
     else
     {
-        for (int i = 0; i < Inven.size(); ++i)
+        for (int i = 0; i < EquipmentInven.size(); ++i)
         {
-            if (Inven[i].first->GetName() == item->GetName())
+            if (EquipmentInven[i]->GetName() == item->GetName())
             {
-                Inven[i].second++;
+                cout << "동일한 아이템을 갖고 있습니다." << endl;
+                return;
+            }
+        }
+        EquipmentInven.push_back(item);
+    }
+}
+
+void Inventory::AddToConsumption(IConsumptionItem* item, int quantity)
+{
+    if (ConsumptionInven.empty())
+        ConsumptionInven.push_back(make_pair(item, quantity));
+
+    else
+    {
+        for (int i = 0; i < ConsumptionInven.size(); ++i)
+        {
+            if (ConsumptionInven[i].first->GetName() == item->GetName())
+            {
+                ConsumptionInven[i].second += quantity;
                 delete item;
                 return;
             }
         }
-        Inven.push_back(make_pair(item, 1));
+        ConsumptionInven.push_back(make_pair(item, quantity));
     }
 }
 
-void Inventory::RemoveItem(IItem* item)
+void Inventory::AddToEtc(IEtcItem* item, int quantity)
 {
-    for (int i = 0; i < Inven.size(); ++i)
+    if (EtcInven.empty())
+        EtcInven.push_back(make_pair(item, quantity));
+
+    else
     {
-        if (Inven[i].first->GetName() == item->GetName())
+        for (int i = 0; i < EtcInven.size(); ++i)
         {
-            if (Inven[i].second > 1)
+            if (EtcInven[i].first->GetName() == item->GetName())
             {
-                Inven[i].second--;
+                EtcInven[i].second += quantity;
+                delete item;
                 return;
             }
-            else if (Inven[i].second == 1)
+        }
+        EtcInven.push_back(make_pair(item, quantity));
+    }
+}
+
+void Inventory::RemoveToEquipment(IEquipmentItem* item)
+{
+    for (int i = 0; i < EquipmentInven.size(); ++i)
+    {
+        if (EquipmentInven[i]->GetName() == item->GetName())
+            EquipmentInven.erase(remove(EquipmentInven.begin(), EquipmentInven.end(),
+                EquipmentInven[i]), EquipmentInven.end());
+    }
+}
+
+void Inventory::RemoveToConsumption(IConsumptionItem* item, int quantity)
+{
+    for (int i = 0; i < ConsumptionInven.size(); ++i)
+    {
+        if (ConsumptionInven[i].first->GetName() == item->GetName())
+        {
+            if (ConsumptionInven[i].second > 1)
             {
-                Inven.erase(remove(Inven.begin(), Inven.end(),
-                    Inven[i]), Inven.end());
+                ConsumptionInven[i].second -= quantity;
+                return;
+            }
+            else if (ConsumptionInven[i].second == 1)
+            {
+                ConsumptionInven.erase(remove(ConsumptionInven.begin(), ConsumptionInven.end(),
+                    ConsumptionInven[i]), ConsumptionInven.end());
                 return;
             }
         }
     }
 }
 
-void Inventory::UseItem(int index)
+void Inventory::RemoveToEtc(IEtcItem* item, int quantity)
 {
-    if (index >= 0 && index < Inven.size())
+    for (int i = 0; i < EtcInven.size(); ++i)
     {
-        cout << Inven[index].first->GetName() << "을(를) 사용합니다.\n";
-        bool IsCanUse = Inven[index].first->Use(Character::GetInstance());
-        if(IsCanUse)
-            RemoveItem(Inven[index].first);
+        if (EtcInven[i].first->GetName() == item->GetName())
+        {
+            if (EtcInven[i].second > 1)
+            {
+                EtcInven[i].second -= quantity;
+                return;
+            }
+            else if (EtcInven[i].second == 1)
+            {
+                EtcInven.erase(remove(EtcInven.begin(), EtcInven.end(),
+                    EtcInven[i]), EtcInven.end());
+                return;
+            }
+        }
     }
 }
