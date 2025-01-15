@@ -36,6 +36,7 @@ public:
 	double GetHealth();
 	void SetHealth(double health);
 	double GetAttack();
+	void GetDamage(double attack);
 	void SetAttack(double attack);
 	void TakeDamage(double damage);
 	double GetExperience();

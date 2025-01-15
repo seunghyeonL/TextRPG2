@@ -61,6 +61,15 @@ double Character::GetAttack()
     return Attack;
 }
 
+void Character::GetDamage(double attack)
+{
+    Health -= attack;
+    if (Health <= 0)
+    {
+        Health = 0;
+    }
+}
+
 void Character::SetAttack(double attack)
 {
     Attack = attack;
@@ -100,20 +109,14 @@ void Character::DisplayInventory()
 {
     HealthPotion *potion = new HealthPotion();
     AttackBoost *AB = new AttackBoost();
-    Inven->AddItem(potion);
-    Inven->AddItem(AB);
+    Inven->AddItem(potion); // 임시
+    Inven->AddItem(AB); // 임시
     if (Inven->GetInventory().empty())
         cout << "인벤토리는 비어있다."
                 "\n";
 
     for (int i = 0; i < Inven->GetInventory().size(); i++)
-        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
-
-    int index;
-    cin >> index;
-    Inven->UseItem(index);
-    for (int i = 0; i < Inven->GetInventory().size(); i++)
-        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+        cout << i + 1<< ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
 }
 
 void Character::LevelUp()
