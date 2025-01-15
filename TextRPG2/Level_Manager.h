@@ -22,13 +22,13 @@ public:
 
 private:
 	class Level* m_pCurrentLevel{ nullptr };
-	
-	vector<Level*> Levels;
-	vector<Map*> Maps;
 
 	unsigned int m_iLevelIndex{ 0 };
 
 public:
 	static Level_Manager* Create();
+	
+	Level* CreateMap(MAP MAP_ENUM);
+
 	virtual void Free();
 };

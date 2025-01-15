@@ -18,9 +18,9 @@ void Orc::Update()
 
 }
 
-void Orc::Interact() {
-
-}
+//void Orc::Interact() {
+//
+//}
 
 Orc* Orc::Create(string name, int health, int attack)
 {
@@ -42,4 +42,5 @@ Orc* Orc::CreateBoss(string name, int health, int attack)
 
 void Orc::Free()
 {
+	IMonster::Free();
 }

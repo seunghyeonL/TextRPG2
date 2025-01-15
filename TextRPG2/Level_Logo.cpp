@@ -1,6 +1,7 @@
 #include "Level_Logo.h"
 #include "Level_Main.h"
 #include "Level_Dungeon.h"
+#include "Level_Shop.h"
 #include "GameManager.h"
 #include "Character.h"
 
@@ -41,8 +42,9 @@ void Level_Logo::Update()
 {
 	/* ������ �� */
 	if (m_pGameManager->Key_Down('A'))
-		//m_pGameManager->Change_Level(new Level_Main());
-		m_pGameManager->Change_Level(new Level_Dungeon());
+		//m_pGameManager->Change_Level(new Level_Shop());
+		m_pGameManager->Change_Level(new Level_Main());
+		//m_pGameManager->Change_Level(new Level_Dungeon());
 }
 
 void Level_Logo::Render()

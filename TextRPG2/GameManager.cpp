@@ -162,7 +162,12 @@ IMonster* GameManager::GenerateMonster(int level)
 			break;
 		}
 	}
-};
+}
+
+Level* GameManager::CreateMap(MAP MAP_ENUM)
+{
+	return m_pLevel_Manager->CreateMap(MAP_ENUM);
+}
 
 void GameManager::StartGame()
 {

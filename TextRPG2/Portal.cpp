@@ -3,17 +3,14 @@
 #include "Character.h"
 #include "EventLoop.h"
 
-Portal::Portal(int PosX, int PosY, int DestPosX, int DestPosY) {
-	Pos.X = PosX;
-	Pos.Y = PosY;
+Portal::Portal(int DestPosX, int DestPosY) {
 	DestPos.X = DestPosX;
 	DestPos.Y = DestPosY;
 }
 
 Portal::~Portal()
 {
-	if(Destination != nullptr)
-		Destination->Free();
+
 }
 
 void Portal::Initialize()
@@ -21,9 +18,9 @@ void Portal::Initialize()
 	
 }
 
-void Portal::SetDestination(Level* Level_Dest)
+void Portal::SetDestination(MAP MAP_ENUM)
 {
-	Destination = Level_Dest;
+	Destination = MAP_ENUM;
 }
 
 void Portal::Interact()
@@ -33,9 +30,8 @@ void Portal::Interact()
 	character->SetPosition(DestPos.X, DestPos.Y);
 	EventLoop* eventLoop = EventLoop::Get_Instance();
 	eventLoop->AddTask([m_pGameManager, this]()->void {
-		m_pGameManager->Change_Level(this->Destination);
+		m_pGameManager->Change_Level(m_pGameManager->CreateMap(Destination));
 		//m_pGameManager->Update();
 	});
-	
 }
 

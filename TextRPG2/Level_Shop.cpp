@@ -9,9 +9,10 @@ Level_Shop::Level_Shop()
 {
 	Initialize();
 }
+
 void Level_Shop::Initialize()
 {
-	MapType = MAP_VILLAGE;
+	MapType = MAP_SHOP;
 
 	for (int i = 0; i < MAP_HEIGHT; i++) {
 		for (int j = 0; j < MAP_WIDTH; j++) {
@@ -19,66 +20,78 @@ void Level_Shop::Initialize()
 		}
 	}
 
-	Character* character = Character::GetInstance();
+	Portal* VillagePortal = new Portal(MAP_HEIGHT / 2, 2);
+	Interactables.push_back(VillagePortal);
+	VillagePortal->SetDestination(MAP_VILLAGE);
 
-	PosStruct cPos = character->GetPosition();
+	m_Map[PosStruct{ MAP_HEIGHT / 2, MAP_WIDTH - 2 }] = { "마", VillagePortal };
+	m_Map[PosStruct{ MAP_HEIGHT / 2, MAP_WIDTH - 1 }] = { "을", VillagePortal };
+
+	Character* pCharacter = Character::GetInstance();
+	PosStruct cPos = pCharacter->GetPosition();
 
 	m_Map[cPos] = { "A ", nullptr };
 }
 
 void Level_Shop::Update() {
-	auto character = Character::GetInstance();
-	PosStruct CurPos = character->GetPosition();
+	auto pCharacter = Character::GetInstance();
+	PosStruct CurPos = pCharacter->GetPosition();
 
-	if (m_pGameManager->Key_Down(VK_LEFT))
+	m_Map[CurPos] = { ". ", nullptr };
+
+	if (m_pGameManager->Key_Down(VK_UP))
 	{
 		if (CurPos.X > 0) {
 			auto Interactable = m_Map[PosStruct{ CurPos.X - 1, CurPos.Y }].second;
 			if (Interactable) {
 				Interactable->Interact();
+				return;
 			}
 			else {
 				CurPos.X--;
-				character->SetPosition(CurPos.X, CurPos.Y);
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
 		}
 	}
-	else if (m_pGameManager->Key_Down(VK_UP))
+	else if (m_pGameManager->Key_Down(VK_LEFT))
 	{
 		if (CurPos.Y > 0) {
 			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y - 1 }].second;
 			if (Interactable) {
 				Interactable->Interact();
+				return;
 			}
 			else {
 				CurPos.Y--;
-				character->SetPosition(CurPos.X, CurPos.Y);
-			}
-		}
-	}
-	else if (m_pGameManager->Key_Down(VK_DOWN))
-	{
-		if (CurPos.Y < MAP_HEIGHT - 1) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y + 1 }].second;
-			if (Interactable) {
-				Interactable->Interact();
-			}
-			else {
-				CurPos.Y++;
-				character->SetPosition(CurPos.X, CurPos.Y);
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
 		}
 	}
 	else if (m_pGameManager->Key_Down(VK_RIGHT))
 	{
+		if (CurPos.Y < MAP_HEIGHT - 1) {
+			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y + 1 }].second;
+			if (Interactable) {
+				Interactable->Interact();
+				return;
+			}
+			else {
+				CurPos.Y++;
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
+			}
+		}
+	}
+	else if (m_pGameManager->Key_Down(VK_DOWN))
+	{
 		if (CurPos.X < MAP_WIDTH - 1) {
 			auto Interactable = m_Map[PosStruct{ CurPos.X + 1, CurPos.Y }].second;
 			if (Interactable) {
 				Interactable->Interact();
+				return;
 			}
 			else {
 				CurPos.X++;
-				character->SetPosition(CurPos.X, CurPos.Y);
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
 		}
 	}
@@ -98,6 +111,8 @@ void Level_Shop::Update() {
 			CurView = VIEW_MAP;
 		system("cls");
 	}
+
+	m_Map[CurPos] = { "A ", nullptr };
 }
 
 void Level_Shop::Render()
@@ -106,8 +121,6 @@ void Level_Shop::Render()
 	{
 		for (int j = 0; j < MAP_WIDTH; j++) {
 			Buffer += m_Map[PosStruct{ i, j }].first;
-			//wcout << Buffer;
-			//cout << i << " " << j << '\n';
 		}
 		Buffer.push_back(L'\n');
 	}

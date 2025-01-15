@@ -35,6 +35,8 @@ public:
 
 	class IMonster* GenerateMonster(int level);
 
+	Level* CreateMap(MAP MAP_ENUM);
+
 	void StartGame();
 
 	void Battle(IMonster* Monster);

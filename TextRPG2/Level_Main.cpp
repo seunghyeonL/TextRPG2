@@ -21,35 +21,31 @@ void Level_Main::Initialize()
 		}
 	}
 
-	Portal* DungeonPortal = new Portal(0, MAP_WIDTH / 2, MAP_HEIGHT - 2, MAP_WIDTH / 2);
-	Portal* ShopPortal = new Portal(MAP_HEIGHT / 2, 0, MAP_HEIGHT / 2, MAP_WIDTH - 3);
+	Portal* DungeonPortal = new Portal(MAP_HEIGHT - 2, MAP_WIDTH / 2);
+	Portal* ShopPortal = new Portal(MAP_HEIGHT / 2, MAP_WIDTH - 3);
 
 	Interactables.push_back(DungeonPortal);
 	Interactables.push_back(ShopPortal);
 
-	Level_Dungeon* DungeonMap = new Level_Dungeon();
-	Level_Shop* ShopMap = new Level_Shop();
-
-	DungeonPortal->SetDestination(DungeonMap);
-	ShopPortal->SetDestination(ShopMap);
+	DungeonPortal->SetDestination(MAP_DUNGEON);
+	ShopPortal->SetDestination(MAP_SHOP);
 
 	m_Map[PosStruct{ 0, MAP_WIDTH / 2 }] = { "던", DungeonPortal };
 	m_Map[PosStruct{ 0, MAP_WIDTH / 2 + 1 }] = { "전", DungeonPortal };
 
-
 	m_Map[PosStruct{ MAP_HEIGHT / 2, 0 }] = { "상", ShopPortal };
 	m_Map[PosStruct{ MAP_HEIGHT / 2, 1 }] = { "점", ShopPortal };
 
-	Character* character = Character::GetInstance();
+	Character* pCharacter = Character::GetInstance();
 
-	PosStruct cPos = character->GetPosition();
+	PosStruct cPos = pCharacter->GetPosition();
 
 	m_Map[cPos] = { "A ", nullptr };
 }
 
 void Level_Main::Update() {
-	auto character = Character::GetInstance();
-	PosStruct CurPos = character->GetPosition();
+	auto pCharacter = Character::GetInstance();
+	PosStruct CurPos = pCharacter->GetPosition();
 
 	m_Map[CurPos] = { ". ", nullptr };
 
@@ -63,7 +59,7 @@ void Level_Main::Update() {
 			}
 			else {
 				CurPos.X--;
-				character->SetPosition(CurPos.X, CurPos.Y);
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
 		}
 	}
@@ -77,7 +73,7 @@ void Level_Main::Update() {
 			}
 			else {
 				CurPos.Y--;
-				character->SetPosition(CurPos.X, CurPos.Y);
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
 		}
 	}
@@ -91,7 +87,7 @@ void Level_Main::Update() {
 			}
 			else {
 				CurPos.Y++;
-				character->SetPosition(CurPos.X, CurPos.Y);
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
 		}
 	}
@@ -105,7 +101,7 @@ void Level_Main::Update() {
 			}
 			else {
 				CurPos.X++;
-				character->SetPosition(CurPos.X, CurPos.Y);
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
 		}
 	}
@@ -136,8 +132,6 @@ void Level_Main::Render()
 	{
 		for (int j = 0; j < MAP_WIDTH; j++) {
 			Buffer += m_Map[PosStruct{ i, j }].first;
-			//wcout << Buffer;
-			//cout << i << " " << j << '\n';
 		}
 		Buffer.push_back(L'\n');
 	}

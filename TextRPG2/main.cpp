@@ -32,9 +32,11 @@ int main()
 	{
 		pMainApp->Update();
 		
+		pEventLoop->Run();
+
 		pMainApp->Render();
 
-		pEventLoop->Run();
+		
 
 		if (pGameManager->KeyPressedThisFrame())
 			system("pause");

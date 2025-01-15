@@ -1,25 +1,21 @@
 #pragma once
+#include "Client_Defines.h"
 #include "IInteractable.h"
 #include "Level.h"
 
 class Portal : public IInteractable
 {
 public:
-	Portal(int PosX, int PosY, int DestPosX, int DestPosY);
+	Portal(int DestPosX, int DestPosY);
 
 	virtual ~Portal();
 	void Initialize();
-	void SetDestination(Level* Level_Dest);
+	void SetDestination(MAP MAP_ENUM);
 
 	void Interact() override;
 
-	PosStruct GetPos() {
-		return Pos;
-	};
-
 protected:
-	PosStruct Pos{ 0, 0 };
 	PosStruct DestPos{ 0, 0 };
-	Level* Destination{ nullptr };
+	MAP Destination{ MAP_END };
 };
 

@@ -166,6 +166,7 @@
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
     <ClInclude Include="EventLoop.h" />
+    <ClInclude Include="IHealthObserver.h" />
     <ClInclude Include="Level_Main.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Observer.h" />

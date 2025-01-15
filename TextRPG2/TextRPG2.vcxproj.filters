@@ -277,5 +277,8 @@
     <ClInclude Include="EventLoop.h">
       <Filter>소스 파일\08. EventLoop</Filter>
     </ClInclude>
+    <ClInclude Include="IHealthObserver.h">
+      <Filter>소스 파일\04.FightObserver</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
