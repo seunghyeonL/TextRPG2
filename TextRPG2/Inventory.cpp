@@ -43,6 +43,25 @@ void Inventory::UseItem(int index)
     }
 }
 
+void Inventory::AddDroppedItems(const vector<IItem*>& droppedItems)
+{
+    for (IItem* item : droppedItems)
+    {
+        if (auto* equipmentItem = dynamic_cast<IEquipmentItem*>(item)) 
+        {
+            AddToEquipment(equipmentItem);
+        }
+        else if (auto* consumptionItem = dynamic_cast<IConsumptionItem*>(item)) 
+        {
+            AddToConsumption(consumptionItem); 
+        }
+        else if (auto* etcItem = dynamic_cast<IEtcItem*>(item)) 
+        {
+            AddToEtc(etcItem);
+        }
+    }
+}
+
 void Inventory::AddToEquipment(IEquipmentItem* item)
 {
     if (EquipmentInven.empty())
@@ -151,9 +170,5 @@ void Inventory::RemoveToEtc(IEtcItem* item, int quantity)
                 return;
             }
         }
-    }
-    else
-    {
-        cout << "\n해당 번호의 아이템이 없습니다.\n";
     }
 }

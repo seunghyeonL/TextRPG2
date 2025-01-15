@@ -4,6 +4,8 @@
 #include "IConsumptionItem.h"
 #include "IEtcItem.h"
 #include "IItemStrategy.h"
+#include "IItem.h"
+
 
 class Inventory
 {
@@ -21,6 +23,7 @@ public:
     int GetGold();
     void AddGold(int gold);
     void UseItem(int index);
+    void AddDroppedItems(const vector<IItem*>& droppedItems);
     void AddToEquipment(IEquipmentItem* item);
     void AddToConsumption(IConsumptionItem* item, int quantity = 1);
     void AddToEtc(IEtcItem* item, int quantity = 1);
