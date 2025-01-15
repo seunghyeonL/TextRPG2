@@ -108,6 +108,7 @@ void Level_Main::Render()
 		Character::GetInstance()->DisplayStatus();
 		break;
 	case VIEW_INVENTORY:
+		system("cls");
 		Character::GetInstance()->DisplayInventory();
 		break;
 	}

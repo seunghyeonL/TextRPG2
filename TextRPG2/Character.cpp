@@ -123,7 +123,7 @@ void Character::DisplayInventory()
             system("cls");
             Inven->UseItem(i); /* 여기서 사용한 아이템 출력 */
             cout << "-----------------------------" << endl; /* 구분선*/
-
+             
             /* 한번 클리어 했으니 인벤토리 다시 출력 */
             if (Inven->GetInventory().empty())
                 cout << "인벤토리는 비어있다." << endl;
