@@ -24,6 +24,7 @@ private:
 	double MaxExperience; // 최대 경험치
 	shared_ptr<Inventory> Inven;
 
+	class GameManager* pGameManager{ nullptr };
 	Character(string name);
 	Character(const Character&) = delete;
 	Character& operator=(const Character&) = delete;

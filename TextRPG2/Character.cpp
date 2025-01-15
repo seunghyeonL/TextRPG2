@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include "GameManager.h"
 #include "Character.h"
 #include "HealthPotion.h"
 #include "AttackBoost.h"
@@ -9,8 +10,13 @@ Character *Character::Instance = nullptr;
 
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
-      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>())
+      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>()),
+    pGameManager{ GameManager::Get_Instance() }
 {
+    HealthPotion* potion = new HealthPotion();
+    AttackBoost* AB = new AttackBoost();
+    Inven->AddItem(potion);
+    Inven->AddItem(AB);
 }
 
 Character *Character::GetInstance(string name)
@@ -100,40 +106,35 @@ void Character::DisplayStatus()
 
 void Character::DisplayInventory()
 {
-    HealthPotion *potion = new HealthPotion();
-    AttackBoost *AB = new AttackBoost();
-    Inven->AddItem(potion);
-    Inven->AddItem(AB);
+
     if (Inven->GetInventory().empty())
         cout << "인벤토리는 비어있다."
                 "\n";
 
     for (int i = 0; i < Inven->GetInventory().size(); i++)
         cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
-    
-    string input;
-    int index;
 
-    while (true) {
-        cout << "사용할 아이템 번호를 입력하세요: ";
-        getline(cin, input); // 한 줄 입력 받기
-        // 문자열을 정수로 변환 시도
-        stringstream ss(input);
-        if (!(ss >> index) || !(ss.eof())) {
-            // 변환 실패 또는 남은 데이터가 있는 경우
-            cout << "잘못된 입력입니다. 정수를 입력하세요.\n";
-            continue;
-        }
+    /* 루프돌면서 키감지 */
+    for (int i = 0; i < Inven->GetInventory().size(); ++i)
+    {
+        if (pGameManager->Key_Down('0' + i))
+        {
+            /* 한번 클리어 해야 깔끔해보임 */
+            system("cls");
+            Inven->UseItem(i); /* 여기서 사용한 아이템 출력 */
+            cout << "-----------------------------" << endl; /* 구분선*/
 
-        // 유효한 범위 확인
-        if (index < 0 || index >= Inven->GetInventory().size()) {
-            cout << "입력한 번호가 유효하지 않습니다. 다시 시도하세요.\n";
-        }
-        else {
-            break; // 유효한 입력이면 루프 종료
+            /* 한번 클리어 했으니 인벤토리 다시 출력 */
+            if (Inven->GetInventory().empty())
+                cout << "인벤토리는 비어있다." << endl;
+
+            for (int i = 0; i < Inven->GetInventory().size(); i++)
+                cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+
+            break;
         }
     }
-    Inven->UseItem(index);
+
 }
 
 void Character::LevelUp()

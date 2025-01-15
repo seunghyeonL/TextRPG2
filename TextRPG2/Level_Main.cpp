@@ -68,7 +68,7 @@ void Level_Main::Update()
 		system("cls");
 	}
 
-	if (m_pGameManager->Key_Down(0x49))
+	if (m_pGameManager->Key_Down('I'))
 	{
 		if (m_eCurView == VIEW_MAP || m_eCurView == VIEW_STATUS)
 			m_eCurView = VIEW_INVENTORY;
