@@ -14,7 +14,7 @@ bool AttackBoost::Use(Character* character)
 {
     if (IsAlreadyUseOne)
     {
-        cout << "이미 한 번 먹었습니다. 더 이상 먹을 수 없습니다.\n";
+        cout << "\n이미 한 번 먹었습니다. 더 이상 먹을 수 없습니다.\n";
         return false;
     }
     else

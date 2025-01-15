@@ -67,7 +67,7 @@ void Inventory::UseItem(int index)
 {
     if (index >= 0 && index < Inven.size())
     {
-        cout << Inven[index].first->GetName() << "을(를) 사용합니다.\n";
+        cout << "\n" << Inven[index].first->GetName() << "을(를) 사용합니다.\n";
         bool IsCanUse = Inven[index].first->Use(Character::GetInstance());
         if(IsCanUse)
             RemoveItem(Inven[index].first);
