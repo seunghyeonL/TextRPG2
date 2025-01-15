@@ -201,6 +201,7 @@ void GameManager::Battle(IMonster* Monster)
 	Character* Player = Character::GetInstance();
 	HealthPotion* hp = new HealthPotion();
 	AttackBoost* boost = new AttackBoost();
+	Inventory* inventory = new Inventory();
 
 	double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
 	double IncreasedAttack = 0; // 공격력 증가 부분을 추적할 변수
@@ -268,14 +269,11 @@ void GameManager::Battle(IMonster* Monster)
 					else if (Monster->GetHealth() <= 0) {
 						// 전투 승리 처리
 
-						// 30퍼 확률로 아이템 드랍
-						if (rand() % 100 < 30)
+						vector<IItem*> DroppedItem = Monster->DropRandomItem();
+						for (IItem* Dropped : DroppedItem)
 						{
-							//IItem* DroppedItem = Monster->DropItem();
-							//if (DroppedItem) {
-							//	Player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
-							//	cout << "몬스터가 " << DroppedItem->GetName() << "을 떨어뜨렸습니다.\n";
-							//}
+							inventory->AddItem(Dropped); // 플레이어의 인벤토리에 아이템 추가
+							cout << "몬스터가 " << Dropped->GetName() << "을 떨어뜨렸습니다.\n";
 						}
 
 						Player->AddExperience(50);
