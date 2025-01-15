@@ -297,7 +297,9 @@ void GameManager::Battle(IMonster* Monster)
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
 		}
 	}
-	boost->IsAlredyUseOne = false; // 공격력 증가 물약 사용 시 체크할 변수
+	for (int i = 0; i < Character::GetInstance()->GetInven()->GetInventory().size(); ++i)
+		Character::GetInstance()->GetInven()->GetInventory()[i].first->SetIsAlreadyUseOne();
+	//boost->IsAlredyUseOne = false; // 공격력 증가 물약 사용 시 체크할 변수
 	delete hp;
 	delete boost;
 	Monster->Free();

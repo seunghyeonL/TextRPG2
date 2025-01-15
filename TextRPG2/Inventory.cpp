@@ -37,12 +37,8 @@ void Inventory::AddItem(IItem* item)
                 delete item;
                 return;
             }
-            else
-            {
-                Inven.push_back(make_pair(item, 1));
-                return;
-            }
         }
+        Inven.push_back(make_pair(item, 1));
     }
 }
 
@@ -72,7 +68,8 @@ void Inventory::UseItem(int index)
     if (index >= 0 && index < Inven.size())
     {
         cout << Inven[index].first->GetName() << "을(를) 사용합니다.\n";
-        Inven[index].first->Use(Character::GetInstance());
-        RemoveItem(Inven[index].first);
+        bool IsCanUse = Inven[index].first->Use(Character::GetInstance());
+        if(IsCanUse)
+            RemoveItem(Inven[index].first);
     }
 }

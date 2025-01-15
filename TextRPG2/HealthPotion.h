@@ -16,5 +16,5 @@ private:
 public:
     HealthPotion();
     string GetName() override;
-    void Use(Character *character) override;
+    bool Use(Character *character) override;
 };
