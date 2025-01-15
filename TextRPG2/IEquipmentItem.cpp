@@ -11,7 +11,3 @@ void IEquipmentItem::RemoveToInventory(shared_ptr<Inventory> inventory, int quan
 {
 	inventory->RemoveToEquipment(this);
 }
-
-void IEquipmentItem::Equip(Character* character)
-{
-}

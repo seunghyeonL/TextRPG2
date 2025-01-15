@@ -137,6 +137,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
+    <ClCompile Include="LiquidMass.cpp" />
     <ClCompile Include="SFightable.cpp" />
     <ClCompile Include="IItem.cpp" />
     <ClCompile Include="IMonster.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="Orc.cpp" />
+    <ClCompile Include="ShabbyHelm.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Troll.cpp" />
   </ItemGroup>
@@ -168,6 +170,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="HealthPotion.h" />
+    <ClInclude Include="LiquidMass.h" />
     <ClInclude Include="SFightable.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IMonster.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="Level_Shop.h" />
     <ClInclude Include="MainApp.h" />
     <ClInclude Include="Orc.h" />
+    <ClInclude Include="ShabbyHelm.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Troll.h" />
   </ItemGroup>

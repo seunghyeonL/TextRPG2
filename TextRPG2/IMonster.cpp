@@ -32,7 +32,7 @@ vector<IItem*> IMonster::DropRandomItem() {
         case DropTable::장비:
         {
             // 중복된 장비가 아니면 드랍
-            string item = EquipmentItems[rand() % EquipmentItems.size()];
+            IEquipmentItem* item = EquipmentItems[rand() % EquipmentItems.size()];
             if (DroppedEquipment.find(item) == DroppedEquipment.end()) {
                 DroppedItems.push_back(item);
                 DroppedEquipment.insert(item);
@@ -43,7 +43,7 @@ vector<IItem*> IMonster::DropRandomItem() {
         case DropTable::소비:
         {
             // 중복된 소비 아이템이 아니면 드랍
-            string item = ConsumableItems[rand() % ConsumableItems.size()];
+            IConsumptionItem* item = ConsumableItems[rand() % ConsumableItems.size()];
             if (DroppedConsumables.find(item) == DroppedConsumables.end()) {
                 DroppedItems.push_back(item);
                 DroppedConsumables.insert(item);
@@ -54,7 +54,7 @@ vector<IItem*> IMonster::DropRandomItem() {
         case DropTable::기타:
         {
             // 중복된 기타 아이템이 아니면 드랍
-            string item = OtherItems[rand() % OtherItems.size()];
+            IEtcItem* item = OtherItems[rand() % OtherItems.size()];
             if (DroppedOther.find(item) == DroppedOther.end()) {
                 DroppedItems.push_back(item);
                 DroppedOther.insert(item);
@@ -67,7 +67,8 @@ vector<IItem*> IMonster::DropRandomItem() {
     // 드랍된 아이템 출력 - 임시
     cout << "드랍된 아이템들: ";
     for (const auto& item : DroppedItems) {
-        cout << item << " ";
+        cout << item->GetName() << " ";
     }
     cout << endl;
+    return DroppedItems;
 }

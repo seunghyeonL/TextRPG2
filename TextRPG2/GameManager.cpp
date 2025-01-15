@@ -201,7 +201,7 @@ void GameManager::Battle(IMonster* Monster)
 	Character* Player = Character::GetInstance();
 	HealthPotion* hp = new HealthPotion();
 	AttackBoost* boost = new AttackBoost();
-	Inventory* inventory = new Inventory();
+	auto inventory = Character::GetInstance()->GetInventory();
 
 	double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
 	double IncreasedAttack = 0; // 공격력 증가 부분을 추적할 변수
@@ -243,7 +243,7 @@ void GameManager::Battle(IMonster* Monster)
 						int index;
 						cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 						cin >> index;
-						Player->GetInven()->UseItem(index - 1);
+						Player->GetInventory()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
 					}
 					break;
@@ -270,11 +270,12 @@ void GameManager::Battle(IMonster* Monster)
 						// 전투 승리 처리
 
 						vector<IItem*> DroppedItem = Monster->DropRandomItem();
-						for (IItem* Dropped : DroppedItem)
-						{
-							inventory->AddItem(Dropped); // 플레이어의 인벤토리에 아이템 추가
-							cout << "몬스터가 " << Dropped->GetName() << "을 떨어뜨렸습니다.\n";
-						}
+						inventory->AddDroppedItems(DroppedItem);
+						//for (IItem* Dropped : DroppedItem)
+						//{
+						//	inventory->AddDroppedItems(Dropped); // 플레이어의 인벤토리에 아이템 추가
+						//	cout << "몬스터가 " << Dropped->GetName() << "을 떨어뜨렸습니다.\n";
+						//}
 
 						Player->AddExperience(50);
 						int gold = 10 + rand() % 10;

@@ -84,6 +84,12 @@
     <Filter Include="소스 파일\05.Item\Consumption\HealthPotion">
       <UniqueIdentifier>{a2038a03-0240-4ebb-b900-ca3e1ccde8fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\05.Item\Equipment\ShabbyHelm">
+      <UniqueIdentifier>{d579ce28-e0c6-43ee-b49e-8c9a12516993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05.Item\Etc\LiquidMass">
+      <UniqueIdentifier>{c7d8ed67-0b66-4733-add3-a55f95318b54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -160,6 +166,12 @@
     </ClCompile>
     <ClCompile Include="IEtcItem.cpp">
       <Filter>소스 파일\05.Item\Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="ShabbyHelm.cpp">
+      <Filter>소스 파일\05.Item\Equipment\ShabbyHelm</Filter>
+    </ClCompile>
+    <ClCompile Include="LiquidMass.cpp">
+      <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +257,12 @@
     </ClInclude>
     <ClInclude Include="IItemStrategy.h">
       <Filter>소스 파일\05.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ShabbyHelm.h">
+      <Filter>소스 파일\05.Item\Equipment\ShabbyHelm</Filter>
+    </ClInclude>
+    <ClInclude Include="LiquidMass.h">
+      <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
