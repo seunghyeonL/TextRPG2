@@ -8,7 +8,7 @@ using namespace std;
 class IMonster: public SFightable
 {
 public:
-	enum class DropItem {
+	enum class DropTable {
 		None,       // 아무것도 떨어지지 않음
 		Gold,       // 골드
 		Potion,     // 물약
@@ -35,6 +35,7 @@ public:
 		}
 	}
 	virtual double GetAttack() const { return mAttack; }
+	virtual void DropItem() {};
 
 	string		mName{};
 	
