@@ -72,4 +72,8 @@ void Inventory::UseItem(int index)
         if(IsCanUse)
             RemoveItem(Inven[index].first);
     }
+    else
+    {
+        cout << "\n해당 번호의 아이템이 없습니다.\n";
+    }
 }
