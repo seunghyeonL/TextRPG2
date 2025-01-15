@@ -10,6 +10,8 @@ protected:
 	int	mAttack{ 0 };
 
 public:
+	SFightable() {}
+	SFightable(int health, int attack) : mHealth{health}, mAttack(attack) {}
 	virtual ~SFightable() = default;
 	virtual void Interact() = 0;
 };

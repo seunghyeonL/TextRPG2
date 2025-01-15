@@ -1,8 +1,17 @@
 #include "Portal.h"
+#include "Character.h"
+
+Portal::Portal(int PosX, int PosY, int DestPosX, int DestPosY) {
+	Pos.X = PosX;
+	Pos.Y = PosY;
+	DestPos.X = DestPosX;
+	DestPos.Y = DestPosY;
+}
 
 Portal::~Portal()
 {
-	Destination->Free();
+	if(Destination != nullptr)
+		Destination->Free();
 }
 
 void Portal::Initialize()
@@ -15,14 +24,11 @@ void Portal::SetDestination(Level* Level_Dest)
 	Destination = Level_Dest;
 }
 
-void Portal::SetPos(int Pos_X, int Pos_Y)
-{
-	Pos.Pos_X = Pos_X;
-	Pos.Pos_Y = Pos_Y;
-}
-
 void Portal::Interact()
 {
+	auto character = Character::GetInstance();
+	character->SetPosition(DestPos.X, DestPos.Y);
 	m_pGameManager->Change_Level(Destination);
+	m_pGameManager->Update();
 }
 

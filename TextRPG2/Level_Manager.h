@@ -1,4 +1,8 @@
 #pragma once
+#include "Client_Defines.h"
+
+class Level;
+class Map;
 
 class Level_Manager final
 {
@@ -18,6 +22,10 @@ public:
 
 private:
 	class Level* m_pCurrentLevel{ nullptr };
+	
+	vector<Level*> Levels;
+	vector<Map*> Maps;
+
 	unsigned int m_iLevelIndex{ 0 };
 
 public:

@@ -1,10 +1,11 @@
 // 디버그
-#define _CRTDBG_MAP_ALLOC
-#include <cstdlib>
-#include <crtdbg.h>
+//#define _CRTDBG_MAP_ALLOC
+//#include <cstdlib>
+//#include <crtdbg.h>
 
 #include "GameManager.h"
 #include "MainApp.h"
+#include "Character.h"
 #include <locale>
 
 void DisableCursorBlinking();
@@ -13,7 +14,7 @@ bool IsAnyKeyPressed();
 int main()
 {
 	// 메모리 누수 확인
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	std::wcout.imbue(std::locale(""));
 	SetConsoleOutputCP(CP_UTF8);

@@ -39,9 +39,6 @@
     <Filter Include="소스 파일\97.Default">
       <UniqueIdentifier>{a44bc811-c7ca-4192-85d0-a534687c6d3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Level\Level_Main">
-      <UniqueIdentifier>{d620cfaa-abfd-48dd-87d2-789921d933db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\06.Inventory">
       <UniqueIdentifier>{d63346e2-037a-41c8-9cea-98470e635134}</UniqueIdentifier>
     </Filter>
@@ -78,14 +75,20 @@
     <Filter Include="소스 파일\01.Level\Manager">
       <UniqueIdentifier>{3589eca2-e0b8-4a9b-8428-d597ca023d8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Level\Level_Dungeon">
-      <UniqueIdentifier>{3cc8b73e-b499-429c-91f1-fa785d4dd7e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Level\Level_Shop">
-      <UniqueIdentifier>{e2c7a1cd-34e2-4746-b306-01f2b523a393}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\03.Interactable\Protal">
       <UniqueIdentifier>{1f31bae7-b365-4b8d-95d5-1a2e2cf46a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Map">
+      <UniqueIdentifier>{5bcee990-33cf-451a-865d-ab4728ef2da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Map\Level_Shop">
+      <UniqueIdentifier>{e2c7a1cd-34e2-4746-b306-01f2b523a393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Map\Level_Dungeon">
+      <UniqueIdentifier>{3cc8b73e-b499-429c-91f1-fa785d4dd7e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Map\Level_Main">
+      <UniqueIdentifier>{d620cfaa-abfd-48dd-87d2-789921d933db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +118,6 @@
     </ClCompile>
     <ClCompile Include="Input_Manager.cpp">
       <Filter>소스 파일\98.Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Level_Main.cpp">
-      <Filter>소스 파일\01.Level\Level_Main</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>소스 파일\06.Inventory</Filter>
@@ -159,16 +159,22 @@
       <Filter>소스 파일\01.Level\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Level_Dungeon.cpp">
-      <Filter>소스 파일\01.Level\Level_Dungeon</Filter>
+      <Filter>소스 파일\01.Level\Map\Level_Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="Level_Shop.cpp">
-      <Filter>소스 파일\01.Level\Level_Shop</Filter>
+      <Filter>소스 파일\01.Level\Map\Level_Shop</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>소스 파일\03.Interactable\Protal</Filter>
     </ClCompile>
-    <ClCompile Include="IMapObject.h">
-      <Filter>소스 파일\01.Level</Filter>
+    <ClCompile Include="Map.cpp">
+      <Filter>소스 파일\01.Level\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Movable.h">
+      <Filter>소스 파일\03.Interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Main.cpp">
+      <Filter>소스 파일\01.Level\Map\Level_Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -201,9 +207,6 @@
     </ClInclude>
     <ClInclude Include="Input_Manager.h">
       <Filter>소스 파일\98.Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Level_Main.h">
-      <Filter>소스 파일\01.Level\Level_Main</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>소스 파일\06.Inventory</Filter>
@@ -251,16 +254,19 @@
       <Filter>소스 파일\01.Level\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Level_Dungeon.h">
-      <Filter>소스 파일\01.Level\Level_Dungeon</Filter>
+      <Filter>소스 파일\01.Level\Map\Level_Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="Level_Shop.h">
-      <Filter>소스 파일\01.Level\Level_Shop</Filter>
+      <Filter>소스 파일\01.Level\Map\Level_Shop</Filter>
     </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>소스 파일\03.Interactable\Protal</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultMapObejct.h">
-      <Filter>소스 파일\01.Level</Filter>
+    <ClInclude Include="Map.h">
+      <Filter>소스 파일\01.Level\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Main.h">
+      <Filter>소스 파일\01.Level\Map\Level_Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

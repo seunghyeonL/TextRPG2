@@ -29,7 +29,7 @@ void GameManager::Initialize()
 	m_pInput_Manager = Input_Manager::Create(hInstance, hWnd);
 }
 
-void GameManager::VisitShop(Character* player)
+void GameManager::VisitShop()
 {
 
 }

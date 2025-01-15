@@ -1,8 +1,6 @@
 #pragma once
-#include "Character.h"
 #include "IMonster.h"
 #include "Client_Defines.h"
-using namespace std;
 
 class GameManager
 {
@@ -41,7 +39,7 @@ public:
 
 	void Battle(IMonster* Monster);
 
-	void VisitShop(Character* player);
+	void VisitShop();
 
 	void Exit();
 

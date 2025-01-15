@@ -1,5 +1,6 @@
 #include "Level_Manager.h"
 #include "Level.h"
+#include "Map.h"
 
 Level_Manager::Level_Manager()
 {
