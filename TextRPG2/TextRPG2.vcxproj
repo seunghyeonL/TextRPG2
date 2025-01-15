@@ -131,6 +131,9 @@
     <ClCompile Include="AttackBoost.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="FullObserver.h" />
+    <ClCompile Include="IConsumptionItem.cpp" />
+    <ClCompile Include="IEquipmentItem.cpp" />
+    <ClCompile Include="IEtcItem.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
@@ -161,6 +164,9 @@
     <ClInclude Include="Client_Macro.h" />
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
+    <ClInclude Include="IConsumptionItem.h" />
+    <ClInclude Include="IEquipmentItem.h" />
+    <ClInclude Include="IEtcItem.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />

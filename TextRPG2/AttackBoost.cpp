@@ -1,8 +1,7 @@
 #include "AttackBoost.h"
 #include "Character.h"
 
-AttackBoost::AttackBoost():Name("AttackBoostItem"), AttackIncrease(20)
-AttackBoost::AttackBoost():Name("AttackBoost"), AttackIncrease(20), IsAlredyUseOne(false)
+AttackBoost::AttackBoost():Name("AttackBoost"), AttackIncrease(20) 
 {
 }
 

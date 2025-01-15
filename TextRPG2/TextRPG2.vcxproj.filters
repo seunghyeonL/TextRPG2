@@ -30,12 +30,6 @@
     <Filter Include="소스 파일\05.Item">
       <UniqueIdentifier>{2bd3f2bd-4ea8-4606-a098-989cf6cf9b30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\05.Item\HealthPotion">
-      <UniqueIdentifier>{a2038a03-0240-4ebb-b900-ca3e1ccde8fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\05.Item\AttackBoost">
-      <UniqueIdentifier>{bc785933-bca8-4be0-9280-47e9eeb2ea45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\97.Default">
       <UniqueIdentifier>{a44bc811-c7ca-4192-85d0-a534687c6d3d}</UniqueIdentifier>
     </Filter>
@@ -78,16 +72,31 @@
     <Filter Include="소스 파일\01.Level\Manager">
       <UniqueIdentifier>{3589eca2-e0b8-4a9b-8428-d597ca023d8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\05.Item\Equipment">
+      <UniqueIdentifier>{6d7e52e6-e16a-46c7-a366-000b69ad250c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05.Item\Consumption">
+      <UniqueIdentifier>{9eb0603b-6589-409d-af88-d3b19a405c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05.Item\Etc">
+      <UniqueIdentifier>{3e11278a-e70e-407d-b72b-2e994ce6ceaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05.Item\Consumption\AttackBoost">
+      <UniqueIdentifier>{bc785933-bca8-4be0-9280-47e9eeb2ea45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05.Item\Consumption\HealthPotion">
+      <UniqueIdentifier>{a2038a03-0240-4ebb-b900-ca3e1ccde8fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일\02.GameManager</Filter>
     </ClCompile>
     <ClCompile Include="HealthPotion.cpp">
-      <Filter>소스 파일\05.Item\HealthPotion</Filter>
+      <Filter>소스 파일\05.Item\Consumption\HealthPotion</Filter>
     </ClCompile>
     <ClCompile Include="AttackBoost.cpp">
-      <Filter>소스 파일\05.Item\AttackBoost</Filter>
+      <Filter>소스 파일\05.Item\Consumption\AttackBoost</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일\97.Default</Filter>
@@ -155,16 +164,25 @@
     <ClCompile Include="Level_Manager.cpp">
       <Filter>소스 파일\01.Level\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="IEquipmentItem.cpp">
+      <Filter>소스 파일\05.Item\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="IConsumptionItem.cpp">
+      <Filter>소스 파일\05.Item\Consumption</Filter>
+    </ClCompile>
+    <ClCompile Include="IEtcItem.cpp">
+      <Filter>소스 파일\05.Item\Etc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일\02.GameManager</Filter>
     </ClInclude>
     <ClInclude Include="HealthPotion.h">
-      <Filter>소스 파일\05.Item\HealthPotion</Filter>
+      <Filter>소스 파일\05.Item\Consumption\HealthPotion</Filter>
     </ClInclude>
     <ClInclude Include="AttackBoost.h">
-      <Filter>소스 파일\05.Item\AttackBoost</Filter>
+      <Filter>소스 파일\05.Item\Consumption\AttackBoost</Filter>
     </ClInclude>
     <ClInclude Include="IItem.h">
       <Filter>소스 파일\05.Item</Filter>
@@ -236,6 +254,15 @@
     </ClInclude>
     <ClInclude Include="Level_Manager.h">
       <Filter>소스 파일\01.Level\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IEquipmentItem.h">
+      <Filter>소스 파일\05.Item\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="IConsumptionItem.h">
+      <Filter>소스 파일\05.Item\Consumption</Filter>
+    </ClInclude>
+    <ClInclude Include="IEtcItem.h">
+      <Filter>소스 파일\05.Item\Etc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
