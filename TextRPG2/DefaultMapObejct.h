@@ -1,7 +1,7 @@
 #pragma once
 #include "IMapObject.h"
 
-class DefaultMapObject: public IMapObject
+class DefaultMapObject
 {
 protected:
 	PosStruct Pos;

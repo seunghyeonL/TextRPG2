@@ -1,7 +1,7 @@
 #pragma once
 #include "IMapObject.h"
 
-class IInteractable: public IMapObject
+class IInteractable
 {
 public:
 	virtual ~IInteractable() = default;
