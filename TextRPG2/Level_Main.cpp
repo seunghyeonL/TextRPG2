@@ -1,92 +1,158 @@
+#include "Client_Defines.h"
 #include "Level_Main.h"
+#include "Level_Dungeon.h"
+#include "Level_Shop.h"
+#include "Portal.h"
 #include "Character.h"
-#include "GameManager.h"
+
 Level_Main::Level_Main()
-	: Level{}
+	: Map{}
 {
+	Initialize();
 }
 
 void Level_Main::Initialize()
 {
-	m_iLevelIndex = LEVEL_MAIN;
+	MapType = MAP_VILLAGE;
 
-	for (int i = 0; i < MAP_HEIGHT; i++) {
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			m_Map[i][j] = L'.';
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			m_Map.insert({PosStruct{i, j}, {". ", nullptr}});
 		}
 	}
 
-	m_Map[0][MAP_WIDTH / 2] = L'던';
-	m_Map[0][MAP_WIDTH / 2 + 1] = L'전';
+	Portal *DungeonPortal = new Portal(MAP_HEIGHT - 2, MAP_WIDTH / 2);
+	Portal *ShopPortal = new Portal(MAP_HEIGHT / 2, MAP_WIDTH - 3);
 
-	m_Map[MAP_HEIGHT / 2][0] = L'상';
-	m_Map[MAP_HEIGHT / 2][1] = L'점';
+	Interactables.push_back(DungeonPortal);
+	Interactables.push_back(ShopPortal);
 
-	m_pPlayerPosX = m_pGameManager->GetPlayerPosX();
-	m_pPlayerPosY = m_pGameManager->GetPlayerPosY();
+	DungeonPortal->SetDestination(MAP_DUNGEON);
+	ShopPortal->SetDestination(MAP_SHOP);
 
-	*m_pPlayerPosX = MAP_WIDTH / 2;
-	*m_pPlayerPosY = MAP_HEIGHT / 2;
-	m_Map[*m_pPlayerPosY][*m_pPlayerPosX] = L'A';
+	m_Map[PosStruct{0, MAP_WIDTH / 2}] = {"던", DungeonPortal};
+	m_Map[PosStruct{0, MAP_WIDTH / 2 + 1}] = {"전", DungeonPortal};
+
+	m_Map[PosStruct{MAP_HEIGHT / 2, 0}] = {"상", ShopPortal};
+	m_Map[PosStruct{MAP_HEIGHT / 2, 1}] = {"점", ShopPortal};
+
+	Character *pCharacter = Character::GetInstance();
+
+	PosStruct cPos = pCharacter->GetPosition();
+
+	m_Map[cPos] = {"A ", nullptr};
 }
 
 void Level_Main::Update()
 {
-	m_Map[*m_pPlayerPosY][*m_pPlayerPosX] = L'.';
+	auto pCharacter = Character::GetInstance();
+	PosStruct CurPos = pCharacter->GetPosition();
 
-	if (m_pGameManager->Key_Down(VK_LEFT))
-	{
-		if ((*m_pPlayerPosX) > 0)
-			(*m_pPlayerPosX)--;
-	}
+	m_Map[CurPos] = {". ", nullptr};
 
 	if (m_pGameManager->Key_Down(VK_UP))
 	{
-		if ((*m_pPlayerPosY) > 0)
-			(*m_pPlayerPosY)--;
+		if (CurPos.X > 0)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X - 1, CurPos.Y}].second;
+			if (Interactable)
+			{
+				Interactable->Interact();
+				return;
+			}
+			else
+			{
+				CurPos.X--;
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
+			}
+		}
 	}
-
-	if (m_pGameManager->Key_Down(VK_DOWN))
+	else if (m_pGameManager->Key_Down(VK_LEFT))
 	{
-		if ((*m_pPlayerPosY) < MAP_HEIGHT - 1)
-			(*m_pPlayerPosY)++;
+		if (CurPos.Y > 0)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X, CurPos.Y - 1}].second;
+			if (Interactable)
+			{
+				Interactable->Interact();
+				return;
+			}
+			else
+			{
+				CurPos.Y--;
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
+			}
+		}
 	}
-
-	if (m_pGameManager->Key_Down(VK_RIGHT))
+	else if (m_pGameManager->Key_Down(VK_RIGHT))
 	{
-		if ((*m_pPlayerPosX) < MAP_WIDTH - 1)
-			(*m_pPlayerPosX)++;
-
+		if (CurPos.Y < MAP_HEIGHT - 1)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X, CurPos.Y + 1}].second;
+			if (Interactable)
+			{
+				Interactable->Interact();
+				return;
+			}
+			else
+			{
+				CurPos.Y++;
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
+			}
+		}
 	}
-
-	if (m_pGameManager->Key_Down(VK_TAB))
+	else if (m_pGameManager->Key_Down(VK_DOWN))
 	{
-		if(m_eCurView == VIEW_MAP || m_eCurView == VIEW_INVENTORY)
-			m_eCurView = VIEW_STATUS;
+		if (CurPos.X < MAP_WIDTH - 1)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X + 1, CurPos.Y}].second;
+			if (Interactable)
+			{
+				Interactable->Interact();
+				return;
+			}
+			else
+			{
+				CurPos.X++;
+				pCharacter->SetPosition(CurPos.X, CurPos.Y);
+			}
+		}
+	}
+	else if (m_pGameManager->Key_Down(VK_TAB))
+	{
+		if (CurView == VIEW_MAP || CurView == VIEW_INVENTORY)
+			CurView = VIEW_STATUS;
 		else
-			m_eCurView = VIEW_MAP;
+			CurView = VIEW_MAP;
+		system("cls");
+	}
+	else if (m_pGameManager->Key_Down(0x49))
+	{
+		if (CurView == VIEW_MAP || CurView == VIEW_STATUS)
+			CurView = VIEW_INVENTORY;
+		else
+			CurView = VIEW_MAP;
 		system("cls");
 	}
 
 	if (m_pGameManager->Key_Down('I'))
 	{
-		if (m_eCurView == VIEW_MAP || m_eCurView == VIEW_STATUS)
-			m_eCurView = VIEW_INVENTORY;
+		if (CurView == VIEW_MAP || CurView == VIEW_STATUS)
+			CurView = VIEW_INVENTORY;
 		else
-			m_eCurView = VIEW_MAP;
+			CurView = VIEW_MAP;
 		system("cls");
 	}
 
-	Check_Collision_Potal();
-
-	m_Map[*m_pPlayerPosY][*m_pPlayerPosX] = L'A';
-
-	Correction_Map_Potal();
+	m_Map[CurPos] = {"A ", nullptr};
 }
 
 void Level_Main::Render()
 {
-	if (m_eCurMap == MAP_DUNGEON) { // 여기부터
+	if (MapType == MAP_DUNGEON)
+	{ // 여기부터
 		system("cls");
 		auto character = Character::GetInstance();
 		auto monster = m_pGameManager->GenerateMonster(character->GetLevel());
@@ -95,21 +161,20 @@ void Level_Main::Render()
 	} // 여기까지 임시임
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			buffer.push_back(m_Map[i][j]);
-
-			Push_Space(i, j);
-		} 
-		buffer.push_back(L'\n');
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			Buffer += m_Map[PosStruct{i, j}].first;
+		}
+		Buffer.push_back(L'\n');
 	}
 
 	gotoxy(0, 0);
 
-	switch (m_eCurView)
+	switch (CurView)
 	{
 	case VIEW_MAP:
 		Render_TextMap();
-		wcout << buffer;
+		cout << Buffer;
 		break;
 	case VIEW_STATUS:
 		Character::GetInstance()->DisplayStatus();
@@ -118,167 +183,12 @@ void Level_Main::Render()
 		Character::GetInstance()->DisplayInventory();
 		break;
 	}
-	
+
 	cout << "TAB : 스탯창\tI : 인벤토리\tESC : 종료" << endl;
-	buffer.clear();
-}
-
-void Level_Main::Render_TextMap()
-{
-	switch (m_eCurMap)
-	{
-	case MAP_VILLAGE:
-		cout << "MAP : 마을" << endl;
-		break;
-	case MAP_DUNGEON:
-		cout << "MAP : 던전" << endl;
-		break;
-	case MAP_SHOP:
-		cout << "MAP : 상점" << endl;
-		break;
-	}
-}
-
-void Level_Main::Check_Collision_Potal()
-{
-	switch (m_eCurMap)
-	{
-	case MAP_VILLAGE:
-	{
-		/* Check Dungeon */
-		if (*m_pPlayerPosY == 0 && (*m_pPlayerPosX == MAP_WIDTH / 2 || *m_pPlayerPosX == MAP_WIDTH / 2 + 1))
-		{
-			m_eCurMap = MAP_DUNGEON;
-
-			/* 여기가 던전 충돌되서 맵바꾸는 곳 */
-			//GameManager::Get_Instance()->Change_Level(Level_BattleFiled::Create());
-
-			*m_pPlayerPosY = MAP_HEIGHT - 2;
-		}
-
-		/* Check Shop */
-		if (*m_pPlayerPosY == MAP_HEIGHT / 2 && (*m_pPlayerPosX == 0 || *m_pPlayerPosX == 1))
-		{
-			m_eCurMap = MAP_SHOP;
-			*m_pPlayerPosX = MAP_WIDTH - 3;
-		}
-
-		for (int i = 0; i < MAP_HEIGHT; i++) {
-			for (int j = 0; j < MAP_WIDTH; j++) {
-				m_Map[i][j] = L'.';
-			}
-		}
-
-		break;
-	}
-	case MAP_DUNGEON:
-	{
-		/* Check Village */
-		if (*m_pPlayerPosY == MAP_HEIGHT - 1 && (*m_pPlayerPosX == MAP_WIDTH / 2 || *m_pPlayerPosX == MAP_WIDTH / 2 + 1))
-		{
-			m_eCurMap = MAP_VILLAGE;
-			*m_pPlayerPosY = 1;
-		}
-
-		for (int i = 0; i < MAP_HEIGHT; i++) {
-			for (int j = 0; j < MAP_WIDTH; j++) {
-				m_Map[i][j] = L'.';
-			}
-		}
-
-		break;
-	}
-	case MAP_SHOP:
-	{
-		/* Check Village */
-		if (*m_pPlayerPosY == MAP_HEIGHT / 2 && (*m_pPlayerPosX == MAP_WIDTH - 2 || *m_pPlayerPosX == MAP_WIDTH - 1))
-		{
-			m_eCurMap = MAP_VILLAGE;
-			*m_pPlayerPosX = 2;
-		}
-
-		for (int i = 0; i < MAP_HEIGHT; i++) {
-			for (int j = 0; j < MAP_WIDTH; j++) {
-				m_Map[i][j] = L'.';
-			}
-		}
-
-		break;
-	}
-	}
-}
-
-void Level_Main::Correction_Map_Potal()
-{
-	switch (m_eCurMap)
-	{
-	case MAP_VILLAGE:
-	{
-		m_Map[0][MAP_WIDTH / 2] = L'던';
-		m_Map[0][MAP_WIDTH / 2 + 1] = L'전';
-
-		m_Map[MAP_HEIGHT / 2][0] = L'상';
-		m_Map[MAP_HEIGHT / 2][1] = L'점';
-
-		break;
-	}
-	/* 층을 나눌지는 고민 */
-	case MAP_DUNGEON:
-	{
-		m_Map[MAP_HEIGHT - 1][MAP_WIDTH / 2] = L'마';
-		m_Map[MAP_HEIGHT - 1][MAP_WIDTH / 2 + 1] = L'을';
-		break;
-	}
-	case MAP_SHOP:
-	{
-		m_Map[MAP_HEIGHT / 2][MAP_WIDTH - 2] = L'마';
-		m_Map[MAP_HEIGHT / 2][MAP_WIDTH - 1] = L'을';
-
-		break;
-	}
-	}
-}
-
-void Level_Main::Push_Space(int i, int j)
-{
-	switch (m_eCurMap)
-	{
-	case MAP_VILLAGE:
-	{
-		/* Check Duegon */
-		if (!(i == 0 && (j == MAP_WIDTH / 2 || j == MAP_WIDTH / 2 + 1) ||
-			/* Check Shop */
-			i == MAP_HEIGHT / 2 && (j == 0 || j == 1)))
-			buffer.push_back(L' ');
-		break;
-	}
-	case MAP_DUNGEON:
-	{
-		/* Check Village */
-		if (!(i == MAP_HEIGHT - 1 && (j == MAP_WIDTH / 2 || j == MAP_WIDTH / 2 + 1)))
-			buffer.push_back(L' ');
-		break;
-	}
-	case MAP_SHOP:
-	{
-		/* Check Village */
-		if (!(i == MAP_HEIGHT / 2 && (j == MAP_WIDTH - 1 || j == MAP_WIDTH - 2)))
-			buffer.push_back(L' ');
-		break;
-	}
-	}
-}
-
-Level_Main* Level_Main::Create()
-{
-	Level_Main* pInstance = new Level_Main();
-
-	pInstance->Initialize();
-
-	return pInstance;
+	Buffer.clear();
 }
 
 void Level_Main::Free()
 {
-	__super::Free();
+	Map::Free();
 }

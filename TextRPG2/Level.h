@@ -1,5 +1,4 @@
 #pragma once
-#include <windows.h>
 #include "GameManager.h"
 
 class Level
@@ -21,7 +20,7 @@ protected:
 	class GameManager* m_pGameManager{ nullptr };
 
 	unsigned int   		 m_iLevelIndex = { 0 };
-	void gotoxy(int x, int y);
+	
 
 public:
 	virtual void Free();

@@ -11,17 +11,16 @@ Character *Character::Instance = nullptr;
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
       MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>()),
-    pGameManager{ GameManager::Get_Instance() }
+      pGameManager{GameManager::Get_Instance()}
 {
-    HealthPotion* potion = new HealthPotion();
-    AttackBoost* AB = new AttackBoost();
+    HealthPotion *potion = new HealthPotion();
+    AttackBoost *AB = new AttackBoost();
     potion->AddToInventory(Inven, 10);
     AB->AddToInventory(Inven, 5);
 }
 
 Character *Character::GetInstance(string name)
 {
-
     if (Instance == nullptr)
         Instance = new Character(name);
 
