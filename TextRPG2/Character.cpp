@@ -140,10 +140,9 @@ void Character::DisplayInventory()
         for (int i = 0; i < Inven->GetConsumptionInven().size(); i++)
         {
             cout << i + 1 << ". " << Inven->GetConsumptionInven()[i].first->GetName()
-                << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
+                 << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
         }
         cout << "=====================================================================\n";
-            
     }
     if (Inven->GetEtcInven().empty())
     {
@@ -154,12 +153,23 @@ void Character::DisplayInventory()
     {
         cout << "현재 가지고 있는 기타 아이템 목록\n";
         for (int i = 0; i < Inven->GetEtcInven().size(); i++)
+            cout << i << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
+    }
+
+    // system("pause");
+
+    /* 루프돌면서 키감지 */
+    for (int i = 0; i < Inven->GetConsumptionInven().size(); ++i)
+    {
+        if (pGameManager->Key_Down('0' + i))
         {
             cout << i + 1 << ". " << Inven->GetEtcInven()[i].first->GetName()
-                << ": " << Inven->GetEtcInven()[i].second << "개\n";
+                 << ": " << Inven->GetEtcInven()[i].second << "개\n";
         }
         cout << "=====================================================================\n";
     }
+
+    // system("pause");
 }
 
 void Character::LevelUp()
