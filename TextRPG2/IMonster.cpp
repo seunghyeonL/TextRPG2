@@ -79,10 +79,10 @@ vector<IItem *> IMonster::DropRandomItem()
     cout << endl;
     return DroppedItems;
 }
-void IMonster::Interact()
-{
-    auto pGameManager = GameManager::Get_Instance();
-
-    pGameManager->Battle(this);
-    system("cls");
-}
+//void IMonster::Interact()
+//{
+//    auto pGameManager = GameManager::Get_Instance();
+//
+//    pGameManager->Battle(this);
+//    system("cls");
+//}

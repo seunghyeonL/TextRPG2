@@ -10,6 +10,7 @@
 #include "Slime.h"
 #include "Troll.h"
 #include "Level.h"
+#include "Shop.h"
 #include "Orc.h"
 #include <windows.h>
 #include "Level_Dungeon.h"
@@ -350,9 +351,13 @@ void GameManager::Battle(IMonster *Monster)
 
 void GameManager::VisitShop()
 {
-	cout << "상점에 오신 " << Character::GetInstance() << " 플레이어를 환영합니다.\n";
+	Character* Player = Character::GetInstance();
+	Shop* Shop = Shop::GetInstance();
+	bool flag = false;
+	cout << "상점에 오신 " << Player->GetName() << " 플레이어를 환영합니다.\n";
 	while (true)
 	{
+		string name;
 		cout << "\n상점 메뉴\n1. 아이템 구매  2. 아이템 판매  3. 상점 나가기\n";
 		int choice;
 		cin >> choice;
@@ -360,11 +365,20 @@ void GameManager::VisitShop()
 		switch (choice)
 		{
 		case 1:
-
+			Shop->OnSaleItem();
+			flag = Player->BuyItem();
+			if (flag)
+			{
+				// Player->GetInventory()->AddGold();
+			}
 			break;
 		case 2:
-			Character::GetInstance()->DisplayInventory();
-
+			Player->DisplayInventory();
+			flag = Player->SellItem();
+			if (flag)
+			{
+				// Player->GetInventory()->AddGold();
+			}
 			break;
 		case 3:
 			cout << "상점을 나갑니다.\n";

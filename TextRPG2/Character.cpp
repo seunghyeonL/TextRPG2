@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include "Shop.h"
 #include "GameManager.h"
 #include "Character.h"
 #include "HealthPotion.h"
@@ -267,3 +268,187 @@ void Character::ApplyItemStatus(IEquipmentItem* equipItem)
     SetHealth(GetHealth() + equipItem->GetHealthIncrease());
     SetAttack(GetAttack() + equipItem->GetAttackIncrease());
 }
+
+bool Character::BuyItem()
+{
+    Character* Player = Character::GetInstance();
+    Shop* shop = Shop::GetInstance();
+    vector<IEquipmentItem*> ShopEquip = shop->GetEquipList();
+    vector<pair<IConsumptionItem*, int>> ShopConsum = shop->GetConsumptionList();
+    vector<pair<IEtcItem*, int>> ShopEtc = shop->GetOtherList();
+    vector<IEquipmentItem*> EquipmentInven = Player->GetInventory()->GetEquipmentInven();
+    vector<pair<IConsumptionItem*, int>> ConsumptionInven = Player->GetInventory()->GetConsumptionInven();
+    vector<pair<IEtcItem*, int>> EtcInven = Player->GetInventory()->GetEtcInven();
+
+    string name;
+    int choice;
+
+    while (true)
+    {
+        cout << "\n구매하고 싶은 아이템의 이름을 써주세요.\n";
+        cin >> name;
+        cout << "\n" << name << " 아이템을 구매하시겠습니까?\n";
+        cout << "1. 네     2. 아니요\n";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "\n구매할 수량을 입력해주세요.\n";
+            int Quantity;
+            cin >> Quantity;
+            if (Quantity < 0 || Quantity > ShopEquip.size() || Quantity > ShopEquip.size() || Quantity > ShopEquip.size())
+            {
+                cout << "\n잘못된 입력입니다.\n";
+            }
+            else
+            {
+                if (Quantity == 1)
+                {
+                    for (int i = 0; i < ShopEquip.size(); ++i)
+                    {
+                        if (ShopEquip[i]->GetName() == name)
+                        {
+                            ShopEquip.erase(remove(ShopEquip.begin(), ShopEquip.end(),
+                                ShopEquip[i]), ShopEquip.end());
+                            //Player->GetInventory()->AddToEquipment();
+                            return true;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < ShopConsum.size(); ++i)
+                {
+                    if (ShopConsum[i].first->GetName() == name)
+                    {
+                        if (ShopConsum[i].second > 1)
+                        {
+                            ShopConsum[i].second -= Quantity;
+                            //
+                            return true;
+                        }
+                        else if (ShopConsum[i].second == 1)
+                        {
+                            ShopConsum.erase(remove(ShopConsum.begin(), ShopConsum.end(),
+                                ShopConsum[i]), ShopConsum.end());
+                            //
+                            return true;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < ShopEtc.size(); ++i)
+                {
+                    if (ShopEtc[i].first->GetName() == name)
+                    {
+                        if (ShopEtc[i].second > 1)
+                        {
+                            ShopEtc[i].second -= Quantity;
+                            //
+                            return true;
+                        }
+                        else if (ShopEtc[i].second == 1)
+                        {
+                            ShopEtc.erase(remove(ShopEtc.begin(), ShopEtc.end(),
+                                ShopEtc[i]), ShopEtc.end());
+                            //
+                            return true;
+                        }
+                    }
+                }
+            }
+        case 2:
+            break;
+        default:
+            cout << "잘못된 입력입니다.\n";
+        }
+        return false;
+    }
+};
+
+bool Character::SellItem() 
+{
+    Character* Player = Character::GetInstance();
+    vector<IEquipmentItem*> EquipmentInven = Player->GetInventory()->GetEquipmentInven();
+    vector<pair<IConsumptionItem*, int>> ConsumptionInven = Player->GetInventory()->GetConsumptionInven();
+    vector<pair<IEtcItem*, int>> EtcInven = Player->GetInventory()->GetEtcInven();
+
+    string name;
+    int choice;
+
+    while (true)
+    {
+        cout << "\n판매하고 싶은 아이템의 이름을 써주세요.\n";
+        cin >> name;
+        cout << "\n" << name << " 아이템을 판매하시겠습니까?\n";
+        cout << "1. 네     2. 아니요\n";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "\n판매할 수량을 입력해주세요.\n";
+            int Quantity;
+            cin >> Quantity;
+            if (Quantity < 0 || Quantity > EquipmentInven.size() || Quantity > ConsumptionInven.size() || Quantity > EtcInven.size())
+            {
+                cout << "\n잘못된 입력입니다.\n";
+            }
+            else
+            {
+                if (Quantity == 1)
+                {
+                    for (int i = 0; i < EquipmentInven.size(); ++i)
+                    {
+                        if (EquipmentInven[i]->GetName() == name)
+                        {
+                            EquipmentInven.erase(remove(EquipmentInven.begin(), EquipmentInven.end(),
+                                EquipmentInven[i]), EquipmentInven.end());
+                            return true;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < ConsumptionInven.size(); ++i)
+                {
+                    if (ConsumptionInven[i].first->GetName() == name)
+                    {
+                        if (ConsumptionInven[i].second > 1)
+                        {
+                            ConsumptionInven[i].second -= Quantity;
+                            return true;
+                        }
+                        else if (ConsumptionInven[i].second == 1)
+                        {
+                            ConsumptionInven.erase(remove(ConsumptionInven.begin(), ConsumptionInven.end(),
+                                ConsumptionInven[i]), ConsumptionInven.end());
+                            return true;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < EtcInven.size(); ++i)
+                {
+                    if (EtcInven[i].first->GetName() == name)
+                    {
+                        if (EtcInven[i].second > 1)
+                        {
+                            EtcInven[i].second -= Quantity;
+                            return true;
+                        }
+                        else if (EtcInven[i].second == 1)
+                        {
+                            EtcInven.erase(remove(EtcInven.begin(), EtcInven.end(),
+                                EtcInven[i]), EtcInven.end());
+                            return true;
+                        }
+                    }
+                }
+            }
+        case 2:
+            break;
+        default:
+            cout << "잘못된 입력입니다.\n";
+        }
+        return false;
+    }
+}
+

@@ -84,6 +84,9 @@
     <Filter Include="소스 파일\03.Interactable\Portal">
       <UniqueIdentifier>{1f31bae7-b365-4b8d-95d5-1a2e2cf46a21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\96.Shop">
+      <UniqueIdentifier>{333f9a4d-4008-4900-b968-1b1b17d2d1ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -200,6 +203,12 @@
     <ClCompile Include="TrollTooth.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ShopNPC.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>소스 파일\96.Shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -297,5 +306,9 @@
     <ClInclude Include="ShabbyHelm.h" />
     <ClInclude Include="LeatherShoes.h" />
     <ClInclude Include="TrollTooth.h" />
+    <ClInclude Include="ShopNPC.h" />
+    <ClInclude Include="Shop.h">
+      <Filter>소스 파일\96.Shop</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
