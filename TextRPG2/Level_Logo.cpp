@@ -1,6 +1,9 @@
 #include "Level_Logo.h"
 #include "Level_Main.h"
+#include "Level_Dungeon.h"
+#include "Level_Shop.h"
 #include "GameManager.h"
+#include "Character.h"
 
 Level_Logo::Level_Logo()
 	: Level{}
@@ -39,7 +42,9 @@ void Level_Logo::Update()
 {
 	/* ������ �� */
 	if (m_pGameManager->Key_Down('A'))
-		m_pGameManager->Change_Level(Level_Main::Create());
+		//m_pGameManager->Change_Level(new Level_Shop());
+		m_pGameManager->Change_Level(new Level_Main());
+		//m_pGameManager->Change_Level(new Level_Dungeon());
 }
 
 void Level_Logo::Render()
@@ -61,16 +66,5 @@ Level_Logo *Level_Logo::Create()
 
 void Level_Logo::Free()
 {
-	// GameManager::StartGame 으로 Character 생성하는게 맞는데 아직 호환이 안되서
-	// 이렇게 생성했어요.
-
-	system("cls");
-	m_pGameManager->EnableEcho();
-	string name{};
-	cout << "이름을 입력하세요: ";
-	cin >> name;
-	Character::GetInstance(name);
-	m_pGameManager->DisableEcho();
-
 	__super::Free();
 }

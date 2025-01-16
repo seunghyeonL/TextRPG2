@@ -3,5 +3,9 @@
 
 class DeathObserver: public IHealthObserver
 {
+public:
+	void Update(int health) override {
+
+	}
 };
 

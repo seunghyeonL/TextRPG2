@@ -26,5 +26,5 @@ protected:
 public:
 	virtual void Free();
 	virtual void Update() = 0;
-	virtual void Interact() = 0;
+	virtual void Interact();
 };

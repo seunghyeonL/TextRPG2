@@ -1,8 +1,6 @@
 #pragma once
-#include "Character.h"
 #include "IMonster.h"
 #include "Client_Defines.h"
-using namespace std;
 
 class GameManager
 {
@@ -37,11 +35,13 @@ public:
 
 	class IMonster* GenerateMonster(int level);
 
+	Level* CreateMap(MAP MAP_ENUM);
+
 	void StartGame();
 
 	void Battle(IMonster* Monster);
 
-	void VisitShop(Character* player);
+	void VisitShop();
 
 	void Exit();
 

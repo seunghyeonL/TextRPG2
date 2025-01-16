@@ -9,8 +9,8 @@ void IMonster::Free()
 
 }
 
-//void IMonster::interact() {
-//	auto gameManager = GameManager::Get_Instance();
-//
-//	gameManager->Battle(this);
-//}
+void IMonster::Interact() {
+	auto pGameManager = GameManager::Get_Instance();
+
+	pGameManager->Battle(this);
+}

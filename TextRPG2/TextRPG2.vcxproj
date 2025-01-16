@@ -130,11 +130,16 @@
   <ItemGroup>
     <ClCompile Include="AttackBoost.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="EventLoop.cpp" />
+    <ClCompile Include="Level_Main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="FullObserver.h" />
+    <ClCompile Include="Movable.h" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="SFightable.cpp" />
     <ClCompile Include="IItem.cpp" />
     <ClCompile Include="IMonster.cpp" />
@@ -143,7 +148,6 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level_Dungeon.cpp" />
     <ClCompile Include="Level_Logo.cpp" />
-    <ClCompile Include="Level_Main.cpp" />
     <ClCompile Include="Level_Manager.cpp" />
     <ClCompile Include="Level_Shop.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,10 +165,15 @@
     <ClInclude Include="Client_Macro.h" />
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
+    <ClInclude Include="EventLoop.h" />
+    <ClInclude Include="IHealthObserver.h" />
+    <ClInclude Include="Level_Main.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="HealthPotion.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="SFightable.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IMonster.h" />
@@ -174,7 +183,6 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level_Dungeon.h" />
     <ClInclude Include="Level_Logo.h" />
-    <ClInclude Include="Level_Main.h" />
     <ClInclude Include="Level_Manager.h" />
     <ClInclude Include="Level_Shop.h" />
     <ClInclude Include="MainApp.h" />
