@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <windows.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <functional>
@@ -26,10 +27,10 @@ namespace Client
 	};
 
 	struct LasyCout {
-		void operator()(const std::string str) const {
+		void operator()(std::string str) {
 			for (char c : str) {
 				std::cout << c;
-				Sleep(100);
+				Sleep(25);
 			}
 		}
 	};
@@ -37,8 +38,8 @@ namespace Client
 	enum LEVELID { LEVEL_LOGO, LEVEL_MAP, LEVEL_END };
 	enum VIEW { VIEW_STATUS, VIEW_MAP, VIEW_INVENTORY, VIEW_END };
 	enum MAP { MAP_VILLAGE, MAP_DUNGEON, MAP_SHOP, MAP_END };
-	
-	const int MAP_WIDTH = 20; 
+
+	const int MAP_WIDTH = 20;
 	const int MAP_HEIGHT = 20;
 
 	const int MAX_HEALTH = 200;

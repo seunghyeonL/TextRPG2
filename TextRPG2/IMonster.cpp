@@ -82,7 +82,6 @@ void IMonster::Interact()
 {
     auto pGameManager = GameManager::Get_Instance();
 
-    system("cls");
     pGameManager->Battle(this);
     system("cls");
 }
