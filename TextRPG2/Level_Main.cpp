@@ -62,6 +62,11 @@ void Level_Main::Render()
 		}
 		Buffer.push_back(L'\n');
 	}
+	if (preView != CurView)
+	{
+		system("cls");
+		preView = CurView;
+	}
 
 	gotoxy(0, 0);
 
@@ -78,7 +83,9 @@ void Level_Main::Render()
 		Character::GetInstance()->DisplayInventory();
 		break;
 	case VIEW_EQUIPMENTSLOTS:
-		Character::GetInstance()->DisplayEquipmentSlots();
+		preView = VIEW_EQUIPMENTSLOTS;
+		if (Character::GetInstance()->DisplayEquipmentSlots() == true)
+			CurView = VIEW_MAP;
 		break;
 	}
 

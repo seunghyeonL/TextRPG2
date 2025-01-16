@@ -52,7 +52,7 @@ public:
 	double GetGold();
 	void DisplayStatus();
 	void DisplayInventory();
-	void DisplayEquipmentSlots();
+	bool DisplayEquipmentSlots();
 	void LevelUp();
 	void AddExperience(double amount);
 	shared_ptr<Inventory> GetInventory();

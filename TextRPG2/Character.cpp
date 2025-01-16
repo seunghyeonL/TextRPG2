@@ -203,7 +203,7 @@ void Character::DisplayInventory()
     // system("pause");
 }
 
-void Character::DisplayEquipmentSlots()
+bool Character::DisplayEquipmentSlots()
 {
     cout << "현재 착용중인 장비" << endl;
 
@@ -236,12 +236,20 @@ void Character::DisplayEquipmentSlots()
         }
         cout << "=====================================================================\n";
     }
-
+    
     int index;
     //cout << "\n사용할 아이템 번호를 입력해주세요.\n";
     cout<<"\n사용할 아이템 번호를 입력해주세요. // 0번 누를시 탈출.\n";
     cin >> index;
+    if (index == 0)
+    {
+        cout << "0번 누름" << endl;
+        system("cls");
+        return true;
+    }
+
     Equip(index - 1);
+    return false;
 }
 
 void Character::LevelUp()
@@ -341,9 +349,10 @@ int Character::BuyItem()
 {
     Character* Player = Character::GetInstance();
     Shop* shop = Shop::GetInstance();
-    vector<IEquipmentItem*> ShopEquip = shop->GetEquipList();
-    vector<pair<IConsumptionItem*, int>> ShopConsum = shop->GetConsumptionList();
-    vector<pair<IEtcItem*, int>> ShopEtc = shop->GetOtherList();
+    vector<IEquipmentItem*>* ShopEquip = shop->GetEquipList_Ptr();
+    vector<pair<IConsumptionItem*, int>>* ShopConsum = shop->GetConsumptionList_Ptr();
+    vector<pair<IEtcItem*, int>>* ShopEtc = shop->GetOtherList_Ptr();
+
     vector<IEquipmentItem*> EquipmentInven = Player->GetInventory()->GetEquipmentInven();
     vector<pair<IConsumptionItem*, int>> ConsumptionInven = Player->GetInventory()->GetConsumptionInven();
     vector<pair<IEtcItem*, int>> EtcInven = Player->GetInventory()->GetEtcInven();
@@ -353,6 +362,9 @@ int Character::BuyItem()
     int price = 0;
     while (true)
     {
+        system("cls");
+        shop->OnSaleItem();
+
         cout << "\n구매하고 싶은 아이템의 이름을 써주세요.\n";
         cin >> name;
         cout << "\n" << name << " 아이템을 구매하시겠습니까?\n";
@@ -372,70 +384,70 @@ int Character::BuyItem()
             {
                 if (Quantity == 1)
                 {
-                    for (int i = 0; i < ShopEquip.size(); ++i)
+                    for (int i = 0; i < ShopEquip->size(); ++i)
                     {
-                        if (ShopEquip[i]->GetName() == name)
+                        if ((*ShopEquip)[i]->GetName() == name)
                         {
-                            Player->GetInventory()->AddToEquipment(ShopEquip[i]);
-                            ShopEquip.erase(remove(ShopEquip.begin(), ShopEquip.end(),
-                                ShopEquip[i]), ShopEquip.end());
+                            Player->GetInventory()->AddToEquipment((*ShopEquip)[i]);
+                            (*ShopEquip).erase(remove((*ShopEquip).begin(), (*ShopEquip).end(),
+                                (*ShopEquip)[i]), (*ShopEquip).end());
                             return 100;
                         }
                     }
                 }
 
-                for (int i = 0; i < ShopConsum.size(); ++i)
+                for (int i = 0; i < ShopConsum->size(); ++i)
                 {
-                    if (ShopConsum[i].first->GetName() == name)
+                    if ((*ShopConsum)[i].first->GetName() == name)
                     {
-                        if (ShopConsum[i].second > 1)
+                        if ((*ShopConsum)[i].second > 1)
                         {
-                            if (ShopConsum[i].second < Quantity)
+                            if ((*ShopConsum)[i].second < Quantity)
                             {
                                 cout << "\n잘못된 입력입니다.\n";
                                 continue;
                             }
                                 
 
-                            Player->GetInventory()->AddToConsumption(ShopConsum[i].first, Quantity);
-                            ShopConsum[i].second -= Quantity;
+                            Player->GetInventory()->AddToConsumption((*ShopConsum)[i].first, Quantity);
+                            (*ShopConsum)[i].second -= Quantity;
                             
                             return  Quantity * 30;
                         }
-                        else if (ShopConsum[i].second == 1)
+                        else if ((*ShopConsum)[i].second == 1)
                         {
-                            Player->GetInventory()->AddToConsumption(ShopConsum[i].first,1);
+                            Player->GetInventory()->AddToConsumption((*ShopConsum)[i].first,1);
 
-                            ShopConsum.erase(remove(ShopConsum.begin(), ShopConsum.end(),
-                                ShopConsum[i]), ShopConsum.end());
+                            (*ShopConsum).erase(remove((*ShopConsum).begin(), (*ShopConsum).end(),
+                                (*ShopConsum)[i]), (*ShopConsum).end());
                             //
                             return 30;
                         }
                     }
                 }
 
-                for (int i = 0; i < ShopEtc.size(); ++i)
+                for (int i = 0; i < ShopEtc->size(); ++i)
                 {
-                    if (ShopEtc[i].first->GetName() == name)
+                    if ((*ShopEtc)[i].first->GetName() == name)
                     {
-                        if (ShopEtc[i].second > 1)
+                        if ((*ShopEtc)[i].second > 1)
                         {
-                            if (ShopEtc[i].second < Quantity)
+                            if ((*ShopEtc)[i].second < Quantity)
                             {
                                 cout << "\n잘못된 입력입니다.\n";
                                 continue;
                             }
 
-                            Player->GetInventory()->AddToEtc(ShopEtc[i].first, Quantity);
-                            ShopEtc[i].second -= Quantity;
+                            Player->GetInventory()->AddToEtc((*ShopEtc)[i].first, Quantity);
+                            (*ShopEtc)[i].second -= Quantity;
                             //
                             return Quantity * 10;
                         }
-                        else if (ShopEtc[i].second == 1)
+                        else if ((*ShopEtc)[i].second == 1)
                         {
-                            Player->GetInventory()->AddToEtc(ShopEtc[i].first, 1);
-                            ShopEtc.erase(remove(ShopEtc.begin(), ShopEtc.end(),
-                                ShopEtc[i]), ShopEtc.end());
+                            Player->GetInventory()->AddToEtc((*ShopEtc)[i].first, 1);
+                            (*ShopEtc).erase(remove((*ShopEtc).begin(), (*ShopEtc).end(),
+                                (*ShopEtc)[i]), (*ShopEtc).end());
                             //
                             return 10;
                         }
@@ -557,10 +569,6 @@ void Character::ApplyItemAttackStatus(IEquipmentItem* equipItem, IEquipmentItem*
 
 void Character::Equip(int index)
 {
-    if (index == -1)
-    {
-        cout << "0번 누름" << endl;
-    }
 
     if (index >= 0 && index < Inven->GetEquipmentInven().size())
     {

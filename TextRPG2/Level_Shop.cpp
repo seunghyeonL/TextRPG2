@@ -193,7 +193,10 @@ void Level_Shop::Render()
 		Buffer.push_back(L'\n');
 	}
 	if (CurView != preView)
+	{
 		system("cls");
+		preView = CurView;
+	}
 
 	gotoxy(0, 0);
 
@@ -217,9 +220,16 @@ void Level_Shop::Render()
 		if (GameManager::Get_Instance()->VisitShop() == false)
 			CurView = VIEW_MAP;
 		break;
+	case VIEW_EQUIPMENTSLOTS:
+		preView = VIEW_EQUIPMENTSLOTS;
+		system("cls");
+		if (Character::GetInstance()->DisplayEquipmentSlots() == true)
+			CurView = VIEW_MAP;
+		
+		break;
 	}
 	
-	cout << "TAB : 스탯창\tI : 인벤토리\tESC : 종료" << endl;
+	cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 	Buffer.clear();
 }
 
