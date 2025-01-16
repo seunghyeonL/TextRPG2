@@ -131,7 +131,11 @@
     <ClCompile Include="AttackBoost.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="EventLoop.cpp" />
+    <ClCompile Include="IConsumptionItem.cpp" />
+    <ClCompile Include="IEquipmentItem.cpp" />
+    <ClCompile Include="IEtcItem.cpp" />
     <ClCompile Include="Level_Main.cpp" />
+    <ClCompile Include="LiquidMass.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="FullObserver.h" />
     <ClCompile Include="Movable.h" />
@@ -165,8 +169,12 @@
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
     <ClInclude Include="EventLoop.h" />
+    <ClInclude Include="IConsumptionItem.h" />
+    <ClInclude Include="IEquipmentItem.h" />
+    <ClInclude Include="IEtcItem.h" />
     <ClInclude Include="IHealthObserver.h" />
     <ClInclude Include="Level_Main.h" />
+    <ClInclude Include="LiquidMass.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="GameManager.h" />
