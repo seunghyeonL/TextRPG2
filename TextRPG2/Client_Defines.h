@@ -25,6 +25,14 @@ namespace Client
 		}
 	};
 
+	struct LasyCout {
+		void operator()(const std::string str) const {
+			for (char c : str) {
+				std::cout << c;
+				Sleep(100);
+			}
+		}
+	};
 
 	enum LEVELID { LEVEL_LOGO, LEVEL_MAP, LEVEL_END };
 	enum VIEW { VIEW_STATUS, VIEW_MAP, VIEW_INVENTORY, VIEW_END };

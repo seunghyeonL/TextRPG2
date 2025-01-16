@@ -14,7 +14,7 @@ protected:
 
 public:
 	SFightable();
-	virtual ~SFightable() = default;
+	virtual ~SFightable();
 	virtual void HealthUpdate() {
 		for (auto Observer : Observers) {
 			Observer->Update(mHealth, mName, IsActive);

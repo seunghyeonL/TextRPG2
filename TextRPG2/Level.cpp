@@ -27,6 +27,5 @@ void Level::Clear_Resources()
 
 void Level::Free()
 {
-	system("cls");
 	delete this;
 }

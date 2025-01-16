@@ -208,6 +208,8 @@ void GameManager::Battle(IMonster *Monster)
 	Character *Player = Character::GetInstance();
 	HealthPotion *hp = new HealthPotion();
 	AttackBoost *boost = new AttackBoost();
+	function<void(string)> lasyCout = LasyCout();
+
 	auto inventory = Character::GetInstance()->GetInventory();
 
 	double OriginalAttack = Player->GetAttack(); // 전투 시작 전 공격력 저장
@@ -218,6 +220,7 @@ void GameManager::Battle(IMonster *Monster)
 
 	while (Player->GetHealth() > 0 && Monster->GetHealth() > 0)
 	{
+		Monster->PrintPicture();
 
 		cout << "\n메뉴\n1. 아이템 사용     2. 전투하기     3.도망가기\n";
 		int choice;

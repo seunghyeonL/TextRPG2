@@ -10,14 +10,19 @@ class Map : public Level
 {
 protected:
 	Map() {};
-	virtual ~Map() = default;
+	virtual ~Map() {
+		for (auto el : Interactables) {
+			delete el;
+		}
+		system("cls");
+	};
 
-	MAP MapType{MAP_VILLAGE};
-	VIEW CurView{VIEW_MAP};
+	MAP MapType{ MAP_VILLAGE };
+	VIEW CurView{ VIEW_MAP };
 
-	vector<IInteractable *> Interactables;
+	vector<IInteractable*> Interactables;
 
-	unordered_map<PosStruct, pair<string, IInteractable *>, PosStructHash> m_Map;
+	unordered_map<PosStruct, pair<string, IInteractable*>, PosStructHash> m_Map;
 	string Buffer{};
 
 	void gotoxy(int x, int y);

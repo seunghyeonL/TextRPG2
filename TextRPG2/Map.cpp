@@ -146,9 +146,7 @@ void Map::Update()
 
 void Map::Free()
 {
-	for (auto el : Interactables) {
-		delete el;
-	}
+	
 	Level::Free();
 }
 
