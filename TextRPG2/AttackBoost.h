@@ -1,10 +1,13 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "IConsumptionItem.h"
 
 using namespace std;
 
-class AttackBoost : IItem
+class Character;
+
+class AttackBoost : public IConsumptionItem
 {
 private:
     string Name;
@@ -12,6 +15,6 @@ private:
 
 public:
     AttackBoost();
-    string getName();
-    void use(character : Character *);
+    string GetName() override;
+    bool Use(Character *character) override;
 };

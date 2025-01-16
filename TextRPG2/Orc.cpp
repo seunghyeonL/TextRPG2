@@ -1,31 +1,57 @@
 #include "Orc.h"
+#include "HealthPotion.h"
+#include "CanineMass.h"
+#include "BoneHelm.h"
+
 
 Orc::Orc()
-    : IMonster{}
+	: IMonster{}
 {
 }
 
-/* 이렇게 이니셜라이즈에서 직접 초기화 해도 되고 위에서 생성자로 초기화 해도 됨*/
-void Orc::Initialize(string name, int health, int attack)
+void Orc::Initialize(string name, double health, double attack)
 {
-    mName = name;
-    mHealth = health;
-    mAttack = attack;
+	mName = name;
+	mHealth = health;
+	mAttack = attack;
+
+	BoneHelm* helm = new BoneHelm();
+	HealthPotion* potion = new HealthPotion();
+	CanineMass* mass = new CanineMass();
+
+	EquipmentItems.push_back(helm);
+	ConsumableItems.push_back(potion);
+	OtherItems.push_back(mass);
 }
 
 void Orc::Update()
 {
+
 }
 
-Orc *Orc::Create(string name, int health, int attack)
+//void Orc::Interact() {
+//
+//}
+
+Orc* Orc::Create(string name, double health, double attack)
 {
-    Orc *pOrc = new Orc();
+	Orc* pOrc = new Orc();
 
-    pOrc->Initialize(name, health, attack);
+	pOrc->Initialize(name, health, attack);
 
-    return pOrc;
+	return pOrc;
+}
+
+Orc* Orc::CreateBoss(string name, double health, double attack)
+{
+	Orc* pOrc = new Orc();
+
+	pOrc->Initialize(name, health, attack);
+
+	return pOrc;
 }
 
 void Orc::Free()
 {
+	IMonster::Free();
 }

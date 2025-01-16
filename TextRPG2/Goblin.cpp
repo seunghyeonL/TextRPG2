@@ -3,7 +3,6 @@
 #include "GreenLeatherHelm.h"
 #include "GoblinKnife.h"
 
-
 Goblin::Goblin()
 	: IMonster{}
 {
@@ -17,9 +16,9 @@ void Goblin::Initialize(string name, double health, double attack)
 	mHealth = health;
 	mAttack = attack;
 
-	GreenLeatherHelm* helm = new GreenLeatherHelm();
-	HealthPotion* potion = new HealthPotion();
-	GoblinKnife* mass = new GoblinKnife();
+	GreenLeatherHelm *helm = new GreenLeatherHelm();
+	HealthPotion *potion = new HealthPotion();
+	GoblinKnife *mass = new GoblinKnife();
 
 	EquipmentItems.push_back(helm);
 	ConsumableItems.push_back(potion);
@@ -30,9 +29,9 @@ void Goblin::Update()
 {
 }
 
-//void Goblin::Interact() {
+// void Goblin::Interact() {
 //
-//}
+// }
 
 Goblin *Goblin::Create(string name, double health, double attack)
 {

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IItem.h"
+#include "IConsumptionItem.h"
 #include "Character.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class HealthPotion : public IItem
+class HealthPotion : public IConsumptionItem
 {
 private:
     const string Name;
@@ -16,5 +16,5 @@ private:
 public:
     HealthPotion();
     string GetName() override;
-    void Use(Character *character) override;
+    bool Use(Character *character) override;
 };

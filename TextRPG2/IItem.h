@@ -1,15 +1,19 @@
 #pragma once
 
-#include "Character.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class IItem
+class Character;
+class Inventory;
+
+class IItem abstract
 {
 public:
-    ~IItem() = default;
-    virtual string GetName() = 0;
-    virtual void Use(Character *) = 0;
+	virtual ~IItem() = default;
+	virtual string GetName() = 0;
+	virtual void AddToInventory(shared_ptr<Inventory> inventory, int quantity) = 0;
+	virtual void RemoveToInventory(shared_ptr<Inventory> inventory, int quantity) = 0;
 };
+
