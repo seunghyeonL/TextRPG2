@@ -227,7 +227,7 @@ void GameManager::Battle(IMonster *Monster)
 	while (Player->GetHealth() > 0 && Monster->GetHealth() > 0)
 	{
 		system("cls");
-		Monster->PrintPicture();
+		Monster->PrintPictureNormal();
 
 		cout << "\n메뉴\n1. 아이템 사용     2. 전투하기     3.도망가기\n";
 		int choice;
@@ -240,7 +240,6 @@ void GameManager::Battle(IMonster *Monster)
 			if (Player->GetInventory()->GetConsumptionInven().size())
 			{
 				int index;
-				//cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 				lasyCout("\n사용할 아이템 번호를 입력해주세요.\n");
 				cin >> index;
 				Player->GetInventory()->UseItem(index - 1);
@@ -251,7 +250,7 @@ void GameManager::Battle(IMonster *Monster)
 			while (Player->GetHealth() > 0 && Monster->GetHealth() > 0)
 			{
 				system("cls");
-				Monster->PrintPicture();
+				Monster->PrintPictureNormal();
 
 				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
 				cin >> choice;
@@ -271,6 +270,9 @@ void GameManager::Battle(IMonster *Monster)
 					break;
 				case 2:
 					// 플레이어의 공격
+					system("cls");
+					Monster->PrintPictureAttack();
+
 					Monster->GetDamage(Player->GetAttack());
 					ss << Player->GetName() << " 플레이어가 공격했습니다.\n"
 						 << Player->GetAttack() << "의 피해를 입혀 몬스터의 체력은 " << Monster->GetHealth() << "입니다.\n";
@@ -280,6 +282,9 @@ void GameManager::Battle(IMonster *Monster)
 					// 몬스터의 반격
 					if (Monster->GetHealth() > 0)
 					{
+						system("cls");
+						Monster->PrintPictureAttacked();
+
 						Player->GetDamage(Monster->GetAttack());
 						ss << "\n"
 							 << Monster->GetName() << " 몬스터가 공격했습니다.\n"
@@ -298,6 +303,8 @@ void GameManager::Battle(IMonster *Monster)
 					else if (Monster->GetHealth() <= 0)
 					{
 						// 전투 승리 처리
+						system("cls");
+						Monster->PrintPictureNormal();
 
 						vector<IItem *> DroppedItem = Monster->DropRandomItem();
 						inventory->AddDroppedItems(DroppedItem);
@@ -320,6 +327,9 @@ void GameManager::Battle(IMonster *Monster)
 					}
 					break;
 				case 3:
+					system("cls");
+					Monster->PrintPictureNormal();
+
 					ss << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
 					lasyCout(ss.str());
 					ss.str("");
@@ -337,7 +347,7 @@ void GameManager::Battle(IMonster *Monster)
 			break;
 		case 3:
 			system("cls");
-			Monster->PrintPicture();
+			Monster->PrintPictureNormal();
 
 			ss << "\n"
 				 << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
