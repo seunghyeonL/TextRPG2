@@ -15,4 +15,5 @@ private:
 public:
 	void AddTask(const function<void()>& Task); 
 	void Run(); // Pop and run every tasks in task queue. 
+	void Free();
 };
