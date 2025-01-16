@@ -205,7 +205,7 @@ void Character::DisplayInventory()
 
 bool Character::DisplayEquipmentSlots()
 {
-    cout << "현재 착용중인 장비" << endl;
+    cout << "현재 착용중인 장비=====================================================" << endl;
 
     if (HelmSlot == nullptr) 
         cout << "투구 : 비어있음" << endl;
@@ -337,12 +337,6 @@ void Character::SetEquipmentSlots(IEquipmentItem* equipItem, EquipmentType type)
         break;
     }
     Inven->RemoveToEquipment(equipItem);
-}
-
-void Character::ApplyItemHealthStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem)
-{
-    SetHealth(GetHealth() + equipItem->GetHealthIncrease());
-    SetAttack(GetAttack() + equipItem->GetAttackIncrease());
 }
 
 int Character::BuyItem()
@@ -551,6 +545,21 @@ int Character::SellItem()
     }
 }
 
+void Character::ApplyItemHealthStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem)
+{
+    if (exEquipItem == nullptr)
+    {
+        IncreasedHealth += equipItem->GetHealthIncrease();
+        SetMaxHealth(GetHealth() + IncreasedHealth);
+    }
+    else
+    {
+        int HealthDiffer = equipItem->GetHealthIncrease() - exEquipItem->GetHealthIncrease();
+        IncreasedHealth += HealthDiffer;
+        SetMaxHealth(GetHealth() + IncreasedHealth);
+    }
+}
+
 void Character::ApplyItemAttackStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem)
 {
     if (exEquipItem == nullptr)
@@ -574,6 +583,8 @@ void Character::Equip(int index)
     {
         cout << Inven->GetEquipmentInven()[index]->GetName() << "을(를) 착용합니다.\n";
         Inven->GetEquipmentInven()[index]->Equip();
+
+        system("cls");
     }
     
    

@@ -75,12 +75,15 @@ void Level_Main::Render()
 	case VIEW_MAP:
 		Render_TextMap();
 		cout << Buffer;
+		cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 		break;
 	case VIEW_STATUS:
 		Character::GetInstance()->DisplayStatus();
+		cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 		break;
 	case VIEW_INVENTORY:
 		Character::GetInstance()->DisplayInventory();
+		cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 		break;
 	case VIEW_EQUIPMENTSLOTS:
 		preView = VIEW_EQUIPMENTSLOTS;
@@ -89,7 +92,6 @@ void Level_Main::Render()
 		break;
 	}
 
-	cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 	Buffer.clear();
 }
 
