@@ -46,7 +46,7 @@ void Map::Update()
 				//system("cls");
 				if (!Interactable->GetIsActive()) {
 					delete Interactable;
-					m_Map[NextPos] = {"a ", nullptr};
+					m_Map[NextPos] = {". ", nullptr};
 				}
 			}
 			else
@@ -68,7 +68,7 @@ void Map::Update()
 				//system("cls");
 				if (!Interactable->GetIsActive()) {
 					delete Interactable;
-					m_Map[NextPos] = { "a ", nullptr };
+					m_Map[NextPos] = { ". ", nullptr };
 				}
 			}
 			else
@@ -90,7 +90,7 @@ void Map::Update()
 				//system("cls");
 				if (!Interactable->GetIsActive()) {
 					delete Interactable;
-					m_Map[NextPos] = { "a ", nullptr };
+					m_Map[NextPos] = { ". ", nullptr };
 				}
 			}
 			else
