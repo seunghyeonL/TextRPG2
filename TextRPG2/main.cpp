@@ -1,5 +1,12 @@
+// 디버그
+// #define _CRTDBG_MAP_ALLOC
+// #include <cstdlib>
+// #include <crtdbg.h>
+
 #include "GameManager.h"
 #include "MainApp.h"
+#include "Character.h"
+#include "EventLoop.h"
 #include <locale>
 
 void DisableCursorBlinking();
@@ -7,6 +14,9 @@ bool IsAnyKeyPressed();
 
 int main()
 {
+	// 메모리 누수 확인
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	std::wcout.imbue(std::locale(""));
 	SetConsoleOutputCP(CP_UTF8);
 	DisableCursorBlinking();
@@ -14,12 +24,16 @@ int main()
 	MainApp *pMainApp = MainApp::Create();
 
 	GameManager *pGameManager = GameManager::Get_Instance();
+	EventLoop *pEventLoop = EventLoop::Get_Instance();
 	pGameManager->DisableEcho();
 
 	bool bIsInit = false;
 	while (true)
 	{
 		pMainApp->Update();
+
+		pEventLoop->Run();
+
 		pMainApp->Render();
 
 		if (pGameManager->KeyPressedThisFrame())
@@ -34,6 +48,11 @@ int main()
 
 	pMainApp->Free();
 	pGameManager->Destroy_Instance();
+
+	Character *pCharacter = Character::GetInstance();
+	delete pCharacter;
+
+	return 0;
 }
 
 bool IsAnyKeyPressed()

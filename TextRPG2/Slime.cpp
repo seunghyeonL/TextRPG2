@@ -28,9 +28,9 @@ void Slime::Update()
 
 }
 
-void Slime::Interact() {
-
-}
+//void Slime::Interact() {
+//
+//}
 
 Slime* Slime::Create(string name, double health, double attack)
 {
@@ -52,4 +52,5 @@ Slime* Slime::CreateBoss(string name, double health, double attack)
 
 void Slime::Free()
 {
+	IMonster::Free();
 }

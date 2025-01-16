@@ -1,6 +1,8 @@
 #pragma once
 #include "Client_Defines.h"
 #include "IItem.h"
+#include "Movable.h"
+#include "SFightable.h"
 
 #include "Inventory.h"
 #include <string>
@@ -8,29 +10,27 @@
 #include <map>
 #include <memory>
 
-using namespace std;
-
-class Character
+class Character : public Movable
 {
 private:
-	static Character* Instance;
+	static Character *Instance;
 	string Name;
 	int Level;
 	int MaxLevel;
-	double Health;		  // 체력
+	int Health;
+	int Attack;
 	double MaxHealth;	  // 최대 체력
-	double Attack;		  // 공격력
 	double Experience;	  // 경험치
 	double MaxExperience; // 최대 경험치
 	shared_ptr<Inventory> Inven;
 
-	class GameManager* pGameManager{ nullptr };
+	class GameManager *pGameManager{nullptr};
 	Character(string name);
-	Character(const Character&) = delete;
-	Character& operator=(const Character&) = delete;
+	Character(const Character &) = delete;
+	Character &operator=(const Character &) = delete;
 
 public:
-	static Character * GetInstance(string name = "");
+	static Character *GetInstance(string name = "");
 	string GetName();
 	int GetLevel();
 	void SetLevel(int level);

@@ -11,17 +11,16 @@ Character *Character::Instance = nullptr;
 Character::Character(string name)
     : Name(name), Level(1), Health(200),
       MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>()),
-    pGameManager{ GameManager::Get_Instance() }
+      pGameManager{GameManager::Get_Instance()}
 {
-    HealthPotion* potion = new HealthPotion();
-    AttackBoost* AB = new AttackBoost();
+    HealthPotion *potion = new HealthPotion();
+    AttackBoost *AB = new AttackBoost();
     potion->AddToInventory(Inven, 10);
     AB->AddToInventory(Inven, 5);
 }
 
 Character *Character::GetInstance(string name)
 {
-
     if (Instance == nullptr)
         Instance = new Character(name);
 
@@ -118,7 +117,7 @@ void Character::DisplayInventory()
     if (Inven->GetEquipmentInven().empty())
     {
         cout << "장비창은 비어있다."
-            "\n";
+                "\n";
     }
     else
     {
@@ -128,7 +127,7 @@ void Character::DisplayInventory()
     if (Inven->GetConsumptionInven().empty())
     {
         cout << "소비창은 비어있다."
-            "\n";
+                "\n";
     }
     else
     {
@@ -138,14 +137,14 @@ void Character::DisplayInventory()
     if (Inven->GetEtcInven().empty())
     {
         cout << "기타창은 비어있다."
-            "\n";
+                "\n";
     }
     else
     {
         for (int i = 0; i < Inven->GetEtcInven().size(); i++)
             cout << i << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
     }
-    
+
     /* 루프돌면서 키감지 */
     for (int i = 0; i < Inven->GetConsumptionInven().size(); ++i)
     {
@@ -153,14 +152,14 @@ void Character::DisplayInventory()
         {
             /* 한번 클리어 해야 깔끔해보임 */
             system("cls");
-            Inven->UseItem(i); /* 여기서 사용한 아이템 출력 */
+            Inven->UseItem(i);                               /* 여기서 사용한 아이템 출력 */
             cout << "-----------------------------" << endl; /* 구분선*/
 
             /* 한번 클리어 했으니 인벤토리 다시 출력 */
             if (Inven->GetEquipmentInven().empty())
             {
                 cout << "장비창은 비어있다."
-                    "\n";
+                        "\n";
             }
             else
             {
@@ -170,7 +169,7 @@ void Character::DisplayInventory()
             if (Inven->GetConsumptionInven().empty())
             {
                 cout << "소비창은 비어있다."
-                    "\n";
+                        "\n";
             }
             else
             {
@@ -180,7 +179,7 @@ void Character::DisplayInventory()
             if (Inven->GetEtcInven().empty())
             {
                 cout << "기타창은 비어있다."
-                    "\n";
+                        "\n";
             }
             else
             {
@@ -191,7 +190,6 @@ void Character::DisplayInventory()
             break;
         }
     }
-
 }
 
 void Character::LevelUp()
