@@ -204,6 +204,7 @@ void Character::DisplayInventory()
 
 bool Character::DisplayEquipmentSlots()
 {
+    system("cls");
     cout << "현재 착용중인 장비=====================================================" << endl;
 
     if (HelmSlot == nullptr)
@@ -242,8 +243,8 @@ bool Character::DisplayEquipmentSlots()
     cin >> index;
     if (index == 0)
     {
-        cout << "0번 누름" << endl;
-        system("cls");
+        cout << "맵으로 돌아갑니다." << endl;
+        //system("cls");
         return true;
     }
 
@@ -278,6 +279,9 @@ shared_ptr<Inventory> Character::GetInventory()
 
 void Character::SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type)
 {
+    LasyCout lasyCout = LasyCout();
+    stringstream ss;
+
     switch (type)
     {
     case Helm:
@@ -285,7 +289,9 @@ void Character::SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type)
         {
             HelmSlot = equipItem;
             ApplyItemHealthStatus(equipItem);
-            cout << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
+            ss << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
+            lasyCout(ss.str());
+            ss.str("");
         }
         else
         {
@@ -293,7 +299,9 @@ void Character::SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type)
             HelmSlot == nullptr;
             HelmSlot = equipItem;
             ApplyItemHealthStatus(equipItem, ExEquipItem);
-            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
+            ss << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
+            lasyCout(ss.str());
+            ss.str("");
             Inven->AddToEquipment(ExEquipItem);
         }
         break;
@@ -302,7 +310,9 @@ void Character::SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type)
         {
             ArmorSlot = equipItem;
             ApplyItemHealthStatus(equipItem);
-            cout << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+            ss << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+            lasyCout(ss.str());
+            ss.str("");
         }
         else
         {
@@ -310,7 +320,9 @@ void Character::SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type)
             ArmorSlot == nullptr;
             ArmorSlot = equipItem;
             ApplyItemHealthStatus(equipItem, ExEquipItem);
-            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+            ss << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+            lasyCout(ss.str());
+            ss.str("");
             Inven->AddToEquipment(ExEquipItem);
         }
         break;
@@ -319,7 +331,9 @@ void Character::SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type)
         {
             WeaponSlot = equipItem;
             ApplyItemAttackStatus(equipItem);
-            cout << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+            ss << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+            lasyCout(ss.str());
+            ss.str("");
         }
         else
         {
@@ -327,12 +341,16 @@ void Character::SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type)
             WeaponSlot == nullptr;
             WeaponSlot = equipItem;
             ApplyItemAttackStatus(equipItem, ExEquipItem);
-            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+            ss << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+            lasyCout(ss.str());
+            ss.str("");
             Inven->AddToEquipment(ExEquipItem);
         }
         break;
     default:
-        cout << "잘못된 접근입니다." << endl;
+        ss << "잘못된 접근입니다." << endl;
+        lasyCout(ss.str());
+        ss.str("");
         break;
     }
     Inven->RemoveToEquipment(equipItem);
@@ -350,29 +368,37 @@ int Character::BuyItem()
     vector<pair<IConsumptionItem *, int>> ConsumptionInven = Player->GetInventory()->GetConsumptionInven();
     vector<pair<IEtcItem *, int>> EtcInven = Player->GetInventory()->GetEtcInven();
 
+    LasyCout lasyCout = LasyCout();
+    stringstream ss;
+
     string name;
     int choice;
+
     int price = 0;
     while (true)
     {
         system("cls");
         shop->OnSaleItem();
 
-        cout << "\n구매하고 싶은 아이템의 이름을 써주세요.\n";
+        lasyCout("\n구매하고 싶은 아이템의 이름을 써주세요.\n");
         cin >> name;
-        cout << "\n"
+
+        ss << "\n"
              << name << " 아이템을 구매하시겠습니까?\n";
+        lasyCout(ss.str());
+        ss.str("");
+
         cout << "1. 네     2. 아니요\n";
         choice = getInputInteger(1, 2);
         switch (choice)
         {
         case 1:
         {
-            cout << "\n구매할 수량을 입력해주세요.\n";
+            lasyCout("\n구매할 수량을 입력해주세요.\n");
             int Quantity = getInputInteger(0, 10);
             if (Quantity < 0)
             {
-                cout << "\n잘못된 입력입니다.\n";
+                lasyCout("\n잘못된 입력입니다.\n");
             }
             else
             {
@@ -397,7 +423,7 @@ int Character::BuyItem()
                         {
                             if ((*ShopConsum)[i].second < Quantity)
                             {
-                                cout << "\n잘못된 입력입니다.\n";
+                                lasyCout("\n잘못된 입력입니다.\n");
                                 continue;
                             }
 
@@ -425,7 +451,7 @@ int Character::BuyItem()
                         {
                             if ((*ShopEtc)[i].second < Quantity)
                             {
-                                cout << "\n잘못된 입력입니다.\n";
+                                lasyCout("\n잘못된 입력입니다.\n");
                                 continue;
                             }
 
@@ -450,7 +476,7 @@ int Character::BuyItem()
         case 2:
             break;
         default:
-            cout << "잘못된 입력입니다.\n";
+            lasyCout("잘못된 입력입니다.\n");
         }
         return 0;
     }
@@ -463,26 +489,33 @@ int Character::SellItem()
     vector<pair<IConsumptionItem *, int>> *ConsumptionInven = Player->GetInventory()->GetConsumptionInven_Ptr();
     vector<pair<IEtcItem *, int>> *EtcInven = Player->GetInventory()->GetEtcInven_Ptr();
 
+    LasyCout lasyCout = LasyCout();
+    stringstream ss;
+
     string name;
     int choice;
 
     while (true)
     {
-        cout << "\n판매하고 싶은 아이템의 이름을 써주세요.\n";
+        lasyCout("\n판매하고 싶은 아이템의 이름을 써주세요.\n");
         cin >> name;
-        cout << "\n"
+        
+        ss << "\n"
              << name << " 아이템을 판매하시겠습니까?\n";
+        lasyCout(ss.str());
+        ss.str("");
+
         cout << "1. 네     2. 아니요\n";
         choice = getInputInteger(1, 2);
         switch (choice)
         {
         case 1:
         {
-            cout << "\n판매할 수량을 입력해주세요.\n";
+            lasyCout("\n판매할 수량을 입력해주세요.\n");
             int Quantity = getInputInteger(1, 10);
             if (Quantity < 0) // || Quantity > EquipmentInven->size() || Quantity > ConsumptionInven->size() || Quantity > EtcInven->size())
             {
-                cout << "\n잘못된 입력입니다.\n";
+                lasyCout("\n잘못된 입력입니다.\n");
             }
             else
             {
@@ -527,8 +560,8 @@ int Character::SellItem()
                         else if ((*EtcInven)[i].second == 1)
                         {
                             (*EtcInven).erase(remove((*EtcInven).begin(), (*EtcInven).end(),
-                                                     (*EtcInven)[i]),
-                                              (*EtcInven).end());
+                                (*EtcInven)[i]),
+                                (*EtcInven).end());
                             return 5;
                         }
                     }
@@ -538,7 +571,7 @@ int Character::SellItem()
         case 2:
             break;
         default:
-            cout << "잘못된 입력입니다.\n";
+            lasyCout("잘못된 입력입니다.\n");
         }
         return 0;
     }
@@ -577,13 +610,18 @@ void Character::ApplyItemAttackStatus(IEquipmentItem *equipItem, IEquipmentItem 
 
 void Character::Equip(int index)
 {
+    LasyCout lasyCout = LasyCout();
+    stringstream ss;
 
     if (index >= 0 && index < Inven->GetEquipmentInven().size())
     {
-        cout << Inven->GetEquipmentInven()[index]->GetName() << "을(를) 착용합니다.\n";
+        ss << Inven->GetEquipmentInven()[index]->GetName() << "을(를) 착용합니다.\n";
+        lasyCout(ss.str());
+        ss.str("");
+
         Inven->GetEquipmentInven()[index]->Equip();
 
-        system("cls");
+        //system("cls");
     }
 }
 int Character::getInputInteger(int min, int max)

@@ -46,7 +46,7 @@ void Map::Update()
 				//system("cls");
 				if (!Interactable->GetIsActive()) {
 					delete Interactable;
-					m_Map[NextPos] = {". ", nullptr};
+					m_Map[NextPos] = { ". ", nullptr };
 				}
 			}
 			else
@@ -122,7 +122,10 @@ void Map::Update()
 			}
 		}
 	}
-	else if (m_pGameManager->Key_Down(VK_TAB))
+	
+	m_Map[CurPos] = { "A ", nullptr };
+
+	if (m_pGameManager->Key_Down(VK_TAB))
 	{
 		if (CurView == VIEW_MAP || CurView == VIEW_INVENTORY || CurView == VIEW_EQUIPMENTSLOTS)
 			CurView = VIEW_STATUS;
@@ -145,15 +148,56 @@ void Map::Update()
 		else
 			CurView = VIEW_MAP;
 		system("cls");
-}
-	m_Map[CurPos] = { "A ", nullptr };
+	}
 }
 
+void Map::Render()
+{
+	if (preView != CurView)
+	{
+		system("cls");
+		preView = CurView;
+	}
 
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			Buffer += m_Map[PosStruct{ i, j }].first;
+		}
+		Buffer.push_back(L'\n');
+	}
+
+	gotoxy(0, 0);
+
+	switch (CurView)
+	{
+	case VIEW_MAP:
+		Render_TextMap();
+		cout << Buffer;
+		break;
+	case VIEW_STATUS:
+		Character::GetInstance()->DisplayStatus();
+		break;
+	case VIEW_INVENTORY:
+		Character::GetInstance()->DisplayInventory();
+		break;
+	case VIEW_EQUIPMENTSLOTS:
+		preView = VIEW_EQUIPMENTSLOTS;
+		if (Character::GetInstance()->DisplayEquipmentSlots() == true)
+			CurView = VIEW_MAP;
+		break;
+	}
+
+	if (preView != VIEW_EQUIPMENTSLOTS) {
+		cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
+	}
+
+	Buffer.clear();
+}
 
 void Map::Free()
 {
-	
 	Level::Free();
 }
 

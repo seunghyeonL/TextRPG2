@@ -47,45 +47,7 @@ void Level_Shop::Update()
 
 void Level_Shop::Render()
 {
-	for (int i = 0; i < MAP_HEIGHT; i++)
-	{
-		for (int j = 0; j < MAP_WIDTH; j++)
-		{
-			Buffer += m_Map[PosStruct{i, j}].first;
-		}
-		Buffer.push_back(L'\n');
-	}
-	if (CurView != preView)
-	{
-		system("cls");
-		preView = CurView;
-	}
-
-	gotoxy(0, 0);
-
-	switch (CurView)
-	{
-	case VIEW_MAP:
-		Render_TextMap();
-		cout << Buffer;
-		break;
-	case VIEW_STATUS:
-		Character::GetInstance()->DisplayStatus();
-		break;
-	case VIEW_INVENTORY:
-		Character::GetInstance()->DisplayInventory();
-		break;
-	case VIEW_EQUIPMENTSLOTS:
-		preView = VIEW_EQUIPMENTSLOTS;
-		system("cls");
-		if (Character::GetInstance()->DisplayEquipmentSlots() == true)
-			CurView = VIEW_MAP;
-
-		break;
-	}
-
-	cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
-	Buffer.clear();
+	Map::Render();
 }
 
 void Level_Shop::Free()
