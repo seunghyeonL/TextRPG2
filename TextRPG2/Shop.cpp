@@ -2,6 +2,8 @@
 #include "Character.h"
 #pragma once
 
+Shop* Shop::Instance = nullptr;
+
 Shop* Shop::GetInstance()
 {
 	if (Instance == nullptr)
