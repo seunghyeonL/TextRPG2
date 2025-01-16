@@ -10,9 +10,9 @@ class EventLoop {
 private:
 	EventLoop() {};
 	virtual ~EventLoop() = default;
-	queue<function<void()>> Tasks;
+	queue<function<void()>> Tasks; // Task function queue.
 
 public:
-	void AddTask(const function<void()>& Task);
-	void Run();
+	void AddTask(const function<void()>& Task); 
+	void Run(); // Pop and run every tasks in task queue. 
 };
