@@ -1,7 +1,7 @@
 #include "BoneHelm.h"
 
 BoneHelm::BoneHelm()
-	: IEquipmentItem(Helm, 0, 5), Name("BoneHelm")
+	: IEquipmentItem(Helm, 0, 30), Name("BoneHelm")
 {
 }
 

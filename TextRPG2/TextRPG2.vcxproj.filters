@@ -200,6 +200,27 @@
     <ClCompile Include="TrollTooth.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ShopNPC.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ClothArmor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimeArmor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneArmor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Branch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HeavySword.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GreatSword.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -297,5 +318,24 @@
     <ClInclude Include="ShabbyHelm.h" />
     <ClInclude Include="LeatherShoes.h" />
     <ClInclude Include="TrollTooth.h" />
+    <ClInclude Include="ShopNPC.h" />
+    <ClInclude Include="ClothArmor.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimeArmor.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneArmor.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Branch.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HeavySword.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GreatSword.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

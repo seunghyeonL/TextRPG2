@@ -129,12 +129,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttackBoost.cpp" />
+    <ClCompile Include="BoneArmor.cpp" />
     <ClCompile Include="BoneHelm.cpp" />
+    <ClCompile Include="Branch.cpp" />
     <ClCompile Include="CanineMass.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="ClothArmor.cpp" />
     <ClCompile Include="EventLoop.cpp" />
+    <ClCompile Include="GreatSword.cpp" />
     <ClCompile Include="GreenLeatherHelm.cpp" />
     <ClCompile Include="GoblinKnife.cpp" />
+    <ClCompile Include="HeavySword.cpp" />
     <ClCompile Include="IConsumptionItem.cpp" />
     <ClCompile Include="IEquipmentItem.cpp" />
     <ClCompile Include="IEtcItem.cpp" />
@@ -165,21 +170,27 @@
     <ClCompile Include="ShabbyHelm.cpp" />
     <ClCompile Include="ShopNPC.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="SlimeArmor.cpp" />
     <ClCompile Include="Troll.cpp" />
     <ClCompile Include="TrollTooth.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackBoost.h" />
+    <ClInclude Include="BoneArmor.h" />
     <ClInclude Include="BoneHelm.h" />
+    <ClInclude Include="Branch.h" />
     <ClInclude Include="CanineMass.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Client_Defines.h" />
     <ClInclude Include="Client_Macro.h" />
+    <ClInclude Include="ClothArmor.h" />
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
     <ClInclude Include="EventLoop.h" />
+    <ClInclude Include="GreatSword.h" />
     <ClInclude Include="GreenLeatherHelm.h" />
     <ClInclude Include="GoblinKnife.h" />
+    <ClInclude Include="HeavySword.h" />
     <ClInclude Include="IConsumptionItem.h" />
     <ClInclude Include="IEquipmentItem.h" />
     <ClInclude Include="IEtcItem.h" />
@@ -209,6 +220,7 @@
     <ClInclude Include="ShabbyHelm.h" />
     <ClInclude Include="ShopNPC.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="SlimeArmor.h" />
     <ClInclude Include="Troll.h" />
     <ClInclude Include="TrollTooth.h" />
   </ItemGroup>

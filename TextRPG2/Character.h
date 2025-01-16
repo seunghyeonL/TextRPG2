@@ -22,6 +22,8 @@ private:
 	double MaxHealth;	  // 최대 체력
 	double Experience;	  // 경험치
 	double MaxExperience; // 최대 경험치
+	double IncreasedAttak;
+	double IncreasedHealth;
 	shared_ptr<Inventory> Inven;
 	IEquipmentItem* HelmSlot;
 	IEquipmentItem* ArmorSlot;
@@ -40,6 +42,8 @@ public:
 	double GetHealth();
 	void SetHealth(double health);
 	double GetAttack();
+	void SetMaxHealth(double maxHealth);
+	double GetMaxHealth();
 	void GetDamage(double attack);
 	void SetAttack(double attack);
 	void TakeDamage(double damage);
@@ -48,12 +52,12 @@ public:
 	double GetGold();
 	void DisplayStatus();
 	void DisplayInventory();
+	void DisplayEquipmentSlots();
 	void LevelUp();
 	void AddExperience(double amount);
 	shared_ptr<Inventory> GetInventory();
-	IEquipmentItem* GetHelmSlot();
-	IEquipmentItem* GetArmorSlot();
-	IEquipmentItem* GetWeaponSlot();
 	void SetEquipmentSlots(IEquipmentItem* equipItem, EquipmentType type);
-	void ApplyItemStatus(IEquipmentItem* equipItem);
+	void ApplyItemHealthStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem = nullptr);
+	void ApplyItemAttackStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem = nullptr);
+	void Equip(int index);
 };
