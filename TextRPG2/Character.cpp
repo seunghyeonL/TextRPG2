@@ -269,7 +269,7 @@ void Character::ApplyItemStatus(IEquipmentItem* equipItem)
     SetAttack(GetAttack() + equipItem->GetAttackIncrease());
 }
 
-bool Character::BuyItem()
+int Character::BuyItem()
 {
     Character* Player = Character::GetInstance();
     Shop* shop = Shop::GetInstance();
@@ -282,7 +282,7 @@ bool Character::BuyItem()
 
     string name;
     int choice;
-
+    int price = 0;
     while (true)
     {
         cout << "\n구매하고 싶은 아이템의 이름을 써주세요.\n";
@@ -296,7 +296,7 @@ bool Character::BuyItem()
             cout << "\n구매할 수량을 입력해주세요.\n";
             int Quantity;
             cin >> Quantity;
-            if (Quantity < 0 || Quantity > ShopEquip.size() || Quantity > ShopEquip.size() || Quantity > ShopEquip.size())
+            if (Quantity < 0)
             {
                 cout << "\n잘못된 입력입니다.\n";
             }
@@ -308,10 +308,10 @@ bool Character::BuyItem()
                     {
                         if (ShopEquip[i]->GetName() == name)
                         {
+                            Player->GetInventory()->AddToEquipment(ShopEquip[i]);
                             ShopEquip.erase(remove(ShopEquip.begin(), ShopEquip.end(),
                                 ShopEquip[i]), ShopEquip.end());
-                            //Player->GetInventory()->AddToEquipment();
-                            return true;
+                            return 100;
                         }
                     }
                 }
@@ -322,16 +322,26 @@ bool Character::BuyItem()
                     {
                         if (ShopConsum[i].second > 1)
                         {
+                            if (ShopConsum[i].second < Quantity)
+                            {
+                                cout << "\n잘못된 입력입니다.\n";
+                                continue;
+                            }
+                                
+
+                            Player->GetInventory()->AddToConsumption(ShopConsum[i].first, Quantity);
                             ShopConsum[i].second -= Quantity;
-                            //
-                            return true;
+                            
+                            return  Quantity * 30;
                         }
                         else if (ShopConsum[i].second == 1)
                         {
+                            Player->GetInventory()->AddToConsumption(ShopConsum[i].first,1);
+
                             ShopConsum.erase(remove(ShopConsum.begin(), ShopConsum.end(),
                                 ShopConsum[i]), ShopConsum.end());
                             //
-                            return true;
+                            return 30;
                         }
                     }
                 }
@@ -342,16 +352,24 @@ bool Character::BuyItem()
                     {
                         if (ShopEtc[i].second > 1)
                         {
+                            if (ShopEtc[i].second < Quantity)
+                            {
+                                cout << "\n잘못된 입력입니다.\n";
+                                continue;
+                            }
+
+                            Player->GetInventory()->AddToEtc(ShopEtc[i].first, Quantity);
                             ShopEtc[i].second -= Quantity;
                             //
-                            return true;
+                            return Quantity * 10;
                         }
                         else if (ShopEtc[i].second == 1)
                         {
+                            Player->GetInventory()->AddToEtc(ShopEtc[i].first, 1);
                             ShopEtc.erase(remove(ShopEtc.begin(), ShopEtc.end(),
                                 ShopEtc[i]), ShopEtc.end());
                             //
-                            return true;
+                            return 10;
                         }
                     }
                 }
@@ -363,18 +381,19 @@ bool Character::BuyItem()
         }
         return false;
     }
+
 };
 
-bool Character::SellItem() 
+int Character::SellItem() 
 {
     Character* Player = Character::GetInstance();
-    vector<IEquipmentItem*> EquipmentInven = Player->GetInventory()->GetEquipmentInven();
-    vector<pair<IConsumptionItem*, int>> ConsumptionInven = Player->GetInventory()->GetConsumptionInven();
-    vector<pair<IEtcItem*, int>> EtcInven = Player->GetInventory()->GetEtcInven();
+    vector<IEquipmentItem*>* EquipmentInven = Player->GetInventory()->GetEquipmentInven_Ptr();
+    vector<pair<IConsumptionItem*, int>>* ConsumptionInven = Player->GetInventory()->GetConsumptionInven_Ptr();
+    vector<pair<IEtcItem*, int>>* EtcInven = Player->GetInventory()->GetEtcInven_Ptr();
 
     string name;
     int choice;
-
+    
     while (true)
     {
         cout << "\n판매하고 싶은 아이템의 이름을 써주세요.\n";
@@ -388,7 +407,7 @@ bool Character::SellItem()
             cout << "\n판매할 수량을 입력해주세요.\n";
             int Quantity;
             cin >> Quantity;
-            if (Quantity < 0 || Quantity > EquipmentInven.size() || Quantity > ConsumptionInven.size() || Quantity > EtcInven.size())
+            if (Quantity < 0)// || Quantity > EquipmentInven->size() || Quantity > ConsumptionInven->size() || Quantity > EtcInven->size())
             {
                 cout << "\n잘못된 입력입니다.\n";
             }
@@ -396,49 +415,49 @@ bool Character::SellItem()
             {
                 if (Quantity == 1)
                 {
-                    for (int i = 0; i < EquipmentInven.size(); ++i)
+                    for (int i = 0; i < EquipmentInven->size(); ++i)
                     {
-                        if (EquipmentInven[i]->GetName() == name)
+                        if ((*EquipmentInven)[i]->GetName() == name)
                         {
-                            EquipmentInven.erase(remove(EquipmentInven.begin(), EquipmentInven.end(),
-                                EquipmentInven[i]), EquipmentInven.end());
-                            return true;
+                            (*EquipmentInven).erase(remove((*EquipmentInven).begin(), (*EquipmentInven).end(),
+                                (*EquipmentInven)[i]), (*EquipmentInven).end());
+                            return 50;
                         }
                     }
                 }
 
-                for (int i = 0; i < ConsumptionInven.size(); ++i)
+                for (int i = 0; i < ConsumptionInven->size(); ++i)
                 {
-                    if (ConsumptionInven[i].first->GetName() == name)
+                    if ((*ConsumptionInven)[i].first->GetName() == name)
                     {
-                        if (ConsumptionInven[i].second > 1)
+                        if ((*ConsumptionInven)[i].second > 1)
                         {
-                            ConsumptionInven[i].second -= Quantity;
-                            return true;
+                            (*ConsumptionInven)[i].second -= Quantity;
+                            return Quantity * 15;
                         }
-                        else if (ConsumptionInven[i].second == 1)
+                        else if ((*ConsumptionInven)[i].second == 1)
                         {
-                            ConsumptionInven.erase(remove(ConsumptionInven.begin(), ConsumptionInven.end(),
-                                ConsumptionInven[i]), ConsumptionInven.end());
-                            return true;
+                            (*ConsumptionInven).erase(remove((*ConsumptionInven).begin(), (*ConsumptionInven).end(),
+                                (*ConsumptionInven)[i]), (*ConsumptionInven).end());
+                            return 15;
                         }
                     }
                 }
 
-                for (int i = 0; i < EtcInven.size(); ++i)
+                for (int i = 0; i < EtcInven->size(); ++i)
                 {
-                    if (EtcInven[i].first->GetName() == name)
+                    if ((*EtcInven)[i].first->GetName() == name)
                     {
-                        if (EtcInven[i].second > 1)
+                        if ((*EtcInven)[i].second > 1)
                         {
-                            EtcInven[i].second -= Quantity;
-                            return true;
+                            (*EtcInven)[i].second -= Quantity;
+                            return Quantity * 5;
                         }
-                        else if (EtcInven[i].second == 1)
+                        else if ((*EtcInven)[i].second == 1)
                         {
-                            EtcInven.erase(remove(EtcInven.begin(), EtcInven.end(),
-                                EtcInven[i]), EtcInven.end());
-                            return true;
+                            (*EtcInven).erase(remove((*EtcInven).begin(), (*EtcInven).end(),
+                                (*EtcInven)[i]), (*EtcInven).end());
+                            return 5;
                         }
                     }
                 }

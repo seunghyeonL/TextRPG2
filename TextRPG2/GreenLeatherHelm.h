@@ -15,5 +15,6 @@ private:
 public:
     GreenLeatherHelm();
     string GetName() override;
+    void Equip(Character* character);
 };
 

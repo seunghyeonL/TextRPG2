@@ -5,7 +5,7 @@ class IInteractable
 {
 protected:
 	bool IsActive{ true };
-
+	
 public:
 	virtual ~IInteractable() = default;
 	virtual void Interact() = 0;

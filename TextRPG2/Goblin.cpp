@@ -3,10 +3,6 @@
 #include "GreenLeatherHelm.h"
 #include "GoblinKnife.h"
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 90441a63112f0d0eb549806f282c9e1a07dd783d
 Goblin::Goblin()
 	: IMonster{}
 {
@@ -113,15 +109,11 @@ void Goblin::Update()
 {
 }
 
-<<<<<<< HEAD
-//void Goblin::Interact() {
-//
-//}
-=======
+
 // void Goblin::Interact() {
 //
 // }
->>>>>>> 90441a63112f0d0eb549806f282c9e1a07dd783d
+
 
 Goblin* Goblin::Create(string name, double health, double attack)
 {

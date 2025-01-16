@@ -23,7 +23,9 @@ Shop::Shop()
 Shop* Shop::GetInstance()
 {
     if (Instance == nullptr)
+    {
         Instance = new Shop();
+    }
     return Instance;
 }
 
@@ -108,4 +110,9 @@ vector<pair<IConsumptionItem*, int>> Shop::GetConsumptionList()
 vector<pair<IEtcItem*, int>> Shop::GetOtherList()
 {
     return OtherItem;
+}
+
+void Shop::Interact()
+{
+
 }

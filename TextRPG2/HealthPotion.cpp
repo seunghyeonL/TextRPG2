@@ -2,7 +2,7 @@
 #include "Character.h"
 #include <iostream>
 HealthPotion::HealthPotion()
-    : Name("Red Potion"), HealthRestore(50) {}
+    : Name("RedPotion"), HealthRestore(50) {}
 
 string HealthPotion::GetName()
 {

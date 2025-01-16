@@ -6,8 +6,9 @@
 #include "IEquipmentItem.h"
 #include "IConsumptionItem.h"
 #include "IEtcItem.h"
+#include "IInteractable.h"
 
-class Shop
+class Shop : public IInteractable
 {
 private:
     static Shop* Instance;
@@ -24,4 +25,7 @@ public:
     vector<IEquipmentItem*> GetEquipList();
     vector<pair<IConsumptionItem*, int>> GetConsumptionList();
     vector<pair<IEtcItem*, int>> GetOtherList();
+
+    // IInteractable을(를) 통해 상속됨
+    void Interact() override;
 };

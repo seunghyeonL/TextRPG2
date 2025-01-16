@@ -57,6 +57,6 @@ public:
 	void SetEquipmentSlots(IEquipmentItem* equipItem, EquipmentType type);
 	void ApplyItemStatus(IEquipmentItem* equipItem);
 
-	bool SellItem();
-	bool BuyItem();
+	int SellItem();
+	int BuyItem();
 };

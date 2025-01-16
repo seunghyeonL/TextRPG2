@@ -29,6 +29,9 @@ void GameManager::Initialize()
 	m_pLevel_Manager = Level_Manager::Create();
 
 	m_pInput_Manager = Input_Manager::Create(hInstance, hWnd);
+
+	Shop::GetInstance()->Init();
+	
 }
 
 void GameManager::Exit()
@@ -247,10 +250,9 @@ void GameManager::Battle(IMonster *Monster)
 					{
 						int index;
 						lasyCout("\n사용할 아이템 번호를 입력해주세요.\n");
-<<<<<<< HEAD
+
 						cout << "\n사용할 소비 아이템 번호를 입력해주세요.\n";
-=======
->>>>>>> 90441a63112f0d0eb549806f282c9e1a07dd783d
+
 						cin >> index;
 						Player->GetInventory()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
@@ -313,7 +315,7 @@ void GameManager::Battle(IMonster *Monster)
 						lasyCout(ss.str());
 						ss.str("");
 
-						Sleep(2000);					   // 임시
+						//Sleep(2000);					   // 임시
 						Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹기 전 공격력으로 세팅
 						Player->LevelUp();
 					}
@@ -361,11 +363,11 @@ void GameManager::Battle(IMonster *Monster)
 	delete boost;
 }
 
-void GameManager::VisitShop()
+bool GameManager::VisitShop()
 {
 	Character* Player = Character::GetInstance();
 	Shop* Shop = Shop::GetInstance();
-	bool flag = false;
+	int flag = 0;
 	cout << "상점에 오신 " << Player->GetName() << " 플레이어를 환영합니다.\n";
 	while (true)
 	{
@@ -379,9 +381,9 @@ void GameManager::VisitShop()
 		case 1:
 			Shop->OnSaleItem();
 			flag = Player->BuyItem();
-			if (flag)
+			if (flag > 0)
 			{
-				// Player->GetInventory()->AddGold();
+				Player->GetInventory()->AddGold(-flag);
 			}
 			break;
 		case 2:
@@ -389,14 +391,17 @@ void GameManager::VisitShop()
 			flag = Player->SellItem();
 			if (flag)
 			{
-				// Player->GetInventory()->AddGold();
+				Player->GetInventory()->AddGold(flag);
 			}
 			break;
 		case 3:
 			cout << "상점을 나갑니다.\n";
-			return;
+			system("cls");
+			return false;
 		default:
 			cout << "잘못된 입력입니다. 다시 시도하세요.\n";
 		}
 	}
+
+	return true;
 }
