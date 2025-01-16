@@ -8,12 +8,6 @@ void IMonster::Free()
 {
 }
 
-// void IMonster::interact() {
-//	auto gameManager = GameManager::Get_Instance();
-//
-//	gameManager->Battle(this);
-// }
-
 // 아이템 드랍 로직
 vector<IItem *> IMonster::DropRandomItem()
 {

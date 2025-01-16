@@ -11,6 +11,7 @@
 #include <unordered_set>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 using namespace std;
 
@@ -31,7 +32,9 @@ protected:
 	vector<IConsumptionItem *> ConsumableItems; // 소비 아이템들
 	vector<IEtcItem *> OtherItems;				// 기타 아이템들
 
-	string Picture{};
+	string PictureNormal{};
+	string PictureAttack{};
+	string PictureAttacked{};
 
 public:
 	virtual void Initialize(string name, double health, double attack) = 0;
@@ -51,8 +54,14 @@ public:
 	virtual double GetAttack() const { return mAttack; }
 	virtual vector<IItem *> DropRandomItem();
 
-	void PrintPicture() const {
-		cout << Picture << '\n' << '\n';
+	void PrintPictureNormal() const {
+		cout << PictureNormal << '\n' << '\n';
+	}
+	void PrintPictureAttack() const {
+		cout << PictureAttack << '\n' << '\n';
+	}
+	void PrintPictureAttacked() const {
+		cout << PictureAttacked << '\n' << '\n';
 	}
 
 public:
