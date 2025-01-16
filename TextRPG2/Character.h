@@ -48,4 +48,6 @@ public:
 	void LevelUp();
 	void AddExperience(double amount);
 	shared_ptr<Inventory> GetInventory();
+	void BuyItem();
+	bool SellItem();
 };

@@ -16,4 +16,3 @@ public:
 	virtual void AddToInventory(shared_ptr<Inventory> inventory, int quantity) = 0;
 	virtual void RemoveToInventory(shared_ptr<Inventory> inventory, int quantity) = 0;
 };
-

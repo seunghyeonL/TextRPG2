@@ -162,6 +162,7 @@
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="Orc.cpp" />
     <ClCompile Include="ShabbyHelm.cpp" />
+    <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Troll.cpp" />
   </ItemGroup>
@@ -203,6 +204,7 @@
     <ClInclude Include="MainApp.h" />
     <ClInclude Include="Orc.h" />
     <ClInclude Include="ShabbyHelm.h" />
+    <ClInclude Include="Shop.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Troll.h" />
   </ItemGroup>

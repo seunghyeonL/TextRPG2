@@ -1,18 +1,26 @@
 #pragma once
-#include<iostream>
-#include<string>
-#include<stdio.h>
-#include "IItem.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include "IEquipmentItem.h"
+#include "IConsumptionItem.h"
+#include "IEtcItem.h"
 
 class Shop
 {
 private:
-
-public:
+	static Shop* Instance;
 	Shop();
-	void DisplayItemBuy(); // 상점에서 물건 구매 메뉴 출력 함수
-	void DisplayItemSell(); // 상점에서 물건 판매 메뉴 출력 함수
-	void ItemSell(); // 상점에서 물건을 판매하는 함수
-	void ItemBuy(); // 상점에서 물건을 구매하는 함수
-
+	Shop(const Shop&) = delete;
+	Shop& operator=(const Shop&) = delete;
+	vector<IEquipmentItem*> EquipItem;
+	vector<pair<IConsumptionItem*, int>> ConsumptionItem;
+	vector<pair<IEtcItem*, int>> OtherItem;
+public:
+	static Shop* GetInstance();
+	void OnSaleItem();
+	vector<IEquipmentItem*> GetEquipList();
+	vector<pair<IConsumptionItem*, int>> GetConsumptionList();
+	vector<pair<IEtcItem*, int>> GetOtherList();
 };

@@ -13,6 +13,7 @@
 #include "Orc.h"
 #include <windows.h>
 #include "Level_Dungeon.h"
+#include "Shop.h"
 
 IMPLEMENT_SINGLETON(GameManager)
 
@@ -316,8 +317,8 @@ void GameManager::Battle(IMonster *Monster)
 void GameManager::VisitShop()
 {
 	Character* Player = Character::GetInstance();
-	auto inventory = Character::GetInstance()->GetInventory();
-	// Shop* shop = Shop::GetInstance();
+	Shop* shop = Shop::GetInstance();
+	bool flag = false;
 	cout << "상점에 오신 " << Player->GetName() << " 플레이어를 환영합니다.\n";
 	while (true)
 	{
@@ -329,66 +330,15 @@ void GameManager::VisitShop()
 		switch (choice)
 		{
 		case 1:
-			/*  해야할 목록
-				상점아이템 나열
-				번호 입력
-				해당 번호의 아이템을 구매
-				아이템 구매가만큼 플레이어 인벤토리의 골드 감소
-				상점 아이템의 해당 아이템 개수 감소
-				플레이어 인벤토리 내 해당 아이템 개수 증가*/
-
-			// shop->OnSaleItem();
-			//if (shop->OnSaleItem().size())
-			//{
-			int index;
-			cout << "\n구매하고 싶은 아이템 번호를 써주세요.\n";
-			cin >> index;
-			//cout << shop->OnSaleItem() << " 아이템을 구매하시겠습니까?\n";
-			cout << "1. 네     2. 아니요\n";
-			cin >> choice;
-			while (true)
-			{
-				if (choice == 1)
-				{
-					// 구매
-					// shop->BuyItem(index, inventory);
-					break;
-				}
-				else if (choice == 2)
-				{
-
-				}
-				break;
-			//}
+			shop->OnSaleItem();
+			//Player->BuyItem();
 			break;
 		case 2:
-			/* 해야할 목록
-				플레이어 인벤토리 나열
-				번호 입력
-				해당 번호의 아이템을 판매
-				아이템 판매가만큼 플레이어 인벤토리의 골드 증가
-				플레이어 인벤토리 내 해당 아이템 개수 감소*/
 			Player->DisplayInventory();
-			cout << "\n판매하고 싶은 아이템의 이름을 써주세요.\n";
-			cin >> name;
-			cout << name << " 아이템을 판매하시겠습니까?\n";
-			cout << "1. 네     2. 아니요\n";
-			cin >> choice;
-			while (true)
+			flag = Player->SellItem();
+			if (flag)
 			{
-				if (choice == 1)
-				{
-					Player->GetInventory();
-					// 판매
-					// vector<pair<int, string>> SellItem
-					// Character::GetInstance()->SellItem
-					break;
-				}
-				else if(choice == 2)
-				{
-
-				}
-				break;
+				// Player->GetInventory()->AddGold();
 			}
 			break;
 		case 3:
