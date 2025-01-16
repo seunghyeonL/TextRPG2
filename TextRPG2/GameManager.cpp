@@ -304,8 +304,8 @@ void GameManager::Battle(IMonster *Monster)
 					Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹고 도망갈 수 있어서
 					delete hp;
 					delete boost;
-					Monster->Free();
-					Sleep(3000); // 임시
+					//Monster->Free();
+					//Sleep(3000); // 임시
 					return;
 				default:
 					cout << "잘못된 입력입니다. 다시 시도해주세요.\n";

@@ -25,12 +25,7 @@ protected:
 
 public:
 	virtual void Initialize() override = 0;
-	virtual void Update() override = 0;
+	virtual void Update() override;
 	virtual void Render() override = 0;
-
-	// IInteractable* GetObjOfMap(int Pos_X, int Pos_Y) const {
-	//	return m_Map.at(PosStruct{ Pos_X, Pos_Y }).second;
-	// };
-
 	virtual void Free() override;
 };

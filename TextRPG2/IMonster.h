@@ -37,18 +37,17 @@ public:
 	virtual string GetName() const { return mName; }
 
 	virtual double GetHealth() const { return mHealth; }
+	virtual void SetHealth(double health) {
+		mHealth = health;
+		HealthUpdate();
+	}
+
 	virtual void GetDamage(double attack)
 	{
-		mHealth -= attack;
-		if (mHealth <= 0)
-		{
-			mHealth = 0;
-		}
+		SetHealth(mHealth - attack);
 	}
 	virtual double GetAttack() const { return mAttack; }
 	virtual vector<IItem *> DropRandomItem();
-
-	string mName{};
 
 public:
 	virtual void Free();

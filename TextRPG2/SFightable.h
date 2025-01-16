@@ -7,13 +7,18 @@
 class SFightable : public IInteractable
 {
 protected:
-	int mHealth{100};
-	int mAttack{100};
+	double mHealth{100};
+	double mAttack{100};
+	string mName{"NoNamed"};
 	vector<IHealthObserver *> Observers;
 
 public:
 	SFightable();
-	SFightable(int health, int attack);
 	virtual ~SFightable() = default;
+	virtual void HealthUpdate() {
+		for (auto Observer : Observers) {
+			Observer->Update(mHealth, mName, IsActive);
+		}
+	}
 	virtual void Interact() = 0;
 };

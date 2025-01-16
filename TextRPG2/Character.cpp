@@ -145,6 +145,8 @@ void Character::DisplayInventory()
             cout << i << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
     }
 
+    //system("pause");
+
     /* 루프돌면서 키감지 */
     for (int i = 0; i < Inven->GetConsumptionInven().size(); ++i)
     {
@@ -190,6 +192,8 @@ void Character::DisplayInventory()
             break;
         }
     }
+
+    //system("pause");
 }
 
 void Character::LevelUp()
