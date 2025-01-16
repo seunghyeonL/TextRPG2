@@ -9,3 +9,10 @@ string GreenLeatherHelm::GetName()
 {
 	return Name;
 }
+
+void GreenLeatherHelm::Equip(Character* character)
+{
+
+}
+
+

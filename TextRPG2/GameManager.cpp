@@ -15,7 +15,6 @@
 #include <windows.h>
 #include "Level_Dungeon.h"
 
-
 IMPLEMENT_SINGLETON(GameManager)
 
 GameManager::GameManager()
@@ -182,7 +181,7 @@ void GameManager::StartGame()
 	string name;
 	cout << "캐릭터를 생성하기 위해 이름을 입력해주세요.\n";
 	getline(cin, name);
-	Character* Player = Character::GetInstance(name);
+	Character *Player = Character::GetInstance(name);
 }
 
 void GameManager::Battle(IMonster *Monster)
@@ -200,7 +199,7 @@ void GameManager::Battle(IMonster *Monster)
 	double IncreasedAttack = 0;					 // 공격력 증가 부분을 추적할 변수
 
 	ss << "\n전투가 시작되었습니다.\n이번에 싸울 몬스터는 " << Monster->GetName()
-		 << " (체력: " << to_string(Monster->GetHealth()) << ", 공격력: " << to_string(Monster->GetAttack()) << ")\n";
+	   << " (체력: " << to_string(Monster->GetHealth()) << ", 공격력: " << to_string(Monster->GetAttack()) << ")\n";
 
 	lasyCout(ss.str());
 	ss.str("");
@@ -208,7 +207,7 @@ void GameManager::Battle(IMonster *Monster)
 	while (Player->GetHealth() > 0 && Monster->GetHealth() > 0)
 	{
 		system("cls");
-		Monster->PrintPicture();
+		Monster->PrintPictureNormal();
 
 		cout << "\n메뉴\n1. 아이템 사용     2. 전투하기     3.도망가기\n";
 		int choice;
@@ -221,7 +220,6 @@ void GameManager::Battle(IMonster *Monster)
 			if (Player->GetInventory()->GetConsumptionInven().size())
 			{
 				int index;
-				//cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 				lasyCout("\n사용할 아이템 번호를 입력해주세요.\n");
 				cin >> index;
 				Player->GetInventory()->UseItem(index - 1);
@@ -236,7 +234,7 @@ void GameManager::Battle(IMonster *Monster)
 			while (Player->GetHealth() > 0 && Monster->GetHealth() > 0)
 			{
 				system("cls");
-				Monster->PrintPicture();
+				Monster->PrintPictureNormal();
 
 				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
 				cin >> choice;
@@ -249,7 +247,10 @@ void GameManager::Battle(IMonster *Monster)
 					{
 						int index;
 						lasyCout("\n사용할 아이템 번호를 입력해주세요.\n");
+<<<<<<< HEAD
 						cout << "\n사용할 소비 아이템 번호를 입력해주세요.\n";
+=======
+>>>>>>> 90441a63112f0d0eb549806f282c9e1a07dd783d
 						cin >> index;
 						Player->GetInventory()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
@@ -261,19 +262,25 @@ void GameManager::Battle(IMonster *Monster)
 					break;
 				case 2:
 					// 플레이어의 공격
+					system("cls");
+					Monster->PrintPictureAttack();
+
 					Monster->GetDamage(Player->GetAttack());
 					ss << Player->GetName() << " 플레이어가 공격했습니다.\n"
-						 << Player->GetAttack() << "의 피해를 입혀 몬스터의 체력은 " << Monster->GetHealth() << "입니다.\n";
+					   << Player->GetAttack() << "의 피해를 입혀 몬스터의 체력은 " << Monster->GetHealth() << "입니다.\n";
 					lasyCout(ss.str());
 					ss.str("");
 
 					// 몬스터의 반격
 					if (Monster->GetHealth() > 0)
 					{
+						system("cls");
+						Monster->PrintPictureAttacked();
+
 						Player->GetDamage(Monster->GetAttack());
 						ss << "\n"
-							 << Monster->GetName() << " 몬스터가 공격했습니다.\n"
-							 << Monster->GetAttack() << "의 피해를 입혀 플레이어의 체력은 " << Player->GetHealth() << "입니다.\n";
+						   << Monster->GetName() << " 몬스터가 공격했습니다.\n"
+						   << Monster->GetAttack() << "의 피해를 입혀 플레이어의 체력은 " << Player->GetHealth() << "입니다.\n";
 						lasyCout(ss.str());
 						ss.str("");
 					}
@@ -288,6 +295,8 @@ void GameManager::Battle(IMonster *Monster)
 					else if (Monster->GetHealth() <= 0)
 					{
 						// 전투 승리 처리
+						system("cls");
+						Monster->PrintPictureNormal();
 
 						vector<IItem *> DroppedItem = Monster->DropRandomItem();
 						inventory->AddDroppedItems(DroppedItem);
@@ -304,12 +313,15 @@ void GameManager::Battle(IMonster *Monster)
 						lasyCout(ss.str());
 						ss.str("");
 
-						Sleep(5000);					   // 임시
+						Sleep(2000);					   // 임시
 						Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹기 전 공격력으로 세팅
 						Player->LevelUp();
 					}
 					break;
 				case 3:
+					system("cls");
+					Monster->PrintPictureNormal();
+
 					ss << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
 					lasyCout(ss.str());
 					ss.str("");
@@ -317,8 +329,8 @@ void GameManager::Battle(IMonster *Monster)
 					Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹고 도망갈 수 있어서
 					delete hp;
 					delete boost;
-					//Monster->Free();
-					//Sleep(3000); // 임시
+					// Monster->Free();
+					// Sleep(3000); // 임시
 					return;
 				default:
 					cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
@@ -327,16 +339,16 @@ void GameManager::Battle(IMonster *Monster)
 			break;
 		case 3:
 			system("cls");
-			Monster->PrintPicture();
+			Monster->PrintPictureNormal();
 
 			ss << "\n"
-				 << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
+			   << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
 			lasyCout(ss.str());
 			ss.str("");
 			Player->SetAttack(OriginalAttack);
 			delete hp;
 			delete boost;
-			//Sleep(3000); // 임시
+			// Sleep(3000); // 임시
 			return;
 		default:
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";

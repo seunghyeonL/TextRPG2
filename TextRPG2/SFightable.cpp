@@ -12,7 +12,8 @@ SFightable::SFightable()
 
 SFightable::~SFightable()
 {
-	for (auto Observer : Observers) {
+	for (auto Observer : Observers)
+	{
 		delete Observer;
 	}
 }

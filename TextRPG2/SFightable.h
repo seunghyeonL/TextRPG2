@@ -15,8 +15,10 @@ protected:
 public:
 	SFightable();
 	virtual ~SFightable();
-	virtual void HealthUpdate() {
-		for (auto Observer : Observers) {
+	virtual void HealthUpdate()
+	{
+		for (auto Observer : Observers)
+		{
 			Observer->Update(mHealth, mName, IsActive);
 		}
 	}

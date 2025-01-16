@@ -8,13 +8,6 @@ void IMonster::Free()
 {
 }
 
-void IMonster::Interact()
-{
-    auto pGameManager = GameManager::Get_Instance();
-
-    pGameManager->Battle(this);
-}
-
 // 아이템 드랍 로직
 vector<IItem *> IMonster::DropRandomItem()
 {
@@ -79,10 +72,10 @@ vector<IItem *> IMonster::DropRandomItem()
     cout << endl;
     return DroppedItems;
 }
-//void IMonster::Interact()
-//{
-//    auto pGameManager = GameManager::Get_Instance();
-//
-//    pGameManager->Battle(this);
-//    system("cls");
-//}
+void IMonster::Interact()
+{
+    auto pGameManager = GameManager::Get_Instance();
+
+    pGameManager->Battle(this);
+    system("cls");
+}

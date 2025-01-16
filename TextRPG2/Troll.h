@@ -16,5 +16,6 @@ public:
 public:
     static Troll* Create(string name, double health, double attack);
     static Troll* CreateBoss(string name, double health, double attack);
+
     virtual void Free() override;
 };
