@@ -41,7 +41,7 @@ public:
 
 	void Battle(IMonster* Monster);
 
-	void VisitShop(Character* player);
+	void VisitShop();
 
 	void Exit();
 

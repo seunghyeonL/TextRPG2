@@ -117,30 +117,49 @@ void Character::DisplayInventory()
 {
     if (Inven->GetEquipmentInven().empty())
     {
+        cout << "=====================================================================\n";
         cout << "장비창은 비어있다.\n";
+        cout << "=====================================================================\n";
     }
     else
     {
+        cout << "현재 가지고 있는 장비 아이템 목록\n\n";
         for (int i = 0; i < Inven->GetEquipmentInven().size(); i++)
+        {
             cout << i + 1 << ". " << Inven->GetEquipmentInven()[i]->GetName() << "\n";
+        }
+        cout << "=====================================================================\n";
     }
     if (Inven->GetConsumptionInven().empty())
     {
         cout << "소비창은 비어있다.\n";
+        cout << "=====================================================================\n";
     }
     else
     {
+        cout << "현재 가지고 있는 소비 아이템 목록\n\n";
         for (int i = 0; i < Inven->GetConsumptionInven().size(); i++)
-            cout << i + 1 << ". " << Inven->GetConsumptionInven()[i].first->GetName() << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
+        {
+            cout << i + 1 << ". " << Inven->GetConsumptionInven()[i].first->GetName()
+                << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
+        }
+        cout << "=====================================================================\n";
+            
     }
     if (Inven->GetEtcInven().empty())
     {
         cout << "기타창은 비어있다.\n";
+        cout << "=====================================================================\n";
     }
     else
     {
+        cout << "현재 가지고 있는 기타 아이템 목록\n";
         for (int i = 0; i < Inven->GetEtcInven().size(); i++)
-            cout << i + 1 << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
+        {
+            cout << i + 1 << ". " << Inven->GetEtcInven()[i].first->GetName()
+                << ": " << Inven->GetEtcInven()[i].second << "개\n";
+        }
+        cout << "=====================================================================\n";
     }
 
     /* 루프돌면서 키감지 */
