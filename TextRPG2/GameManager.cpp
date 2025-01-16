@@ -308,7 +308,7 @@ void GameManager::Battle(IMonster *Monster)
 						lasyCout(ss.str());
 						ss.str("");
 
-						Sleep(5000);					   // 임시
+						Sleep(2000);					   // 임시
 						Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹기 전 공격력으로 세팅
 						Player->LevelUp();
 					}

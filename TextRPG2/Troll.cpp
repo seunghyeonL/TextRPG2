@@ -1,4 +1,7 @@
 #include "Troll.h"
+#include "LeatherShoes.h"
+#include "HealthPotion.h"
+#include "TrollTooth.h"
 
 Troll::Troll()
     : IMonster{}
@@ -99,6 +102,14 @@ void Troll::Initialize(string name, double health, double attack)
     mName = name;
     mHealth = health;
     mAttack = attack;
+
+    LeatherShoes* shoes = new LeatherShoes();
+    HealthPotion* potion = new HealthPotion();
+    TrollTooth* tooth = new TrollTooth();
+
+    EquipmentItems.push_back(shoes);
+    ConsumableItems.push_back(potion);
+    OtherItems.push_back(tooth);
 }
 
 void Troll::Update()

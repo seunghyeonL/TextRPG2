@@ -3,7 +3,6 @@
 #include "CanineMass.h"
 #include "BoneHelm.h"
 
-
 Orc::Orc()
 	: IMonster{}
 {

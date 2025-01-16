@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class GreemLeatherHelm : public IEquipmentItem
+class GreenLeatherHelm : public IEquipmentItem
 {
 private:
     const string Name;
 
 public:
-    GreemLeatherHelm();
+    GreenLeatherHelm();
     string GetName() override;
     void Equip(Character* character) override;
 };
