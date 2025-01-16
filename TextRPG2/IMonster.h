@@ -32,24 +32,37 @@ protected:
 	vector<IConsumptionItem *> ConsumableItems; // 소비 아이템들
 	vector<IEtcItem *> OtherItems;				// 기타 아이템들
 
+	string PictureNormal{};
+	string PictureAttack{};
+	string PictureAttacked{};
+
 public:
 	virtual void Initialize(string name, double health, double attack) = 0;
 
 	virtual string GetName() const { return mName; }
 
 	virtual double GetHealth() const { return mHealth; }
+	virtual void SetHealth(double health) {
+		mHealth = health;
+		HealthUpdate();
+	}
+
 	virtual void GetDamage(double attack)
 	{
-		mHealth -= attack;
-		if (mHealth <= 0)
-		{
-			mHealth = 0;
-		}
+		SetHealth(mHealth - attack);
 	}
 	virtual double GetAttack() const { return mAttack; }
 	virtual vector<IItem *> DropRandomItem();
 
-	string mName{};
+	void PrintPictureNormal() const {
+		cout << PictureNormal << '\n' << '\n';
+	}
+	void PrintPictureAttack() const {
+		cout << PictureAttack << '\n' << '\n';
+	}
+	void PrintPictureAttacked() const {
+		cout << PictureAttacked << '\n' << '\n';
+	}
 
 public:
 	virtual void Free();

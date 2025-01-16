@@ -10,14 +10,19 @@ class Map : public Level
 {
 protected:
 	Map() {};
-	virtual ~Map() = default;
+	virtual ~Map() {
+		for (auto el : Interactables) {
+			delete el;
+		}
+		system("cls");
+	};
 
-	MAP MapType{MAP_VILLAGE};
-	VIEW CurView{VIEW_MAP};
+	MAP MapType{ MAP_VILLAGE };
+	VIEW CurView{ VIEW_MAP };
 
-	vector<IInteractable *> Interactables;
+	vector<IInteractable*> Interactables;
 
-	unordered_map<PosStruct, pair<string, IInteractable *>, PosStructHash> m_Map;
+	unordered_map<PosStruct, pair<string, IInteractable*>, PosStructHash> m_Map;
 	string Buffer{};
 
 	void gotoxy(int x, int y);
@@ -25,12 +30,7 @@ protected:
 
 public:
 	virtual void Initialize() override = 0;
-	virtual void Update() override = 0;
+	virtual void Update() override;
 	virtual void Render() override = 0;
-
-	// IInteractable* GetObjOfMap(int Pos_X, int Pos_Y) const {
-	//	return m_Map.at(PosStruct{ Pos_X, Pos_Y }).second;
-	// };
-
 	virtual void Free() override;
 };

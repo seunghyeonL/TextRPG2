@@ -9,3 +9,11 @@ SFightable::SFightable()
 	Observers.push_back(new DeathObserver());
 	Observers.push_back(new FullObserver());
 }
+
+SFightable::~SFightable()
+{
+	for (auto Observer : Observers)
+	{
+		delete Observer;
+	}
+}
