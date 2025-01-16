@@ -15,6 +15,5 @@ private:
 public:
     BoneHelm();
     string GetName() override;
-    void Equip(Character* character) override;
 };
 

@@ -186,3 +186,82 @@ shared_ptr<Inventory> Character::GetInventory()
 {
     return Inven;
 }
+
+IEquipmentItem* Character::GetHelmSlot()
+{
+    return HelmSlot;
+}
+
+IEquipmentItem* Character::GetArmorSlot()
+{
+    return ArmorSlot;
+}
+
+IEquipmentItem* Character::GetWeaponSlot()
+{
+    return WeaponSlot;
+}
+
+void Character::SetEquipmentSlots(IEquipmentItem* equipItem, EquipmentType type)
+{
+    switch (type)
+    {
+    case Helm:
+        if (HelmSlot == nullptr)
+        {
+            HelmSlot = equipItem;
+            ApplyItemStatus(equipItem);
+            cout << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
+        }
+        else
+        {
+            auto ExEquipItem = HelmSlot;
+            HelmSlot == nullptr;
+            HelmSlot = equipItem;
+            ApplyItemStatus(equipItem);
+            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
+        }
+        break;
+    case Armor:
+        if (ArmorSlot == nullptr)
+        {
+            ArmorSlot = equipItem;
+            ApplyItemStatus(equipItem);
+            cout << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+        }
+        else
+        {
+            auto ExEquipItem = ArmorSlot;
+            ArmorSlot == nullptr;
+            ArmorSlot = equipItem;
+            ApplyItemStatus(equipItem);
+            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+        }
+        break;
+    case Weapon:
+        if (WeaponSlot == nullptr)
+        {
+            WeaponSlot = equipItem;
+            ApplyItemStatus(equipItem);
+            cout << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+        }
+        else
+        {
+            auto ExEquipItem = WeaponSlot;
+            WeaponSlot == nullptr;
+            WeaponSlot = equipItem;
+            ApplyItemStatus(equipItem);
+            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+        }
+        break;
+    default:
+        cout << "잘못된 접근입니다." << endl;
+        break;
+    }
+}
+
+void Character::ApplyItemStatus(IEquipmentItem* equipItem)
+{
+    SetHealth(GetHealth() + equipItem->GetHealthIncrease());
+    SetAttack(GetAttack() + equipItem->GetAttackIncrease());
+}

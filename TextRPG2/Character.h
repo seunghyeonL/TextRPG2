@@ -23,6 +23,9 @@ private:
 	double Experience;	  // 경험치
 	double MaxExperience; // 최대 경험치
 	shared_ptr<Inventory> Inven;
+	IEquipmentItem* HelmSlot;
+	IEquipmentItem* ArmorSlot;
+	IEquipmentItem* WeaponSlot;
 
 	class GameManager *pGameManager{nullptr};
 	Character(string name);
@@ -48,4 +51,9 @@ public:
 	void LevelUp();
 	void AddExperience(double amount);
 	shared_ptr<Inventory> GetInventory();
+	IEquipmentItem* GetHelmSlot();
+	IEquipmentItem* GetArmorSlot();
+	IEquipmentItem* GetWeaponSlot();
+	void SetEquipmentSlots(IEquipmentItem* equipItem, EquipmentType type);
+	void ApplyItemStatus(IEquipmentItem* equipItem);
 };

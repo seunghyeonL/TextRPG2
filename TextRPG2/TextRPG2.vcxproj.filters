@@ -89,12 +89,6 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일\02.GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="HealthPotion.cpp">
-      <Filter>소스 파일\05.Item\Consumption\HealthPotion</Filter>
-    </ClCompile>
-    <ClCompile Include="AttackBoost.cpp">
-      <Filter>소스 파일\05.Item\Consumption\AttackBoost</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일\97.Default</Filter>
     </ClCompile>
@@ -115,15 +109,6 @@
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>소스 파일\06.Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClCompile>
-    <ClCompile Include="Subject.cpp">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClCompile>
-    <ClCompile Include="UIObserver.cpp">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>소스 파일\03.Interactable\Character</Filter>
@@ -173,16 +158,52 @@
     <ClCompile Include="EventLoop.cpp">
       <Filter>소스 파일\08. EventLoop</Filter>
     </ClCompile>
+    <ClCompile Include="AttackBoost.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneHelm.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CanineMass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenLeatherHelm.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GoblinKnife.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="IConsumptionItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="IEquipmentItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="IEtcItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LiquidMass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPotion.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ShabbyHelm.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LeatherShoes.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TrollTooth.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일\02.GameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthPotion.h">
-      <Filter>소스 파일\05.Item\Consumption\HealthPotion</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackBoost.h">
-      <Filter>소스 파일\05.Item\Consumption\AttackBoost</Filter>
     </ClInclude>
     <ClInclude Include="IItem.h">
       <Filter>소스 파일\05.Item</Filter>
@@ -207,15 +228,6 @@
     </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>소스 파일\06.Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClInclude>
-    <ClInclude Include="Subject.h">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClInclude>
-    <ClInclude Include="UIObserver.h">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>소스 파일\03.Interactable\Character</Filter>
@@ -271,5 +283,19 @@
     <ClInclude Include="IHealthObserver.h">
       <Filter>소스 파일\04.FightObserver</Filter>
     </ClInclude>
+    <ClInclude Include="AttackBoost.h" />
+    <ClInclude Include="BoneHelm.h" />
+    <ClInclude Include="CanineMass.h" />
+    <ClInclude Include="GreenLeatherHelm.h" />
+    <ClInclude Include="GoblinKnife.h" />
+    <ClInclude Include="IConsumptionItem.h" />
+    <ClInclude Include="IEquipmentItem.h" />
+    <ClInclude Include="IEtcItem.h" />
+    <ClInclude Include="LiquidMass.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="HealthPotion.h" />
+    <ClInclude Include="ShabbyHelm.h" />
+    <ClInclude Include="LeatherShoes.h" />
+    <ClInclude Include="TrollTooth.h" />
   </ItemGroup>
 </Project>

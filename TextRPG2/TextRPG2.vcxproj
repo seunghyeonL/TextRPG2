@@ -138,6 +138,7 @@
     <ClCompile Include="IConsumptionItem.cpp" />
     <ClCompile Include="IEquipmentItem.cpp" />
     <ClCompile Include="IEtcItem.cpp" />
+    <ClCompile Include="LeatherShoes.cpp" />
     <ClCompile Include="Level_Main.cpp" />
     <ClCompile Include="LiquidMass.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="ShabbyHelm.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Troll.cpp" />
+    <ClCompile Include="TrollTooth.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackBoost.h" />
@@ -181,6 +183,7 @@
     <ClInclude Include="IEquipmentItem.h" />
     <ClInclude Include="IEtcItem.h" />
     <ClInclude Include="IHealthObserver.h" />
+    <ClInclude Include="LeatherShoes.h" />
     <ClInclude Include="Level_Main.h" />
     <ClInclude Include="LiquidMass.h" />
     <ClInclude Include="Map.h" />
@@ -205,6 +208,7 @@
     <ClInclude Include="ShabbyHelm.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Troll.h" />
+    <ClInclude Include="TrollTooth.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
