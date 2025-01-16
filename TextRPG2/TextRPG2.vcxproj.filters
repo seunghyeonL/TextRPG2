@@ -90,9 +90,6 @@
     <Filter Include="소스 파일\05.Item\Etc\LiquidMass">
       <UniqueIdentifier>{c7d8ed67-0b66-4733-add3-a55f95318b54}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\07.Shop">
-      <UniqueIdentifier>{4618c239-fc07-445b-838b-50569156b4d9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -175,9 +172,6 @@
     </ClCompile>
     <ClCompile Include="LiquidMass.cpp">
       <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
-    </ClCompile>
-    <ClCompile Include="Shop.cpp">
-      <Filter>소스 파일\07.Shop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +263,6 @@
     </ClInclude>
     <ClInclude Include="LiquidMass.h">
       <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
-    </ClInclude>
-    <ClInclude Include="Shop.h">
-      <Filter>소스 파일\07.Shop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -161,50 +161,6 @@ void Character::DisplayInventory()
         }
         cout << "=====================================================================\n";
     }
-
-    /* 루프돌면서 키감지 */
-    for (int i = 0; i + 1 < Inven->GetConsumptionInven().size(); ++i)
-    {
-        if (pGameManager->Key_Down('0' + i))
-        {
-            /* 한번 클리어 해야 깔끔해보임 */
-            system("cls");
-            Inven->UseItem(i); /* 여기서 사용한 아이템 출력 */
-            cout << "-----------------------------" << endl; /* 구분선*/
-
-            /* 한번 클리어 했으니 인벤토리 다시 출력 */
-
-            if (Inven->GetEquipmentInven().empty())
-            {
-                cout << "장비창은 비어있다.\n";
-            }
-            else
-            {
-                for (int i = 0; i < Inven->GetEquipmentInven().size(); i++)
-                    cout << i + 1 << ". " << Inven->GetEquipmentInven()[i]->GetName() << "\n";
-            }
-            if (Inven->GetConsumptionInven().empty())
-            {
-                cout << "소비창은 비어있다.\n";
-            }
-            else
-            {
-                for (int i = 0; i < Inven->GetConsumptionInven().size(); i++)
-                    cout << i + 1 << ". " << Inven->GetConsumptionInven()[i].first->GetName() << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
-            }
-            if (Inven->GetEtcInven().empty())
-            {
-                cout << "기타창은 비어있다.\n";
-            }
-            else
-            {
-                for (int i = 0; i < Inven->GetEtcInven().size(); i++)
-                    cout << i + 1 << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
-            }
-            break;
-        }
-    }
-
 }
 
 void Character::LevelUp()
