@@ -10,9 +10,10 @@
 #include <map>
 #include <memory>
 
-class Character: public Movable {
+class Character : public Movable
+{
 private:
-	static Character* Instance;
+	static Character *Instance;
 	string Name;
 	int Level;
 	int MaxLevel;
@@ -23,18 +24,20 @@ private:
 	double MaxExperience; // 최대 경험치
 	shared_ptr<Inventory> Inven;
 
+	class GameManager *pGameManager{nullptr};
 	Character(string name);
-	Character(const Character&) = delete;
-	Character& operator=(const Character&) = delete;
+	Character(const Character &) = delete;
+	Character &operator=(const Character &) = delete;
 
 public:
-	static Character * GetInstance(string name = "");
+	static Character *GetInstance(string name = "");
 	string GetName();
 	int GetLevel();
 	void SetLevel(int level);
 	double GetHealth();
 	void SetHealth(double health);
 	double GetAttack();
+	void GetDamage(double attack);
 	void SetAttack(double attack);
 	void TakeDamage(double damage);
 	double GetExperience();
@@ -44,6 +47,5 @@ public:
 	void DisplayInventory();
 	void LevelUp();
 	void AddExperience(double amount);
-	shared_ptr<Inventory> GetInven();
-
+	shared_ptr<Inventory> GetInventory();
 };

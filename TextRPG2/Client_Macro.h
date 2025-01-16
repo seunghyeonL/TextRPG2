@@ -25,7 +25,7 @@ unsigned int  ClassName::Destroy_Instance()				\
 	unsigned int iRefCnt = { 0 };						\
 	if(nullptr != m_pInstance)							\
 	{													\
-		/*iRefCnt = m_pInstance->Release();*/			\
+		m_pInstance->Free();							\
 		if(0 == iRefCnt)								\
 			m_pInstance = nullptr;						\
 	}													\

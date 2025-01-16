@@ -13,3 +13,8 @@ void EventLoop::Run() {
         Task();
     }
 }
+
+void EventLoop::Free()
+{
+    delete this;
+}

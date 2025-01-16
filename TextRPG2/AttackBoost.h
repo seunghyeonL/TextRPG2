@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "IItem.h"
+#include "IConsumptionItem.h"
 
 using namespace std;
 
 class Character;
 
-class AttackBoost : public IItem
+class AttackBoost : public IConsumptionItem
 {
 private:
     string Name;
@@ -16,6 +16,5 @@ private:
 public:
     AttackBoost();
     string GetName() override;
-    void Use(Character *character) override;
-    bool IsAlredyUseOne; // 공격력 증가 물약을 두번 연속 먹어도 효과가 증가하지 않는걸 체크하는 변수
+    bool Use(Character *character) override;
 };

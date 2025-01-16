@@ -15,14 +15,16 @@ void Level_Main::Initialize()
 {
 	MapType = MAP_VILLAGE;
 
-	for (int i = 0; i < MAP_HEIGHT; i++) {
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			m_Map.insert({ PosStruct{ i, j }, { ". ", nullptr} });
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			m_Map.insert({PosStruct{i, j}, {". ", nullptr}});
 		}
 	}
 
-	Portal* DungeonPortal = new Portal(MAP_HEIGHT - 2, MAP_WIDTH / 2);
-	Portal* ShopPortal = new Portal(MAP_HEIGHT / 2, MAP_WIDTH - 3);
+	Portal *DungeonPortal = new Portal(MAP_HEIGHT - 2, MAP_WIDTH / 2);
+	Portal *ShopPortal = new Portal(MAP_HEIGHT / 2, MAP_WIDTH - 3);
 
 	Interactables.push_back(DungeonPortal);
 	Interactables.push_back(ShopPortal);
@@ -30,34 +32,38 @@ void Level_Main::Initialize()
 	DungeonPortal->SetDestination(MAP_DUNGEON);
 	ShopPortal->SetDestination(MAP_SHOP);
 
-	m_Map[PosStruct{ 0, MAP_WIDTH / 2 }] = { "던", DungeonPortal };
-	m_Map[PosStruct{ 0, MAP_WIDTH / 2 + 1 }] = { "전", DungeonPortal };
+	m_Map[PosStruct{0, MAP_WIDTH / 2}] = {"던", DungeonPortal};
+	m_Map[PosStruct{0, MAP_WIDTH / 2 + 1}] = {"전", DungeonPortal};
 
-	m_Map[PosStruct{ MAP_HEIGHT / 2, 0 }] = { "상", ShopPortal };
-	m_Map[PosStruct{ MAP_HEIGHT / 2, 1 }] = { "점", ShopPortal };
+	m_Map[PosStruct{MAP_HEIGHT / 2, 0}] = {"상", ShopPortal};
+	m_Map[PosStruct{MAP_HEIGHT / 2, 1}] = {"점", ShopPortal};
 
-	Character* pCharacter = Character::GetInstance();
+	Character *pCharacter = Character::GetInstance();
 
 	PosStruct cPos = pCharacter->GetPosition();
 
-	m_Map[cPos] = { "A ", nullptr };
+	m_Map[cPos] = {"A ", nullptr};
 }
 
-void Level_Main::Update() {
+void Level_Main::Update()
+{
 	auto pCharacter = Character::GetInstance();
 	PosStruct CurPos = pCharacter->GetPosition();
 
-	m_Map[CurPos] = { ". ", nullptr };
+	m_Map[CurPos] = {". ", nullptr};
 
 	if (m_pGameManager->Key_Down(VK_UP))
 	{
-		if (CurPos.X > 0) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X - 1, CurPos.Y }].second;
-			if (Interactable) {
+		if (CurPos.X > 0)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X - 1, CurPos.Y}].second;
+			if (Interactable)
+			{
 				Interactable->Interact();
 				return;
 			}
-			else {
+			else
+			{
 				CurPos.X--;
 				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
@@ -65,13 +71,16 @@ void Level_Main::Update() {
 	}
 	else if (m_pGameManager->Key_Down(VK_LEFT))
 	{
-		if (CurPos.Y > 0) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y - 1 }].second;
-			if (Interactable) {
+		if (CurPos.Y > 0)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X, CurPos.Y - 1}].second;
+			if (Interactable)
+			{
 				Interactable->Interact();
 				return;
 			}
-			else {
+			else
+			{
 				CurPos.Y--;
 				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
@@ -79,13 +88,16 @@ void Level_Main::Update() {
 	}
 	else if (m_pGameManager->Key_Down(VK_RIGHT))
 	{
-		if (CurPos.Y < MAP_HEIGHT - 1) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y + 1 }].second;
-			if (Interactable) {
+		if (CurPos.Y < MAP_HEIGHT - 1)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X, CurPos.Y + 1}].second;
+			if (Interactable)
+			{
 				Interactable->Interact();
 				return;
 			}
-			else {
+			else
+			{
 				CurPos.Y++;
 				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
@@ -93,13 +105,16 @@ void Level_Main::Update() {
 	}
 	else if (m_pGameManager->Key_Down(VK_DOWN))
 	{
-		if (CurPos.X < MAP_WIDTH - 1) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X + 1, CurPos.Y }].second;
-			if (Interactable) {
+		if (CurPos.X < MAP_WIDTH - 1)
+		{
+			auto Interactable = m_Map[PosStruct{CurPos.X + 1, CurPos.Y}].second;
+			if (Interactable)
+			{
 				Interactable->Interact();
 				return;
 			}
-			else {
+			else
+			{
 				CurPos.X++;
 				pCharacter->SetPosition(CurPos.X, CurPos.Y);
 			}
@@ -122,16 +137,33 @@ void Level_Main::Update() {
 		system("cls");
 	}
 
+	if (m_pGameManager->Key_Down('I'))
+	{
+		if (CurView == VIEW_MAP || CurView == VIEW_STATUS)
+			CurView = VIEW_INVENTORY;
+		else
+			CurView = VIEW_MAP;
+		system("cls");
+	}
 
-	m_Map[CurPos] = { "A ", nullptr };
+	m_Map[CurPos] = {"A ", nullptr};
 }
 
 void Level_Main::Render()
 {
+	if (MapType == MAP_DUNGEON)
+	{ // 여기부터
+		system("cls");
+		auto character = Character::GetInstance();
+		auto monster = m_pGameManager->GenerateMonster(character->GetLevel());
+		m_pGameManager->Battle(monster);
+		system("cls");
+	} // 여기까지 임시임
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			Buffer += m_Map[PosStruct{ i, j }].first;
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			Buffer += m_Map[PosStruct{i, j}].first;
 		}
 		Buffer.push_back(L'\n');
 	}

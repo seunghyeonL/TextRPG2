@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+#include <sstream>
+#include "GameManager.h"
 #include "Character.h"
 #include "HealthPotion.h"
 #include "AttackBoost.h"
@@ -6,9 +9,14 @@
 Character *Character::Instance = nullptr;
 
 Character::Character(string name)
-    : Name(name), Level(1), Health(200), Attack(30),
-      MaxHealth(MAX_HEALTH), MaxExperience(100),  Experience(0), Inven(make_unique<Inventory>())
+    : Name(name), Level(1), Health(200),
+      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_shared<Inventory>()),
+      pGameManager{GameManager::Get_Instance()}
 {
+    HealthPotion *potion = new HealthPotion();
+    AttackBoost *AB = new AttackBoost();
+    potion->AddToInventory(Inven, 10);
+    AB->AddToInventory(Inven, 5);
 }
 
 Character *Character::GetInstance(string name)
@@ -60,6 +68,15 @@ double Character::GetAttack()
     return Attack;
 }
 
+void Character::GetDamage(double attack)
+{
+    Health -= attack;
+    if (Health <= 0)
+    {
+        Health = 0;
+    }
+}
+
 void Character::SetAttack(double attack)
 {
     Attack = attack;
@@ -97,22 +114,82 @@ void Character::DisplayStatus()
 
 void Character::DisplayInventory()
 {
-    HealthPotion *potion = new HealthPotion();
-    AttackBoost *AB = new AttackBoost();
-    Inven->AddItem(potion);
-    Inven->AddItem(AB);
-    if (Inven->GetInventory().empty())
-        cout << "인벤토리는 비어있다."
+    if (Inven->GetEquipmentInven().empty())
+    {
+        cout << "장비창은 비어있다."
                 "\n";
+    }
+    else
+    {
+        for (int i = 0; i < Inven->GetEquipmentInven().size(); i++)
+            cout << i << ". " << Inven->GetEquipmentInven()[i]->GetName() << "\n";
+    }
+    if (Inven->GetConsumptionInven().empty())
+    {
+        cout << "소비창은 비어있다."
+                "\n";
+    }
+    else
+    {
+        for (int i = 0; i < Inven->GetConsumptionInven().size(); i++)
+            cout << i << ". " << Inven->GetConsumptionInven()[i].first->GetName() << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
+    }
+    if (Inven->GetEtcInven().empty())
+    {
+        cout << "기타창은 비어있다."
+                "\n";
+    }
+    else
+    {
+        for (int i = 0; i < Inven->GetEtcInven().size(); i++)
+            cout << i << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
+    }
 
-    for (int i = 0; i < Inven->GetInventory().size(); i++)
-        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+    /* 루프돌면서 키감지 */
+    for (int i = 0; i < Inven->GetConsumptionInven().size(); ++i)
+    {
+        if (pGameManager->Key_Down('0' + i))
+        {
+            /* 한번 클리어 해야 깔끔해보임 */
+            system("cls");
+            Inven->UseItem(i);                               /* 여기서 사용한 아이템 출력 */
+            cout << "-----------------------------" << endl; /* 구분선*/
 
-    int index;
-    cin >> index;
-    Inven->UseItem(index);
-    for (int i = 0; i < Inven->GetInventory().size(); i++)
-        cout << i << ". " << Inven->GetInventory()[i].first->GetName() << ": " << Inven->GetInventory()[i].second << "개\n";
+            /* 한번 클리어 했으니 인벤토리 다시 출력 */
+            if (Inven->GetEquipmentInven().empty())
+            {
+                cout << "장비창은 비어있다."
+                        "\n";
+            }
+            else
+            {
+                for (int i = 0; i < Inven->GetEquipmentInven().size(); i++)
+                    cout << i << ". " << Inven->GetEquipmentInven()[i]->GetName() << "\n";
+            }
+            if (Inven->GetConsumptionInven().empty())
+            {
+                cout << "소비창은 비어있다."
+                        "\n";
+            }
+            else
+            {
+                for (int i = 0; i < Inven->GetConsumptionInven().size(); i++)
+                    cout << i << ". " << Inven->GetConsumptionInven()[i].first->GetName() << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
+            }
+            if (Inven->GetEtcInven().empty())
+            {
+                cout << "기타창은 비어있다."
+                        "\n";
+            }
+            else
+            {
+                for (int i = 0; i < Inven->GetEtcInven().size(); i++)
+                    cout << i << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
+            }
+
+            break;
+        }
+    }
 }
 
 void Character::LevelUp()
@@ -135,7 +212,7 @@ void Character::LevelUp()
 
 void Character::AddExperience(double amount) { Experience += amount; }
 
-shared_ptr<Inventory> Character::GetInven()
+shared_ptr<Inventory> Character::GetInventory()
 {
     return Inven;
 }
