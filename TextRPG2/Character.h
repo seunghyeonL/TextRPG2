@@ -59,4 +59,6 @@ public:
 
 	int SellItem();
 	int BuyItem();
+
+	int getInputInteger(int min, int max);
 };

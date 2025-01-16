@@ -108,7 +108,7 @@ void Inventory::AddToConsumption(IConsumptionItem* item, int quantity)
             if (ConsumptionInven[i].first->GetName() == item->GetName())
             {
                 ConsumptionInven[i].second += quantity;
-                delete item;
+                //delete item;
                 return;
             }
         }

@@ -30,7 +30,7 @@ namespace Client
 		void operator()(std::string str) {
 			for (char c : str) {
 				std::cout << c;
-				//Sleep(25);
+				Sleep(25);
 			}
 		}
 	};
