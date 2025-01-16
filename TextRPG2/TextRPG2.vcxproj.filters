@@ -39,9 +39,6 @@
     <Filter Include="소스 파일\06.Inventory">
       <UniqueIdentifier>{d63346e2-037a-41c8-9cea-98470e635134}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\07.InventoryObserver">
-      <UniqueIdentifier>{c0608c12-f22b-4106-bea3-b118bea99948}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\03.Interactable">
       <UniqueIdentifier>{9052e147-f2fa-4673-b8e8-92215eb1e99f}</UniqueIdentifier>
     </Filter>
@@ -87,6 +84,12 @@
     <Filter Include="소스 파일\05.Item\Consumption\HealthPotion">
       <UniqueIdentifier>{a2038a03-0240-4ebb-b900-ca3e1ccde8fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\05.Item\Equipment\ShabbyHelm">
+      <UniqueIdentifier>{d579ce28-e0c6-43ee-b49e-8c9a12516993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\05.Item\Etc\LiquidMass">
+      <UniqueIdentifier>{c7d8ed67-0b66-4733-add3-a55f95318b54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -121,15 +124,6 @@
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>소스 파일\06.Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClCompile>
-    <ClCompile Include="Subject.cpp">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClCompile>
-    <ClCompile Include="UIObserver.cpp">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClCompile>
     <ClCompile Include="Level_Dungeon.cpp">
       <Filter>소스 파일</Filter>
@@ -173,6 +167,12 @@
     <ClCompile Include="IEtcItem.cpp">
       <Filter>소스 파일\05.Item\Etc</Filter>
     </ClCompile>
+    <ClCompile Include="ShabbyHelm.cpp">
+      <Filter>소스 파일\05.Item\Equipment\ShabbyHelm</Filter>
+    </ClCompile>
+    <ClCompile Include="LiquidMass.cpp">
+      <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -210,15 +210,6 @@
     </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>소스 파일\06.Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClInclude>
-    <ClInclude Include="Subject.h">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
-    </ClInclude>
-    <ClInclude Include="UIObserver.h">
-      <Filter>소스 파일\07.InventoryObserver</Filter>
     </ClInclude>
     <ClInclude Include="Level_Dungeon.h" />
     <ClInclude Include="Level_Shop.h" />
@@ -263,6 +254,15 @@
     </ClInclude>
     <ClInclude Include="IEtcItem.h">
       <Filter>소스 파일\05.Item\Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="IItemStrategy.h">
+      <Filter>소스 파일\05.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ShabbyHelm.h">
+      <Filter>소스 파일\05.Item\Equipment\ShabbyHelm</Filter>
+    </ClInclude>
+    <ClInclude Include="LiquidMass.h">
+      <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

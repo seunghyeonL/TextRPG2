@@ -47,5 +47,5 @@ public:
 	void DisplayInventory();
 	void LevelUp();
 	void AddExperience(double amount);
-	shared_ptr<Inventory> GetInven();
+	shared_ptr<Inventory> GetInventory();
 };

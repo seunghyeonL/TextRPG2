@@ -201,6 +201,7 @@ void GameManager::Battle(IMonster* Monster)
 	Character* Player = Character::GetInstance();
 	HealthPotion* hp = new HealthPotion();
 	AttackBoost* boost = new AttackBoost();
+	auto inventory = Character::GetInstance()->GetInventory();
 
 	double OriginalAttack = Player->GetAttack();  // 전투 시작 전 공격력 저장
 	double IncreasedAttack = 0; // 공격력 증가 부분을 추적할 변수
@@ -219,12 +220,12 @@ void GameManager::Battle(IMonster* Monster)
 		case 1:
 			cout << "\n";
 			Player->DisplayInventory();
-			if (Player->GetInven()->GetInventory().size())
+			if (Player->GetInventory()->GetConsumptionInven().size())
 			{
 				int index;
 				cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 				cin >> index;
-				Player->GetInven()->UseItem(index - 1);
+				Player->GetInventory()->UseItem(index - 1);
 				IncreasedAttack = Player->GetAttack() - OriginalAttack;
 			}
 		case 2:
@@ -237,12 +238,12 @@ void GameManager::Battle(IMonster* Monster)
 				{
 				case 1:
 					Player->DisplayInventory();
-					if (Player->GetInven()->GetInventory().size())
+					if (Player->GetInventory()->GetConsumptionInven().size())
 					{
 						int index;
 						cout << "\n사용할 아이템 번호를 입력해주세요.\n";
 						cin >> index;
-						Player->GetInven()->UseItem(index - 1);
+						Player->GetInventory()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
 					}
 					break;
@@ -268,19 +269,17 @@ void GameManager::Battle(IMonster* Monster)
 					else if (Monster->GetHealth() <= 0) {
 						// 전투 승리 처리
 
-						// 30퍼 확률로 아이템 드랍
-						if (rand() % 100 < 30)
-						{
-							//IItem* DroppedItem = Monster->DropItem();
-							//if (DroppedItem) {
-							//	Player->AddItem(DroppedItem); // 플레이어의 인벤토리에 아이템 추가
-							//	cout << "몬스터가 " << DroppedItem->GetName() << "을 떨어뜨렸습니다.\n";
-							//}
-						}
+						vector<IItem*> DroppedItem = Monster->DropRandomItem();
+						inventory->AddDroppedItems(DroppedItem);
+						//for (IItem* Dropped : DroppedItem)
+						//{
+						//	inventory->AddDroppedItems(Dropped); // 플레이어의 인벤토리에 아이템 추가
+						//	cout << "몬스터가 " << Dropped->GetName() << "을 떨어뜨렸습니다.\n";
+						//}
 
 						Player->AddExperience(50);
 						int gold = 10 + rand() % 10;
-						Player->GetInven()->AddGold(gold);
+						Player->GetInventory()->AddGold(gold);
 						cout << "\n전투에서 승리했습니다.\n50의 경험치와 " << gold << " 골드를 획득!\n";
 
 						Sleep(5000); // 임시
@@ -313,8 +312,8 @@ void GameManager::Battle(IMonster* Monster)
 			cout << "잘못된 입력입니다. 다시 시도해주세요.\n";
 		}
 	}
-	for (int i = 0; i < Character::GetInstance()->GetInven()->GetInventory().size(); ++i)
-		Character::GetInstance()->GetInven()->GetInventory()[i].first->SetIsAlreadyUseOne();
+	for (int i = 0; i < Character::GetInstance()->GetInventory()->GetConsumptionInven().size(); ++i)
+		Character::GetInstance()->GetInventory()->GetConsumptionInven()[i].first->SetIsAlreadyUseOne();
 	//boost->IsAlredyUseOne = false; // 공격력 증가 물약 사용 시 체크할 변수
 	delete hp;
 	delete boost;

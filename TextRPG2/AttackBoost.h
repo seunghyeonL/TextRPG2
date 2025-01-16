@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "IItem.h"
+#include "IConsumptionItem.h"
 
 using namespace std;
 
 class Character;
 
-class AttackBoost : public IItem
+class AttackBoost : public IConsumptionItem
 {
 private:
     string Name;

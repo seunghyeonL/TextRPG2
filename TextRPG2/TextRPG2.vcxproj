@@ -134,10 +134,10 @@
     <ClCompile Include="IConsumptionItem.cpp" />
     <ClCompile Include="IEquipmentItem.cpp" />
     <ClCompile Include="IEtcItem.cpp" />
-    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
+    <ClCompile Include="LiquidMass.cpp" />
     <ClCompile Include="SFightable.cpp" />
     <ClCompile Include="IItem.cpp" />
     <ClCompile Include="IMonster.cpp" />
@@ -152,10 +152,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="Orc.cpp" />
+    <ClCompile Include="ShabbyHelm.cpp" />
     <ClCompile Include="Slime.cpp" />
-    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Troll.cpp" />
-    <ClCompile Include="UIObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackBoost.h" />
@@ -167,10 +166,11 @@
     <ClInclude Include="IConsumptionItem.h" />
     <ClInclude Include="IEquipmentItem.h" />
     <ClInclude Include="IEtcItem.h" />
-    <ClInclude Include="Observer.h" />
+    <ClInclude Include="IItemStrategy.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="HealthPotion.h" />
+    <ClInclude Include="LiquidMass.h" />
     <ClInclude Include="SFightable.h" />
     <ClInclude Include="IItem.h" />
     <ClInclude Include="IMonster.h" />
@@ -185,10 +185,9 @@
     <ClInclude Include="Level_Shop.h" />
     <ClInclude Include="MainApp.h" />
     <ClInclude Include="Orc.h" />
+    <ClInclude Include="ShabbyHelm.h" />
     <ClInclude Include="Slime.h" />
-    <ClInclude Include="Subject.h" />
     <ClInclude Include="Troll.h" />
-    <ClInclude Include="UIObserver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
