@@ -15,13 +15,6 @@ void Level::Update()
 {
 }
 
-void Level::gotoxy(int x, int y) {
-	COORD coord;
-	coord.X = SHORT(x);
-	coord.Y = SHORT(y);
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
 void Level::Render()
 {
 

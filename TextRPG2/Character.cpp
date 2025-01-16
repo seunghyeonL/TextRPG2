@@ -6,14 +6,13 @@
 Character *Character::Instance = nullptr;
 
 Character::Character(string name)
-    : Name(name), Level(1), Health(200),
-      MaxHealth(MAX_HEALTH), MaxExperience(100), Attack(30), Experience(0), Inven(make_unique<Inventory>())
+    : Name(name), Level(1), Health(200), Attack(30),
+      MaxHealth(MAX_HEALTH), MaxExperience(100),  Experience(0), Inven(make_unique<Inventory>())
 {
 }
 
 Character *Character::GetInstance(string name)
 {
-
     if (Instance == nullptr)
         Instance = new Character(name);
 

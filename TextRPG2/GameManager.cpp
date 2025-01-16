@@ -12,6 +12,7 @@
 #include "Level.h"
 #include "Orc.h"
 #include <windows.h>
+#include "Level_Dungeon.h"
 
 IMPLEMENT_SINGLETON(GameManager)
 
@@ -30,7 +31,7 @@ void GameManager::Initialize()
 	m_pInput_Manager = Input_Manager::Create(hInstance, hWnd);
 }
 
-void GameManager::VisitShop(Character* player)
+void GameManager::VisitShop()
 {
 
 }
@@ -108,7 +109,9 @@ GameManager* GameManager::Create()
 
 void GameManager::Free()
 {
-
+	m_pLevel_Manager->Free();
+	m_pInput_Manager->Free();
+	delete this;
 }
 
 IMonster* GameManager::GenerateMonster(int level)
@@ -119,12 +122,13 @@ IMonster* GameManager::GenerateMonster(int level)
 	Orc* orc;
 	if (level % 10 == 0)
 	{
-		cout << "보스 몬스터를 조우했습니다.\n";
+		wcout << "보스 몬스터를 조우했습니다.\n";
 		switch (level % 40)
 		{
-		case 0:
-			troll = Troll::CreateBoss("트롤 대장", level + 30, level + 10);
+		case 0: {
+			troll = Troll::CreateBoss("트롤대장", level + 30, level + 10);
 			return troll;
+		}
 		case 10:
 			slime = Slime::CreateBoss("빨간 슬라임", level + 30, level + 10);
 			return slime;
@@ -165,7 +169,12 @@ IMonster* GameManager::GenerateMonster(int level)
 			return nullptr; // 기본 반환값
 		}
 	}
-};
+}
+
+Level* GameManager::CreateMap(MAP MAP_ENUM)
+{
+	return m_pLevel_Manager->CreateMap(MAP_ENUM);
+}
 
 void GameManager::StartGame()
 {
