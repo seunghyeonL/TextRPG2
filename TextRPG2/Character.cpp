@@ -289,13 +289,12 @@ int Character::BuyItem()
         cin >> name;
         cout << "\n" << name << " 아이템을 구매하시겠습니까?\n";
         cout << "1. 네     2. 아니요\n";
-        cin >> choice;
+        choice = getInputInteger(1, 2);
         switch (choice)
         {
-        case 1:
+        case 1: {
             cout << "\n구매할 수량을 입력해주세요.\n";
-            int Quantity;
-            cin >> Quantity;
+            int Quantity = getInputInteger(0, 10);
             if (Quantity < 0)
             {
                 cout << "\n잘못된 입력입니다.\n";
@@ -327,16 +326,16 @@ int Character::BuyItem()
                                 cout << "\n잘못된 입력입니다.\n";
                                 continue;
                             }
-                                
+
 
                             Player->GetInventory()->AddToConsumption(ShopConsum[i].first, Quantity);
                             ShopConsum[i].second -= Quantity;
-                            
+
                             return  Quantity * 30;
                         }
                         else if (ShopConsum[i].second == 1)
                         {
-                            Player->GetInventory()->AddToConsumption(ShopConsum[i].first,1);
+                            Player->GetInventory()->AddToConsumption(ShopConsum[i].first, 1);
 
                             ShopConsum.erase(remove(ShopConsum.begin(), ShopConsum.end(),
                                 ShopConsum[i]), ShopConsum.end());
@@ -374,12 +373,13 @@ int Character::BuyItem()
                     }
                 }
             }
+        }
         case 2:
             break;
         default:
             cout << "잘못된 입력입니다.\n";
         }
-        return false;
+        return 0;
     }
 
 };
@@ -400,13 +400,12 @@ int Character::SellItem()
         cin >> name;
         cout << "\n" << name << " 아이템을 판매하시겠습니까?\n";
         cout << "1. 네     2. 아니요\n";
-        cin >> choice;
+        choice = getInputInteger(1, 2);
         switch (choice)
         {
-        case 1:
+        case 1:{
             cout << "\n판매할 수량을 입력해주세요.\n";
-            int Quantity;
-            cin >> Quantity;
+            int Quantity = getInputInteger(1, 10);
             if (Quantity < 0)// || Quantity > EquipmentInven->size() || Quantity > ConsumptionInven->size() || Quantity > EtcInven->size())
             {
                 cout << "\n잘못된 입력입니다.\n";
@@ -462,12 +461,46 @@ int Character::SellItem()
                     }
                 }
             }
+        }
         case 2:
             break;
         default:
             cout << "잘못된 입력입니다.\n";
         }
-        return false;
+        return 0;
     }
 }
 
+int Character::getInputInteger(int min, int max) {
+    int result;
+    stringstream ss;
+
+    while (true) {
+        cout << "입력: ";
+        int tmp;
+        string input;
+        cin >> input;
+
+        ss.str(input);
+        if (ss >> tmp) {
+            if (ss.eof()) {
+                if (tmp >= min && tmp <= max) {
+                    result = tmp;
+                    break;
+                }
+                else {
+                    cout << "입력값은 " << min << "에서 " << max << "까지"
+                        << endl
+                        << endl;
+                }
+            }
+        }
+        else {
+            cout << "잘못된 입력. 숫자를 입력해주세요." << endl << endl;
+        }
+        ss.clear();
+        ss.str("");
+    }
+
+    return result;
+}
