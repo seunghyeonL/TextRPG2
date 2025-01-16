@@ -17,8 +17,8 @@ private:
 	string Name;
 	int Level;
 	int MaxLevel;
-	int Health;
-	int Attack;
+	double Health;
+	double Attack;
 	double MaxHealth;	  // 최대 체력
 	double Experience;	  // 경험치
 	double MaxExperience; // 최대 경험치

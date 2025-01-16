@@ -7,13 +7,12 @@
 class SFightable : public IInteractable
 {
 protected:
-	double mHealth{100};
-	double mAttack{100};
+	double mHealth;
+	double mAttack;
 	vector<IHealthObserver *> Observers;
 
 public:
 	SFightable();
-	SFightable(double health, double attack);
 	virtual ~SFightable() = default;
 	virtual void Interact() = 0;
 };

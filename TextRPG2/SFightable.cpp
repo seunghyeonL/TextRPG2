@@ -9,12 +9,3 @@ SFightable::SFightable()
 	Observers.push_back(new DeathObserver());
 	Observers.push_back(new FullObserver());
 }
-
-SFightable::SFightable(double health, double attack)
-	: mHealth{ health }, mAttack(attack)
-{
-	Observers.push_back(new DangerObserver());
-	Observers.push_back(new DeathObserver());
-	Observers.push_back(new FullObserver());
-}
-
