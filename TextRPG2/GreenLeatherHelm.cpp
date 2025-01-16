@@ -1,7 +1,7 @@
 #include "GreenLeatherHelm.h"
 
 GreenLeatherHelm::GreenLeatherHelm()
-	: IEquipmentItem(Helm, 0, 5), Name("GreenLeatherHelm")
+	: IEquipmentItem(Helm, 0, 10), Name("GreenLeatherHelm")
 {
 }
 

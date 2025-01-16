@@ -26,6 +26,10 @@ public:
     vector<pair<IConsumptionItem*, int>> GetConsumptionList();
     vector<pair<IEtcItem*, int>> GetOtherList();
 
+    vector<IEquipmentItem*>* GetEquipList_Ptr();
+    vector<pair<IConsumptionItem*, int>>* GetConsumptionList_Ptr();
+    vector<pair<IEtcItem*, int>>* GetOtherList_Ptr();
+
     // IInteractable을(를) 통해 상속됨
     void Interact() override;
 };

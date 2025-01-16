@@ -124,7 +124,7 @@ void Map::Update()
 	}
 	else if (m_pGameManager->Key_Down(VK_TAB))
 	{
-		if (CurView == VIEW_MAP || CurView == VIEW_INVENTORY)
+		if (CurView == VIEW_MAP || CurView == VIEW_INVENTORY || CurView == VIEW_EQUIPMENTSLOTS)
 			CurView = VIEW_STATUS;
 		else
 			CurView = VIEW_MAP;
@@ -132,13 +132,20 @@ void Map::Update()
 	}
 	else if (m_pGameManager->Key_Down(0x49))
 	{
-		if (CurView == VIEW_MAP || CurView == VIEW_STATUS)
+		if (CurView == VIEW_MAP || CurView == VIEW_STATUS || CurView == VIEW_EQUIPMENTSLOTS)
 			CurView = VIEW_INVENTORY;
 		else
 			CurView = VIEW_MAP;
 		system("cls");
 	}
-
+	else if (m_pGameManager->Key_Down(0x45))
+	{
+		if (CurView == VIEW_MAP || CurView == VIEW_INVENTORY || CurView == VIEW_STATUS)
+			CurView = VIEW_EQUIPMENTSLOTS;
+		else
+			CurView = VIEW_MAP;
+		system("cls");
+}
 	m_Map[CurPos] = { "A ", nullptr };
 }
 

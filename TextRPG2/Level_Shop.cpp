@@ -15,30 +15,32 @@ void Level_Shop::Initialize()
 {
 	MapType = MAP_SHOP;
 
-	for (int i = 0; i < MAP_HEIGHT; i++) {
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			m_Map.insert({ PosStruct{ i, j }, { ". ", nullptr} });
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			m_Map.insert({PosStruct{i, j}, {". ", nullptr}});
 		}
 	}
 
-	Portal* VillagePortal = new Portal(MAP_HEIGHT / 2, 2);
+	Portal *VillagePortal = new Portal(MAP_HEIGHT / 2, 2);
 	Interactables.push_back(VillagePortal);
 	VillagePortal->SetDestination(MAP_VILLAGE);
 
-	Shop* pShop = Shop::GetInstance();
+	Shop *pShop = Shop::GetInstance();
 
-	m_Map[PosStruct{ MAP_HEIGHT / 2, MAP_WIDTH - 2 }] = { "마", VillagePortal };
-	m_Map[PosStruct{ MAP_HEIGHT / 2, MAP_WIDTH - 1 }] = { "을", VillagePortal };
+	m_Map[PosStruct{MAP_HEIGHT / 2, MAP_WIDTH - 2}] = {"마", VillagePortal};
+	m_Map[PosStruct{MAP_HEIGHT / 2, MAP_WIDTH - 1}] = {"을", VillagePortal};
 
-	m_Map[PosStruct{ MAP_HEIGHT / 2, 2 }] = { "S ", pShop };
+	m_Map[PosStruct{MAP_HEIGHT / 2, 2}] = {"S ", pShop};
 
-	Character* pCharacter = Character::GetInstance();
+	Character *pCharacter = Character::GetInstance();
 	PosStruct cPos = pCharacter->GetPosition();
 
-	m_Map[cPos] = { "A ", nullptr };
+	m_Map[cPos] = {"A ", nullptr};
 }
 
-void Level_Shop::Update() 
+void Level_Shop::Update()
 {
 	Map::Update();
 }
@@ -47,10 +49,16 @@ void Level_Shop::Render()
 {
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			Buffer += m_Map[PosStruct{ i, j }].first;
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			Buffer += m_Map[PosStruct{i, j}].first;
 		}
 		Buffer.push_back(L'\n');
+	}
+	if (CurView != preView)
+	{
+		system("cls");
+		preView = CurView;
 	}
 
 	gotoxy(0, 0);
@@ -67,9 +75,16 @@ void Level_Shop::Render()
 	case VIEW_INVENTORY:
 		Character::GetInstance()->DisplayInventory();
 		break;
+	case VIEW_EQUIPMENTSLOTS:
+		preView = VIEW_EQUIPMENTSLOTS;
+		system("cls");
+		if (Character::GetInstance()->DisplayEquipmentSlots() == true)
+			CurView = VIEW_MAP;
+
+		break;
 	}
-	
-	cout << "TAB : 스탯창\tI : 인벤토리\tESC : 종료" << endl;
+
+	cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 	Buffer.clear();
 }
 

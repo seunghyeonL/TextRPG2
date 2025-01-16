@@ -112,6 +112,21 @@ vector<pair<IEtcItem*, int>> Shop::GetOtherList()
     return OtherItem;
 }
 
+vector<IEquipmentItem*>* Shop::GetEquipList_Ptr()
+{
+    return &EquipItem;
+}
+
+vector<pair<IConsumptionItem*, int>>* Shop::GetConsumptionList_Ptr()
+{
+    return &ConsumptionItem;
+}
+
+vector<pair<IEtcItem*, int>>* Shop::GetOtherList_Ptr()
+{
+    return &OtherItem;
+}
+
 void Shop::Interact()
 {
     GameManager* pGameManager = GameManager::Get_Instance();

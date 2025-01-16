@@ -4,35 +4,34 @@
 Inventory::Inventory()
     : Gold(0)
 {
-
 }
 
-vector<IEquipmentItem*> Inventory::GetEquipmentInven()
+vector<IEquipmentItem *> Inventory::GetEquipmentInven()
 {
     return EquipmentInven;
 }
 
-vector<pair<IConsumptionItem*, int>> Inventory::GetConsumptionInven()
+vector<pair<IConsumptionItem *, int>> Inventory::GetConsumptionInven()
 {
     return ConsumptionInven;
 }
 
-vector<pair<IEtcItem*, int>> Inventory::GetEtcInven()
+vector<pair<IEtcItem *, int>> Inventory::GetEtcInven()
 {
     return EtcInven;
 }
 
-vector<IEquipmentItem*>* Inventory::GetEquipmentInven_Ptr()
+vector<IEquipmentItem *> *Inventory::GetEquipmentInven_Ptr()
 {
     return &EquipmentInven;
 }
 
-vector<pair<IConsumptionItem*, int>>* Inventory::GetConsumptionInven_Ptr()
+vector<pair<IConsumptionItem *, int>> *Inventory::GetConsumptionInven_Ptr()
 {
     return &ConsumptionInven;
 }
 
-vector<pair<IEtcItem*, int>>* Inventory::GetEtcInven_Ptr()
+vector<pair<IEtcItem *, int>> *Inventory::GetEtcInven_Ptr()
 {
     return &EtcInven;
 }
@@ -53,31 +52,31 @@ void Inventory::UseItem(int index)
     {
         cout << ConsumptionInven[index].first->GetName() << "을(를) 사용합니다.\n";
         bool IsCanUse = ConsumptionInven[index].first->Use(Character::GetInstance());
-        if(IsCanUse)
+        if (IsCanUse)
             RemoveToConsumption(ConsumptionInven[index].first);
     }
 }
 
-void Inventory::AddDroppedItems(const vector<IItem*>& droppedItems)
+void Inventory::AddDroppedItems(const vector<IItem *> &droppedItems)
 {
-    for (IItem* item : droppedItems)
+    for (IItem *item : droppedItems)
     {
-        if (auto* equipmentItem = dynamic_cast<IEquipmentItem*>(item)) 
+        if (auto *equipmentItem = dynamic_cast<IEquipmentItem *>(item))
         {
             AddToEquipment(equipmentItem);
         }
-        else if (auto* consumptionItem = dynamic_cast<IConsumptionItem*>(item)) 
+        else if (auto *consumptionItem = dynamic_cast<IConsumptionItem *>(item))
         {
-            AddToConsumption(consumptionItem); 
+            AddToConsumption(consumptionItem);
         }
-        else if (auto* etcItem = dynamic_cast<IEtcItem*>(item)) 
+        else if (auto *etcItem = dynamic_cast<IEtcItem *>(item))
         {
             AddToEtc(etcItem);
         }
     }
 }
 
-void Inventory::AddToEquipment(IEquipmentItem* item)
+void Inventory::AddToEquipment(IEquipmentItem *item)
 {
     if (EquipmentInven.empty())
         EquipmentInven.push_back(item);
@@ -96,7 +95,7 @@ void Inventory::AddToEquipment(IEquipmentItem* item)
     }
 }
 
-void Inventory::AddToConsumption(IConsumptionItem* item, int quantity)
+void Inventory::AddToConsumption(IConsumptionItem *item, int quantity)
 {
     if (ConsumptionInven.empty())
         ConsumptionInven.push_back(make_pair(item, quantity));
@@ -108,7 +107,7 @@ void Inventory::AddToConsumption(IConsumptionItem* item, int quantity)
             if (ConsumptionInven[i].first->GetName() == item->GetName())
             {
                 ConsumptionInven[i].second += quantity;
-                //delete item;
+                // delete item;
                 return;
             }
         }
@@ -116,7 +115,7 @@ void Inventory::AddToConsumption(IConsumptionItem* item, int quantity)
     }
 }
 
-void Inventory::AddToEtc(IEtcItem* item, int quantity)
+void Inventory::AddToEtc(IEtcItem *item, int quantity)
 {
     if (EtcInven.empty())
         EtcInven.push_back(make_pair(item, quantity));
@@ -136,17 +135,18 @@ void Inventory::AddToEtc(IEtcItem* item, int quantity)
     }
 }
 
-void Inventory::RemoveToEquipment(IEquipmentItem* item)
+void Inventory::RemoveToEquipment(IEquipmentItem *item)
 {
     for (int i = 0; i < EquipmentInven.size(); ++i)
     {
         if (EquipmentInven[i]->GetName() == item->GetName())
             EquipmentInven.erase(remove(EquipmentInven.begin(), EquipmentInven.end(),
-                EquipmentInven[i]), EquipmentInven.end());
+                                        EquipmentInven[i]),
+                                 EquipmentInven.end());
     }
 }
 
-void Inventory::RemoveToConsumption(IConsumptionItem* item, int quantity)
+void Inventory::RemoveToConsumption(IConsumptionItem *item, int quantity)
 {
     for (int i = 0; i < ConsumptionInven.size(); ++i)
     {
@@ -160,14 +160,15 @@ void Inventory::RemoveToConsumption(IConsumptionItem* item, int quantity)
             else if (ConsumptionInven[i].second == 1)
             {
                 ConsumptionInven.erase(remove(ConsumptionInven.begin(), ConsumptionInven.end(),
-                    ConsumptionInven[i]), ConsumptionInven.end());
+                                              ConsumptionInven[i]),
+                                       ConsumptionInven.end());
                 return;
             }
         }
     }
 }
 
-void Inventory::RemoveToEtc(IEtcItem* item, int quantity)
+void Inventory::RemoveToEtc(IEtcItem *item, int quantity)
 {
     for (int i = 0; i < EtcInven.size(); ++i)
     {
@@ -181,7 +182,8 @@ void Inventory::RemoveToEtc(IEtcItem* item, int quantity)
             else if (EtcInven[i].second == 1)
             {
                 EtcInven.erase(remove(EtcInven.begin(), EtcInven.end(),
-                    EtcInven[i]), EtcInven.end());
+                                      EtcInven[i]),
+                               EtcInven.end());
                 return;
             }
         }

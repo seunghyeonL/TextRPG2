@@ -37,7 +37,9 @@ int main()
 		pMainApp->Render();
 
 		if (pGameManager->KeyPressedThisFrame())
+		{
 			system("pause");
+		}
 
 		if (bIsInit == false)
 		{
