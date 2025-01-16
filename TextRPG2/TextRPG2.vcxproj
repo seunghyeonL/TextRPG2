@@ -129,8 +129,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttackBoost.cpp" />
+    <ClCompile Include="BoneHelm.cpp" />
+    <ClCompile Include="CanineMass.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="EventLoop.cpp" />
+    <ClCompile Include="GreenLeatherHelm.cpp" />
+    <ClCompile Include="GoblinKnife.cpp" />
     <ClCompile Include="IConsumptionItem.cpp" />
     <ClCompile Include="IEquipmentItem.cpp" />
     <ClCompile Include="IEtcItem.cpp" />
@@ -163,12 +167,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackBoost.h" />
+    <ClInclude Include="BoneHelm.h" />
+    <ClInclude Include="CanineMass.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Client_Defines.h" />
     <ClInclude Include="Client_Macro.h" />
     <ClInclude Include="DangerObserver.h" />
     <ClInclude Include="DeathObserver.h" />
     <ClInclude Include="EventLoop.h" />
+    <ClInclude Include="GreenLeatherHelm.h" />
+    <ClInclude Include="GoblinKnife.h" />
     <ClInclude Include="IConsumptionItem.h" />
     <ClInclude Include="IEquipmentItem.h" />
     <ClInclude Include="IEtcItem.h" />

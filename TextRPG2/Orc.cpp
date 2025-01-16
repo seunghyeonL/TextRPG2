@@ -1,4 +1,8 @@
 #include "Orc.h"
+#include "HealthPotion.h"
+#include "CanineMass.h"
+#include "BoneHelm.h"
+
 
 Orc::Orc()
 	: IMonster{}
@@ -10,6 +14,14 @@ void Orc::Initialize(string name, double health, double attack)
 	mName = name;
 	mHealth = health;
 	mAttack = attack;
+
+	BoneHelm* helm = new BoneHelm();
+	HealthPotion* potion = new HealthPotion();
+	CanineMass* mass = new CanineMass();
+
+	EquipmentItems.push_back(helm);
+	ConsumableItems.push_back(potion);
+	OtherItems.push_back(mass);
 }
 
 void Orc::Update()
