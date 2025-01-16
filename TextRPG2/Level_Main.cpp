@@ -52,47 +52,7 @@ void Level_Main::Update()
 
 void Level_Main::Render()
 {
-	for (int i = 0; i < MAP_HEIGHT; i++)
-	{
-		for (int j = 0; j < MAP_WIDTH; j++)
-		{
-			string Tile = m_Map[PosStruct{ i, j }].first;
-			
-			Buffer += m_Map[PosStruct{ i, j }].first;
-		}
-		Buffer.push_back(L'\n');
-	}
-	if (preView != CurView)
-	{
-		system("cls");
-		preView = CurView;
-	}
-
-	gotoxy(0, 0);
-
-	switch (CurView)
-	{
-	case VIEW_MAP:
-		Render_TextMap();
-		cout << Buffer;
-		cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
-		break;
-	case VIEW_STATUS:
-		Character::GetInstance()->DisplayStatus();
-		cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
-		break;
-	case VIEW_INVENTORY:
-		Character::GetInstance()->DisplayInventory();
-		cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
-		break;
-	case VIEW_EQUIPMENTSLOTS:
-		preView = VIEW_EQUIPMENTSLOTS;
-		if (Character::GetInstance()->DisplayEquipmentSlots() == true)
-			CurView = VIEW_MAP;
-		break;
-	}
-
-	Buffer.clear();
+	Map::Render();
 }
 
 void Level_Main::Free()

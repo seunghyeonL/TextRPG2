@@ -19,6 +19,7 @@ protected:
 
 	MAP MapType{ MAP_VILLAGE };
 	VIEW CurView{ VIEW_MAP };
+	VIEW preView{ VIEW_MAP };
 
 	vector<IInteractable*> Interactables;
 
@@ -31,6 +32,6 @@ protected:
 public:
 	virtual void Initialize() override = 0;
 	virtual void Update() override;
-	virtual void Render() override = 0;
+	virtual void Render() override;
 	virtual void Free() override;
 };
