@@ -71,9 +71,12 @@ void Level_Dungeon::Render()
 	case VIEW_INVENTORY:
 		Character::GetInstance()->DisplayInventory();
 		break;
+	case VIEW_EQUIPMENTSLOTS:
+		Character::GetInstance()->DisplayEquipmentSlots();
+		break;
 	}
 
-	cout << "TAB : 스탯창\tI : 인벤토리\tESC : 종료" << endl;
+	cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 	Buffer.clear();
 }
 
