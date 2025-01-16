@@ -1,7 +1,7 @@
 // 디버그
-//#define _CRTDBG_MAP_ALLOC
-//#include <cstdlib>
-//#include <crtdbg.h>
+// #define _CRTDBG_MAP_ALLOC
+// #include <cstdlib>
+// #include <crtdbg.h>
 
 #include "GameManager.h"
 #include "MainApp.h"
@@ -21,22 +21,20 @@ int main()
 	SetConsoleOutputCP(CP_UTF8);
 	DisableCursorBlinking();
 
-	MainApp* pMainApp = MainApp::Create();
+	MainApp *pMainApp = MainApp::Create();
 
-	GameManager* pGameManager = GameManager::Get_Instance();
-	EventLoop* pEventLoop = EventLoop::Get_Instance();
+	GameManager *pGameManager = GameManager::Get_Instance();
+	EventLoop *pEventLoop = EventLoop::Get_Instance();
 	pGameManager->DisableEcho();
 
 	bool bIsInit = false;
 	while (true)
 	{
 		pMainApp->Update();
-		
+
 		pEventLoop->Run();
 
 		pMainApp->Render();
-
-		
 
 		if (pGameManager->KeyPressedThisFrame())
 			system("pause");
@@ -48,10 +46,11 @@ int main()
 		}
 	}
 
-	Character* pCharacter = Character::GetInstance();
-
-	delete pCharacter;
 	pMainApp->Free();
+	pGameManager->Destroy_Instance();
+
+	Character *pCharacter = Character::GetInstance();
+	delete pCharacter;
 
 	return 0;
 }

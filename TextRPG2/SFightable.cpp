@@ -10,11 +10,9 @@ SFightable::SFightable()
 	Observers.push_back(new FullObserver());
 }
 
-SFightable::SFightable(int health, int attack) 
-	: mHealth{ health }, mAttack(attack)
+SFightable::~SFightable()
 {
-	Observers.push_back(new DangerObserver());
-	Observers.push_back(new DeathObserver());
-	Observers.push_back(new FullObserver());
+	for (auto Observer : Observers) {
+		delete Observer;
+	}
 }
-

@@ -5,5 +5,5 @@ class IHealthObserver
 {
 public:
 	virtual ~IHealthObserver() = default;
-	virtual void Update(int health) = 0;
+	virtual void Update(double health, string name, bool& IsActive) = 0;
 };

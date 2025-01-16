@@ -30,20 +30,11 @@
     <Filter Include="소스 파일\05.Item">
       <UniqueIdentifier>{2bd3f2bd-4ea8-4606-a098-989cf6cf9b30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\05.Item\HealthPotion">
-      <UniqueIdentifier>{a2038a03-0240-4ebb-b900-ca3e1ccde8fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\05.Item\AttackBoost">
-      <UniqueIdentifier>{bc785933-bca8-4be0-9280-47e9eeb2ea45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\97.Default">
       <UniqueIdentifier>{a44bc811-c7ca-4192-85d0-a534687c6d3d}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\06.Inventory">
       <UniqueIdentifier>{d63346e2-037a-41c8-9cea-98470e635134}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\07.InventoryObserver">
-      <UniqueIdentifier>{c0608c12-f22b-4106-bea3-b118bea99948}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\03.Interactable">
       <UniqueIdentifier>{9052e147-f2fa-4673-b8e8-92215eb1e99f}</UniqueIdentifier>
@@ -99,10 +90,10 @@
       <Filter>소스 파일\02.GameManager</Filter>
     </ClCompile>
     <ClCompile Include="HealthPotion.cpp">
-      <Filter>소스 파일\05.Item\HealthPotion</Filter>
+      <Filter>소스 파일\05.Item\Consumption\HealthPotion</Filter>
     </ClCompile>
     <ClCompile Include="AttackBoost.cpp">
-      <Filter>소스 파일\05.Item\AttackBoost</Filter>
+      <Filter>소스 파일\05.Item\Consumption\AttackBoost</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일\97.Default</Filter>
@@ -188,10 +179,10 @@
       <Filter>소스 파일\02.GameManager</Filter>
     </ClInclude>
     <ClInclude Include="HealthPotion.h">
-      <Filter>소스 파일\05.Item\HealthPotion</Filter>
+      <Filter>소스 파일\05.Item\Consumption\HealthPotion</Filter>
     </ClInclude>
     <ClInclude Include="AttackBoost.h">
-      <Filter>소스 파일\05.Item\AttackBoost</Filter>
+      <Filter>소스 파일\05.Item\Consumption\AttackBoost</Filter>
     </ClInclude>
     <ClInclude Include="IItem.h">
       <Filter>소스 파일\05.Item</Filter>

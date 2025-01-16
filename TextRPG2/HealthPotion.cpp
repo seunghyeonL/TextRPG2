@@ -9,8 +9,14 @@ string HealthPotion::GetName()
     return Name;
 }
 
-void HealthPotion::Use(Character *character)
+bool HealthPotion::Use(Character *character)
 {
+    LasyCout lasyCout = LasyCout();
+    stringstream ss;
+
     character->SetHealth(character->GetHealth() + HealthRestore);
-    cout << "체력을 " << HealthRestore << " 회복했습니다." << endl;
+    ss << "체력을 " << HealthRestore << " 회복했습니다." << endl;
+    lasyCout(ss.str());
+    ss.str("");
+    return true;
 }

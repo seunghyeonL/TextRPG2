@@ -1,20 +1,19 @@
 #pragma once
 
-#include "IConsumptionItem.h"
+#include "IEtcItem.h"
 #include "Character.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class HealthPotion : public IConsumptionItem
+class LiquidMass : public IEtcItem
 {
 private:
     const string Name;
-    const int HealthRestore;
 
 public:
-    HealthPotion();
+    LiquidMass();
     string GetName() override;
-    bool Use(Character *character) override;
 };
+

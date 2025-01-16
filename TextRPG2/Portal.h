@@ -1,7 +1,6 @@
 #pragma once
 #include "Client_Defines.h"
 #include "IInteractable.h"
-#include "Level.h"
 
 class Portal : public IInteractable
 {

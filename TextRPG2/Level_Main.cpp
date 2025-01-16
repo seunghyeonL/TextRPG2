@@ -15,9 +15,11 @@ void Level_Main::Initialize()
 {
 	MapType = MAP_VILLAGE;
 
-	for (int i = 0; i < MAP_HEIGHT; i++) {
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			m_Map.insert({ PosStruct{ i, j }, { ". ", nullptr} });
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			m_Map.insert({ PosStruct{i, j}, {". ", nullptr} });
 		}
 	}
 
@@ -43,94 +45,19 @@ void Level_Main::Initialize()
 	m_Map[cPos] = { "A ", nullptr };
 }
 
-void Level_Main::Update() {
-	auto pCharacter = Character::GetInstance();
-	PosStruct CurPos = pCharacter->GetPosition();
-
-	m_Map[CurPos] = { ". ", nullptr };
-
-	if (m_pGameManager->Key_Down(VK_UP))
-	{
-		if (CurPos.X > 0) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X - 1, CurPos.Y }].second;
-			if (Interactable) {
-				Interactable->Interact();
-				return;
-			}
-			else {
-				CurPos.X--;
-				pCharacter->SetPosition(CurPos.X, CurPos.Y);
-			}
-		}
-	}
-	else if (m_pGameManager->Key_Down(VK_LEFT))
-	{
-		if (CurPos.Y > 0) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y - 1 }].second;
-			if (Interactable) {
-				Interactable->Interact();
-				return;
-			}
-			else {
-				CurPos.Y--;
-				pCharacter->SetPosition(CurPos.X, CurPos.Y);
-			}
-		}
-	}
-	else if (m_pGameManager->Key_Down(VK_RIGHT))
-	{
-		if (CurPos.Y < MAP_HEIGHT - 1) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X, CurPos.Y + 1 }].second;
-			if (Interactable) {
-				Interactable->Interact();
-				return;
-			}
-			else {
-				CurPos.Y++;
-				pCharacter->SetPosition(CurPos.X, CurPos.Y);
-			}
-		}
-	}
-	else if (m_pGameManager->Key_Down(VK_DOWN))
-	{
-		if (CurPos.X < MAP_WIDTH - 1) {
-			auto Interactable = m_Map[PosStruct{ CurPos.X + 1, CurPos.Y }].second;
-			if (Interactable) {
-				Interactable->Interact();
-				return;
-			}
-			else {
-				CurPos.X++;
-				pCharacter->SetPosition(CurPos.X, CurPos.Y);
-			}
-		}
-	}
-	else if (m_pGameManager->Key_Down(VK_TAB))
-	{
-		if (CurView == VIEW_MAP || CurView == VIEW_INVENTORY)
-			CurView = VIEW_STATUS;
-		else
-			CurView = VIEW_MAP;
-		system("cls");
-	}
-	else if (m_pGameManager->Key_Down(0x49))
-	{
-		if (CurView == VIEW_MAP || CurView == VIEW_STATUS)
-			CurView = VIEW_INVENTORY;
-		else
-			CurView = VIEW_MAP;
-		system("cls");
-	}
-
-
-	m_Map[CurPos] = { "A ", nullptr };
+void Level_Main::Update()
+{
+	Map::Update();
 }
 
 void Level_Main::Render()
 {
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
-		for (int j = 0; j < MAP_WIDTH; j++) {
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			string Tile = m_Map[PosStruct{ i, j }].first;
+			
 			Buffer += m_Map[PosStruct{ i, j }].first;
 		}
 		Buffer.push_back(L'\n');
