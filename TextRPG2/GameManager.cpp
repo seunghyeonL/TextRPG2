@@ -186,8 +186,6 @@ void GameManager::StartGame()
 void GameManager::Battle(IMonster *Monster)
 {
 	Character *Player = Character::GetInstance();
-	HealthPotion *hp = new HealthPotion();
-	AttackBoost *boost = new AttackBoost();
 	auto inventory = Character::GetInstance()->GetInventory();
 
 	double OriginalAttack = Player->GetAttack(); // 전투 시작 전 공격력 저장
@@ -290,8 +288,6 @@ void GameManager::Battle(IMonster *Monster)
 				case 3:
 					cout << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
 					Player->SetAttack(OriginalAttack); // 공격력 증가 물약 먹고 도망갈 수 있어서
-					delete hp;
-					delete boost;
 					Monster->Free();
 					Sleep(3000); // 임시
 					return;
@@ -304,8 +300,6 @@ void GameManager::Battle(IMonster *Monster)
 			cout << "\n"
 				 << Player->GetName() << " 플레이어는 도망을 선택하였습니다.\n";
 			Player->SetAttack(OriginalAttack);
-			delete hp;
-			delete boost;
 			Monster->Free();
 			Sleep(3000); // 임시
 			return;
@@ -316,16 +310,18 @@ void GameManager::Battle(IMonster *Monster)
 	for (int i = 0; i < Character::GetInstance()->GetInventory()->GetConsumptionInven().size(); ++i)
 		Character::GetInstance()->GetInventory()->GetConsumptionInven()[i].first->SetIsAlreadyUseOne();
 	// boost->IsAlredyUseOne = false; // 공격력 증가 물약 사용 시 체크할 변수
-	delete hp;
-	delete boost;
 	Monster->Free();
 }
 
 void GameManager::VisitShop()
 {
-	cout << "상점에 오신 " << Character::GetInstance() << " 플레이어를 환영합니다.\n";
+	Character* Player = Character::GetInstance();
+	auto inventory = Character::GetInstance()->GetInventory();
+	// Shop* shop = Shop::GetInstance();
+	cout << "상점에 오신 " << Player->GetName() << " 플레이어를 환영합니다.\n";
 	while (true)
 	{
+		string name;
 		cout << "\n상점 메뉴\n1. 아이템 구매  2. 아이템 판매  3. 상점 나가기\n";
 		int choice;
 		cin >> choice;
@@ -333,11 +329,67 @@ void GameManager::VisitShop()
 		switch (choice)
 		{
 		case 1:
+			/*  해야할 목록
+				상점아이템 나열
+				번호 입력
+				해당 번호의 아이템을 구매
+				아이템 구매가만큼 플레이어 인벤토리의 골드 감소
+				상점 아이템의 해당 아이템 개수 감소
+				플레이어 인벤토리 내 해당 아이템 개수 증가*/
 
+			// shop->OnSaleItem();
+			//if (shop->OnSaleItem().size())
+			//{
+			int index;
+			cout << "\n구매하고 싶은 아이템 번호를 써주세요.\n";
+			cin >> index;
+			//cout << shop->OnSaleItem() << " 아이템을 구매하시겠습니까?\n";
+			cout << "1. 네     2. 아니요\n";
+			cin >> choice;
+			while (true)
+			{
+				if (choice == 1)
+				{
+					// 구매
+					// shop->BuyItem(index, inventory);
+					break;
+				}
+				else if (choice == 2)
+				{
+
+				}
+				break;
+			//}
 			break;
 		case 2:
-			Character::GetInstance()->DisplayInventory();
+			/* 해야할 목록
+				플레이어 인벤토리 나열
+				번호 입력
+				해당 번호의 아이템을 판매
+				아이템 판매가만큼 플레이어 인벤토리의 골드 증가
+				플레이어 인벤토리 내 해당 아이템 개수 감소*/
+			Player->DisplayInventory();
+			cout << "\n판매하고 싶은 아이템의 이름을 써주세요.\n";
+			cin >> name;
+			cout << name << " 아이템을 판매하시겠습니까?\n";
+			cout << "1. 네     2. 아니요\n";
+			cin >> choice;
+			while (true)
+			{
+				if (choice == 1)
+				{
+					Player->GetInventory();
+					// 판매
+					// vector<pair<int, string>> SellItem
+					// Character::GetInstance()->SellItem
+					break;
+				}
+				else if(choice == 2)
+				{
 
+				}
+				break;
+			}
 			break;
 		case 3:
 			cout << "상점을 나갑니다.\n";
@@ -347,3 +399,5 @@ void GameManager::VisitShop()
 		}
 	}
 }
+
+
