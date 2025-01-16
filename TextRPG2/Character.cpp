@@ -160,6 +160,8 @@ void Character::DisplayInventory()
         }
         cout << "=====================================================================\n";
     }
+
+    // system("pause");
 }
 
 void Character::LevelUp()

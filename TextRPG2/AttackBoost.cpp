@@ -12,15 +12,21 @@ string AttackBoost::GetName()
 
 bool AttackBoost::Use(Character* character)
 {
+    LasyCout lasyCout = LasyCout();
+    stringstream ss;
+
     if (IsAlreadyUseOne)
     {
-        cout << "\n이미 한 번 먹었습니다. 더 이상 먹을 수 없습니다.\n";
+        lasyCout("\n이미 한 번 먹었습니다. 더 이상 먹을 수 없습니다.\n");
         return false;
     }
     else
     {
         character->SetAttack(character->GetAttack() + AttackIncrease);
-        cout << "공격력이 " << AttackIncrease << "만큼 증가했습니다." << endl;
+        ss << "공격력이 " << AttackIncrease << "만큼 증가했습니다." << endl;
+        lasyCout(ss.str());
+        ss.str("");
+
         IsAlreadyUseOne = true;
         return true;
     }
