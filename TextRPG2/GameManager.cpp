@@ -112,6 +112,40 @@ void GameManager::Free()
 	delete this;
 }
 
+int GameManager::getInputInteger(int min, int max) {
+	int result;
+	stringstream ss;
+
+	while (true) {
+		cout << "입력: ";
+		int tmp;
+		string input;
+		cin >> input;
+
+		ss.str(input);
+		if (ss >> tmp) {
+			if (ss.eof()) {
+				if (tmp >= min && tmp <= max) {
+					result = tmp;
+					break;
+				}
+				else {
+					cout << "입력값은 " << min << "에서 " << max << "까지"
+						<< endl
+						<< endl;
+				}
+			}
+		}
+		else {
+			cout << "잘못된 입력. 숫자를 입력해주세요." << endl << endl;
+		}
+		ss.clear();
+		ss.str("");
+	}
+
+	return result;
+}
+
 IMonster *GameManager::GenerateMonster(int level)
 {
 	srand(static_cast<unsigned int>(time(NULL)));
@@ -213,8 +247,7 @@ void GameManager::Battle(IMonster *Monster)
 		Monster->PrintPictureNormal();
 
 		cout << "\n메뉴\n1. 아이템 사용     2. 전투하기     3.도망가기\n";
-		int choice;
-		cin >> choice;
+		int choice = getInputInteger(1, 3);
 		switch (choice)
 		{
 		case 1:
@@ -222,9 +255,10 @@ void GameManager::Battle(IMonster *Monster)
 			Player->DisplayInventory();
 			if (Player->GetInventory()->GetConsumptionInven().size())
 			{
-				int index;
+				
 				lasyCout("\n사용할 아이템 번호를 입력해주세요.\n");
-				cin >> index;
+				int index = getInputInteger(0, 10);
+				
 				Player->GetInventory()->UseItem(index - 1);
 				IncreasedAttack = Player->GetAttack() - OriginalAttack;
 				if (index > Player->GetInventory()->GetConsumptionInven().size())
@@ -240,7 +274,7 @@ void GameManager::Battle(IMonster *Monster)
 				Monster->PrintPictureNormal();
 
 				cout << "\n메뉴\n1. 아이템 사용     2. 공격하기     3.도망가기\n";
-				cin >> choice;
+				choice = getInputInteger(1, 3);
 				cout << "\n";
 				switch (choice)
 				{
@@ -253,7 +287,7 @@ void GameManager::Battle(IMonster *Monster)
 
 						cout << "\n사용할 소비 아이템 번호를 입력해주세요.\n";
 
-						cin >> index;
+						index = getInputInteger(1, 10);
 						Player->GetInventory()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
 						if (index > Player->GetInventory()->GetConsumptionInven().size())
@@ -373,8 +407,8 @@ bool GameManager::VisitShop()
 	{
 		string name;
 		cout << "\n상점 메뉴\n1. 아이템 구매  2. 아이템 판매  3. 상점 나가기\n";
-		int choice;
-		cin >> choice;
+		int choice = getInputInteger(1, 3);
+
 		cout << "\n";
 		switch (choice)
 		{
