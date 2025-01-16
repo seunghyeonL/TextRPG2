@@ -1,4 +1,8 @@
 #pragma once
+#include "Client_Defines.h"
+
+class Level;
+class Map;
 
 class Level_Manager final
 {
@@ -18,9 +22,13 @@ public:
 
 private:
 	class Level* m_pCurrentLevel{ nullptr };
+
 	unsigned int m_iLevelIndex{ 0 };
 
 public:
 	static Level_Manager* Create();
+	
+	Level* CreateMap(MAP MAP_ENUM);
+
 	virtual void Free();
 };

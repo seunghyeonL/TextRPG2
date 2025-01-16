@@ -17,9 +17,9 @@ void Troll::Update()
 
 }
 
-void Troll::Interact() {
-
-}
+//void Troll::Interact() {
+//
+//}
 
 Troll* Troll::Create(string name, double health, double attack)
 {
@@ -41,4 +41,5 @@ Troll* Troll::CreateBoss(string name, double health, double attack)
 
 void Troll::Free()
 {
+	IMonster::Free();
 }

@@ -43,5 +43,6 @@ MainApp* MainApp::Create()
 
 void MainApp::Free()
 {
-
+	m_pGameManager->Free();
+	delete this;
 }

@@ -33,9 +33,6 @@
     <Filter Include="소스 파일\97.Default">
       <UniqueIdentifier>{a44bc811-c7ca-4192-85d0-a534687c6d3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\01.Level\Level_Main">
-      <UniqueIdentifier>{d620cfaa-abfd-48dd-87d2-789921d933db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\06.Inventory">
       <UniqueIdentifier>{d63346e2-037a-41c8-9cea-98470e635134}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,24 @@
     <Filter Include="소스 파일\05.Item\Etc\LiquidMass">
       <UniqueIdentifier>{c7d8ed67-0b66-4733-add3-a55f95318b54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Level\Map">
+      <UniqueIdentifier>{5bcee990-33cf-451a-865d-ab4728ef2da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Map\Level_Shop">
+      <UniqueIdentifier>{e2c7a1cd-34e2-4746-b306-01f2b523a393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Map\Level_Dungeon">
+      <UniqueIdentifier>{3cc8b73e-b499-429c-91f1-fa785d4dd7e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Level\Map\Level_Main">
+      <UniqueIdentifier>{d620cfaa-abfd-48dd-87d2-789921d933db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\08. EventLoop">
+      <UniqueIdentifier>{68a97274-6412-4669-bc9e-f2d9e4997903}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Interactable\Portal">
+      <UniqueIdentifier>{1f31bae7-b365-4b8d-95d5-1a2e2cf46a21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -119,17 +134,25 @@
     <ClCompile Include="Input_Manager.cpp">
       <Filter>소스 파일\98.Input</Filter>
     </ClCompile>
-    <ClCompile Include="Level_Main.cpp">
-      <Filter>소스 파일\01.Level\Level_Main</Filter>
-    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>소스 파일\06.Inventory</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Level_Dungeon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Level_Shop.cpp">
       <Filter>소스 파일</Filter>
+=======
+    <ClCompile Include="Observer.cpp">
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObserver.cpp">
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+>>>>>>> c2e25881c799d4aa479de8cb235fffa6eaf14ad8
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>소스 파일\03.Interactable\Character</Filter>
@@ -158,6 +181,7 @@
     <ClCompile Include="Level_Manager.cpp">
       <Filter>소스 파일\01.Level\Manager</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="IEquipmentItem.cpp">
       <Filter>소스 파일\05.Item\Equipment</Filter>
     </ClCompile>
@@ -172,6 +196,28 @@
     </ClCompile>
     <ClCompile Include="LiquidMass.cpp">
       <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
+=======
+    <ClCompile Include="Level_Dungeon.cpp">
+      <Filter>소스 파일\01.Level\Map\Level_Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Shop.cpp">
+      <Filter>소스 파일\01.Level\Map\Level_Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>소스 파일\03.Interactable\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>소스 파일\01.Level\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Movable.h">
+      <Filter>소스 파일\03.Interactable</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_Main.cpp">
+      <Filter>소스 파일\01.Level\Map\Level_Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EventLoop.cpp">
+      <Filter>소스 파일\08. EventLoop</Filter>
+>>>>>>> c2e25881c799d4aa479de8cb235fffa6eaf14ad8
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,14 +251,23 @@
     <ClInclude Include="Input_Manager.h">
       <Filter>소스 파일\98.Input</Filter>
     </ClInclude>
-    <ClInclude Include="Level_Main.h">
-      <Filter>소스 파일\01.Level\Level_Main</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>소스 파일\06.Inventory</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Level_Dungeon.h" />
     <ClInclude Include="Level_Shop.h" />
+=======
+    <ClInclude Include="Observer.h">
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObserver.h">
+      <Filter>소스 파일\07.InventoryObserver</Filter>
+    </ClInclude>
+>>>>>>> c2e25881c799d4aa479de8cb235fffa6eaf14ad8
     <ClInclude Include="Character.h">
       <Filter>소스 파일\03.Interactable\Character</Filter>
     </ClInclude>
@@ -246,6 +301,7 @@
     <ClInclude Include="Level_Manager.h">
       <Filter>소스 파일\01.Level\Manager</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="IEquipmentItem.h">
       <Filter>소스 파일\05.Item\Equipment</Filter>
     </ClInclude>
@@ -263,6 +319,28 @@
     </ClInclude>
     <ClInclude Include="LiquidMass.h">
       <Filter>소스 파일\05.Item\Etc\LiquidMass</Filter>
+=======
+    <ClInclude Include="Level_Dungeon.h">
+      <Filter>소스 파일\01.Level\Map\Level_Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Shop.h">
+      <Filter>소스 파일\01.Level\Map\Level_Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>소스 파일\03.Interactable\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>소스 파일\01.Level\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_Main.h">
+      <Filter>소스 파일\01.Level\Map\Level_Main</Filter>
+    </ClInclude>
+    <ClInclude Include="EventLoop.h">
+      <Filter>소스 파일\08. EventLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="IHealthObserver.h">
+      <Filter>소스 파일\04.FightObserver</Filter>
+>>>>>>> c2e25881c799d4aa479de8cb235fffa6eaf14ad8
     </ClInclude>
   </ItemGroup>
 </Project>

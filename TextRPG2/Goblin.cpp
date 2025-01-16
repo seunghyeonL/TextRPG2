@@ -18,9 +18,9 @@ void Goblin::Update()
 {
 }
 
-void Goblin::Interact() {
-
-}
+//void Goblin::Interact() {
+//
+//}
 
 Goblin *Goblin::Create(string name, double health, double attack)
 {
@@ -42,4 +42,5 @@ Goblin *Goblin::CreateBoss(string name, double health, double attack)
 
 void Goblin::Free()
 {
+	IMonster::Free();
 }

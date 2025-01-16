@@ -7,7 +7,7 @@
 #include "IItem.h"
 
 
-class Inventory
+class Inventory : public Subject
 {
 private:
     vector<IEquipmentItem*> EquipmentInven;
