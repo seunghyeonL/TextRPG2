@@ -56,6 +56,12 @@ void Level_Dungeon::Render()
 		}
 		Buffer.push_back(L'\n');
 	}
+	if (preView != CurView)
+	{
+		system("cls");
+		preView = CurView;
+	}
+		
 
 	gotoxy(0, 0);
 
@@ -71,9 +77,14 @@ void Level_Dungeon::Render()
 	case VIEW_INVENTORY:
 		Character::GetInstance()->DisplayInventory();
 		break;
+	case VIEW_EQUIPMENTSLOTS:
+		preView = VIEW_EQUIPMENTSLOTS;
+		if (Character::GetInstance()->DisplayEquipmentSlots() == true)
+			CurView = VIEW_MAP;
+		break;
 	}
 
-	cout << "TAB : 스탯창\tI : 인벤토리\tESC : 종료" << endl;
+	cout << "TAB : 스탯창\tE : 장비창\tI : 인벤토리\tESC : 종료" << endl;
 	Buffer.clear();
 }
 

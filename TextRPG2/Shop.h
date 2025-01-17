@@ -6,21 +6,30 @@
 #include "IEquipmentItem.h"
 #include "IConsumptionItem.h"
 #include "IEtcItem.h"
+#include "IInteractable.h"
 
-class Shop
+class Shop : public IInteractable
 {
 private:
-	static Shop* Instance;
-	Shop();
-	Shop(const Shop&) = delete;
-	Shop& operator=(const Shop&) = delete;
-	vector<IEquipmentItem*> EquipItem;
-	vector<pair<IConsumptionItem*, int>> ConsumptionItem;
-	vector<pair<IEtcItem*, int>> OtherItem;
+    static Shop* Instance;
+    Shop();
+    Shop(const Shop&) = delete;
+    Shop& operator=(const Shop&) = delete;
+    vector<IEquipmentItem*> EquipItem;
+    vector<pair<IConsumptionItem*, int>> ConsumptionItem;
+    vector<pair<IEtcItem*, int>> OtherItem;
 public:
-	static Shop *GetInstance();
-	void OnSaleItem();
-	vector<IEquipmentItem*> GetEquipList();
-	vector<pair<IConsumptionItem*, int>> GetConsumptionList();
-	vector<pair<IEtcItem*, int>> GetOtherList();
+    static Shop* GetInstance();
+    void Init();
+    void OnSaleItem();
+    vector<IEquipmentItem*> GetEquipList();
+    vector<pair<IConsumptionItem*, int>> GetConsumptionList();
+    vector<pair<IEtcItem*, int>> GetOtherList();
+
+    vector<IEquipmentItem*>* GetEquipList_Ptr();
+    vector<pair<IConsumptionItem*, int>>* GetConsumptionList_Ptr();
+    vector<pair<IEtcItem*, int>>* GetOtherList_Ptr();
+
+    // IInteractable을(를) 통해 상속됨
+    void Interact() override;
 };

@@ -9,8 +9,8 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void Render() override;
-
-
+private:
+	VIEW preView{ VIEW_MAP };
 public:
 	Level_Shop();
 	virtual ~Level_Shop() = default;

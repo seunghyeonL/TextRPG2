@@ -1,10 +1,20 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include "Shop.h"
 #include "GameManager.h"
 #include "Character.h"
 #include "HealthPotion.h"
 #include "AttackBoost.h"
+#include "ShabbyHelm.h"
+#include "GreenLeatherHelm.h"
+#include "BoneHelm.h"
+#include "ClothArmor.h"
+#include "SlimeArmor.h"
+#include "BoneArmor.h"
+#include "Branch.h"
+#include "HeavySword.h"
+#include "GreatSword.h"
 
 Character *Character::Instance = nullptr;
 
@@ -15,8 +25,27 @@ Character::Character(string name)
 {
     HealthPotion *potion = new HealthPotion();
     AttackBoost *AB = new AttackBoost();
+    ShabbyHelm* helm = new ShabbyHelm();
+    GreenLeatherHelm* gh = new GreenLeatherHelm();
+    BoneHelm* bh = new BoneHelm();
+    ClothArmor* ca = new ClothArmor();
+    SlimeArmor* sa = new SlimeArmor();
+    BoneArmor* ba = new BoneArmor();
+    Branch* b = new Branch();
+    HeavySword* hs = new HeavySword();
+    GreatSword* gs = new GreatSword();
+
     potion->AddToInventory(Inven, 10);
     AB->AddToInventory(Inven, 5);
+    helm->AddToInventory(Inven, 1);
+    gh->AddToInventory(Inven, 1);
+    bh->AddToInventory(Inven, 1);
+    ca->AddToInventory(Inven, 1);
+    sa->AddToInventory(Inven, 1);
+    ba->AddToInventory(Inven, 1);
+    b->AddToInventory(Inven, 1);
+    hs->AddToInventory(Inven, 1);
+    gs->AddToInventory(Inven, 1);
 }
 
 Character *Character::GetInstance(string name)
@@ -66,6 +95,16 @@ void Character::SetHealth(double health)
 double Character::GetAttack()
 {
     return Attack;
+}
+
+void Character::SetMaxHealth(double maxHealth)
+{
+    MaxHealth = maxHealth;
+}
+
+double Character::GetMaxHealth()
+{
+    return MaxHealth;
 }
 
 void Character::GetDamage(double attack)
@@ -140,9 +179,10 @@ void Character::DisplayInventory()
         for (int i = 0; i < Inven->GetConsumptionInven().size(); i++)
         {
             cout << i + 1 << ". " << Inven->GetConsumptionInven()[i].first->GetName()
-                 << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
+                << ": " << Inven->GetConsumptionInven()[i].second << "개\n";
         }
         cout << "=====================================================================\n";
+            
     }
     if (Inven->GetEtcInven().empty())
     {
@@ -153,23 +193,63 @@ void Character::DisplayInventory()
     {
         cout << "현재 가지고 있는 기타 아이템 목록\n";
         for (int i = 0; i < Inven->GetEtcInven().size(); i++)
-            cout << i << ". " << Inven->GetEtcInven()[i].first->GetName() << ": " << Inven->GetEtcInven()[i].second << "개\n";
-    }
-
-    // system("pause");
-
-    /* 루프돌면서 키감지 */
-    for (int i = 0; i < Inven->GetConsumptionInven().size(); ++i)
-    {
-        if (pGameManager->Key_Down('0' + i))
         {
             cout << i + 1 << ". " << Inven->GetEtcInven()[i].first->GetName()
-                 << ": " << Inven->GetEtcInven()[i].second << "개\n";
+                << ": " << Inven->GetEtcInven()[i].second << "개\n";
         }
         cout << "=====================================================================\n";
     }
 
     // system("pause");
+}
+
+bool Character::DisplayEquipmentSlots()
+{
+    cout << "현재 착용중인 장비=====================================================" << endl;
+
+    if (HelmSlot == nullptr) 
+        cout << "투구 : 비어있음" << endl;
+    else 
+        cout << "투구 : " << HelmSlot->GetName() << endl;
+    if (ArmorSlot == nullptr) 
+        cout << "갑옷 : 비어있음" << endl;
+    else 
+        cout << "갑옷 : " << ArmorSlot->GetName() << endl;
+
+    if (WeaponSlot == nullptr) 
+        cout << "무기 : 비어있음" << endl;
+    else
+        cout << "무기 : " << WeaponSlot->GetName() << endl;
+
+    if (Inven->GetEquipmentInven().empty())
+    {
+        cout << "=====================================================================\n";
+        cout << "장비창은 비어있다.\n";
+        cout << "=====================================================================\n";
+    }
+    else
+    {
+        cout << "현재 가지고 있는 장비 아이템 목록\n\n";
+        for (int i = 0; i < Inven->GetEquipmentInven().size(); i++)
+        {
+            cout << i + 1 << ". " << Inven->GetEquipmentInven()[i]->GetName() << "\n";
+        }
+        cout << "=====================================================================\n";
+    }
+    
+    int index;
+    //cout << "\n사용할 아이템 번호를 입력해주세요.\n";
+    cout<<"\n사용할 아이템 번호를 입력해주세요. // 0번 누를시 탈출.\n";
+    cin >> index;
+    if (index == 0)
+    {
+        cout << "0번 누름" << endl;
+        system("cls");
+        return true;
+    }
+
+    Equip(index - 1);
+    return false;
 }
 
 void Character::LevelUp()
@@ -197,48 +277,196 @@ shared_ptr<Inventory> Character::GetInventory()
     return Inven;
 }
 
-void Character::BuyItem()
+void Character::SetEquipmentSlots(IEquipmentItem* equipItem, EquipmentType type)
 {
-    string name;
-    int choice;
-    /*  해야할 목록
-                상점아이템 나열
-                번호 입력
-                해당 번호의 아이템을 구매
-                아이템 구매가만큼 플레이어 인벤토리의 골드 감소
-                상점 아이템의 해당 아이템 개수 감소
-                플레이어 인벤토리 내 해당 아이템 개수 증가*/
-    cout << "\n구매하고 싶은 아이템 번호를 써주세요.\n";
-    cin >> choice;
-    //cout << shop->OnSaleItem() << " 아이템을 구매하시겠습니까?\n";
-    cout << "1. 네     2. 아니요\n";
-    cin >> choice;
-    while (true)
+    switch (type)
     {
-        if (choice == 1)
+    case Helm:
+        if (HelmSlot == nullptr)
         {
-            // 구매
-            // shop->BuyItem(index, inventory);
-            break;
+            HelmSlot = equipItem;
+            ApplyItemHealthStatus(equipItem);
+            cout << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
         }
-        else if (choice == 2)
+        else
         {
-
+            auto ExEquipItem = HelmSlot;
+            HelmSlot == nullptr;
+            HelmSlot = equipItem;
+            ApplyItemHealthStatus(equipItem, ExEquipItem);
+            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 투구칸에 장착하였습니다." << endl;
+            Inven->AddToEquipment(ExEquipItem);
         }
         break;
-    };
-};
+    case Armor:
+        if (ArmorSlot == nullptr)
+        {
+            ArmorSlot = equipItem;
+            ApplyItemHealthStatus(equipItem);
+            cout << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+        }
+        else
+        {
+            auto ExEquipItem = ArmorSlot;
+            ArmorSlot == nullptr;
+            ArmorSlot = equipItem;
+            ApplyItemHealthStatus(equipItem, ExEquipItem);
+            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 갑옷칸에 장착하였습니다." << endl;
+            Inven->AddToEquipment(ExEquipItem);
+        }
+        break;
+    case Weapon:
+        if (WeaponSlot == nullptr)
+        {
+            WeaponSlot = equipItem;
+            ApplyItemAttackStatus(equipItem);
+            cout << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+        }
+        else
+        {
+            auto ExEquipItem = WeaponSlot;
+            WeaponSlot == nullptr;
+            WeaponSlot = equipItem;
+            ApplyItemAttackStatus(equipItem, ExEquipItem);
+            cout << ExEquipItem->GetName() << "을 해제하고 " << equipItem->GetName() << "을 무기칸에 장착하였습니다." << endl;
+            Inven->AddToEquipment(ExEquipItem);
+        }
+        break;
+    default:
+        cout << "잘못된 접근입니다." << endl;
+        break;
+    }
+    Inven->RemoveToEquipment(equipItem);
+}
 
-bool Character::SellItem()
+int Character::BuyItem()
 {
     Character* Player = Character::GetInstance();
+    Shop* shop = Shop::GetInstance();
+    vector<IEquipmentItem*>* ShopEquip = shop->GetEquipList_Ptr();
+    vector<pair<IConsumptionItem*, int>>* ShopConsum = shop->GetConsumptionList_Ptr();
+    vector<pair<IEtcItem*, int>>* ShopEtc = shop->GetOtherList_Ptr();
+
     vector<IEquipmentItem*> EquipmentInven = Player->GetInventory()->GetEquipmentInven();
     vector<pair<IConsumptionItem*, int>> ConsumptionInven = Player->GetInventory()->GetConsumptionInven();
     vector<pair<IEtcItem*, int>> EtcInven = Player->GetInventory()->GetEtcInven();
 
     string name;
     int choice;
+    int price = 0;
+    while (true)
+    {
+        system("cls");
+        shop->OnSaleItem();
 
+        cout << "\n구매하고 싶은 아이템의 이름을 써주세요.\n";
+        cin >> name;
+        cout << "\n" << name << " 아이템을 구매하시겠습니까?\n";
+        cout << "1. 네     2. 아니요\n";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "\n구매할 수량을 입력해주세요.\n";
+            int Quantity;
+            cin >> Quantity;
+            if (Quantity < 0)
+            {
+                cout << "\n잘못된 입력입니다.\n";
+            }
+            else
+            {
+                if (Quantity == 1)
+                {
+                    for (int i = 0; i < ShopEquip->size(); ++i)
+                    {
+                        if ((*ShopEquip)[i]->GetName() == name)
+                        {
+                            Player->GetInventory()->AddToEquipment((*ShopEquip)[i]);
+                            (*ShopEquip).erase(remove((*ShopEquip).begin(), (*ShopEquip).end(),
+                                (*ShopEquip)[i]), (*ShopEquip).end());
+                            return 100;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < ShopConsum->size(); ++i)
+                {
+                    if ((*ShopConsum)[i].first->GetName() == name)
+                    {
+                        if ((*ShopConsum)[i].second > 1)
+                        {
+                            if ((*ShopConsum)[i].second < Quantity)
+                            {
+                                cout << "\n잘못된 입력입니다.\n";
+                                continue;
+                            }
+                                
+
+                            Player->GetInventory()->AddToConsumption((*ShopConsum)[i].first, Quantity);
+                            (*ShopConsum)[i].second -= Quantity;
+                            
+                            return  Quantity * 30;
+                        }
+                        else if ((*ShopConsum)[i].second == 1)
+                        {
+                            Player->GetInventory()->AddToConsumption((*ShopConsum)[i].first,1);
+
+                            (*ShopConsum).erase(remove((*ShopConsum).begin(), (*ShopConsum).end(),
+                                (*ShopConsum)[i]), (*ShopConsum).end());
+                            //
+                            return 30;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < ShopEtc->size(); ++i)
+                {
+                    if ((*ShopEtc)[i].first->GetName() == name)
+                    {
+                        if ((*ShopEtc)[i].second > 1)
+                        {
+                            if ((*ShopEtc)[i].second < Quantity)
+                            {
+                                cout << "\n잘못된 입력입니다.\n";
+                                continue;
+                            }
+
+                            Player->GetInventory()->AddToEtc((*ShopEtc)[i].first, Quantity);
+                            (*ShopEtc)[i].second -= Quantity;
+                            //
+                            return Quantity * 10;
+                        }
+                        else if ((*ShopEtc)[i].second == 1)
+                        {
+                            Player->GetInventory()->AddToEtc((*ShopEtc)[i].first, 1);
+                            (*ShopEtc).erase(remove((*ShopEtc).begin(), (*ShopEtc).end(),
+                                (*ShopEtc)[i]), (*ShopEtc).end());
+                            //
+                            return 10;
+                        }
+                    }
+                }
+            }
+        case 2:
+            break;
+        default:
+            cout << "잘못된 입력입니다.\n";
+        }
+        return false;
+    }
+
+};
+
+int Character::SellItem() 
+{
+    Character* Player = Character::GetInstance();
+    vector<IEquipmentItem*>* EquipmentInven = Player->GetInventory()->GetEquipmentInven_Ptr();
+    vector<pair<IConsumptionItem*, int>>* ConsumptionInven = Player->GetInventory()->GetConsumptionInven_Ptr();
+    vector<pair<IEtcItem*, int>>* EtcInven = Player->GetInventory()->GetEtcInven_Ptr();
+
+    string name;
+    int choice;
     while (true)
     {
         cout << "\n판매하고 싶은 아이템의 이름을 써주세요.\n";
@@ -252,7 +480,7 @@ bool Character::SellItem()
             cout << "\n판매할 수량을 입력해주세요.\n";
             int Quantity;
             cin >> Quantity;
-            if (Quantity < 0 || Quantity > EquipmentInven.size() || Quantity > ConsumptionInven.size() || Quantity > EtcInven.size())
+            if (Quantity < 0)// || Quantity > EquipmentInven->size() || Quantity > ConsumptionInven->size() || Quantity > EtcInven->size())
             {
                 cout << "\n잘못된 입력입니다.\n";
             }
@@ -260,49 +488,48 @@ bool Character::SellItem()
             {
                 if (Quantity == 1)
                 {
-                    for (int i = 0; i < EquipmentInven.size(); ++i)
+                    for (int i = 0; i < EquipmentInven->size(); ++i)
                     {
-                        if (EquipmentInven[i]->GetName() == name)
+                        if ((*EquipmentInven)[i]->GetName() == name)
                         {
-                            EquipmentInven.erase(remove(EquipmentInven.begin(), EquipmentInven.end(),
-                                EquipmentInven[i]), EquipmentInven.end());
-                            return true;
+                            (*EquipmentInven).erase(remove((*EquipmentInven).begin(), (*EquipmentInven).end(),
+                                (*EquipmentInven)[i]), (*EquipmentInven).end());
+                            return 50;
+                        }
+                    }
+                }
+                for (int i = 0; i < ConsumptionInven->size(); ++i)
+                {
+                    if ((*ConsumptionInven)[i].first->GetName() == name)
+                    {
+                        if ((*ConsumptionInven)[i].second > 1)
+                        {
+                            (*ConsumptionInven)[i].second -= Quantity;
+                            return Quantity * 15;
+                        }
+                        else if ((*ConsumptionInven)[i].second == 1)
+                        {
+                            (*ConsumptionInven).erase(remove((*ConsumptionInven).begin(), (*ConsumptionInven).end(),
+                                (*ConsumptionInven)[i]), (*ConsumptionInven).end());
+                            return 15;
                         }
                     }
                 }
 
-                for (int i = 0; i < ConsumptionInven.size(); ++i)
+                for (int i = 0; i < EtcInven->size(); ++i)
                 {
-                    if (ConsumptionInven[i].first->GetName() == name)
+                    if ((*EtcInven)[i].first->GetName() == name)
                     {
-                        if (ConsumptionInven[i].second > 1)
+                        if ((*EtcInven)[i].second > 1)
                         {
-                            ConsumptionInven[i].second -= Quantity;
-                            return true;
+                            (*EtcInven)[i].second -= Quantity;
+                            return Quantity * 5;
                         }
-                        else if (ConsumptionInven[i].second == 1)
+                        else if ((*EtcInven)[i].second == 1)
                         {
-                            ConsumptionInven.erase(remove(ConsumptionInven.begin(), ConsumptionInven.end(),
-                                ConsumptionInven[i]), ConsumptionInven.end());
-                            return true;
-                        }
-                    }
-                }
-
-                for (int i = 0; i < EtcInven.size(); ++i)
-                {
-                    if (EtcInven[i].first->GetName() == name)
-                    {
-                        if (EtcInven[i].second > 1)
-                        {
-                            EtcInven[i].second -= Quantity;
-                            return true;
-                        }
-                        else if (EtcInven[i].second == 1)
-                        {
-                            EtcInven.erase(remove(EtcInven.begin(), EtcInven.end(),
-                                EtcInven[i]), EtcInven.end());
-                            return true;
+                            (*EtcInven).erase(remove((*EtcInven).begin(), (*EtcInven).end(),
+                                (*EtcInven)[i]), (*EtcInven).end());
+                            return 5;
                         }
                     }
                 }
@@ -314,4 +541,49 @@ bool Character::SellItem()
         }
         return false;
     }
+}
+
+void Character::ApplyItemHealthStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem)
+{
+    if (exEquipItem == nullptr)
+    {
+        IncreasedHealth += equipItem->GetHealthIncrease();
+        SetMaxHealth(GetHealth() + IncreasedHealth);
+    }
+    else
+    {
+        int HealthDiffer = equipItem->GetHealthIncrease() - exEquipItem->GetHealthIncrease();
+        IncreasedHealth += HealthDiffer;
+        SetMaxHealth(GetHealth() + IncreasedHealth);
+    }
+}
+
+void Character::ApplyItemAttackStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem)
+{
+    if (exEquipItem == nullptr)
+    {
+        IncreasedAttak += equipItem->GetAttackIncrease();
+        SetAttack(GetAttack() + IncreasedAttak);
+    }
+    else
+    {
+        IncreasedAttak = 0;
+        int AttackDiffer = equipItem->GetAttackIncrease() - exEquipItem->GetAttackIncrease();
+        IncreasedAttak += AttackDiffer;
+        SetAttack(GetAttack() + IncreasedAttak);
+    }
+}
+
+void Character::Equip(int index)
+{
+
+    if (index >= 0 && index < Inven->GetEquipmentInven().size())
+    {
+        cout << Inven->GetEquipmentInven()[index]->GetName() << "을(를) 착용합니다.\n";
+        Inven->GetEquipmentInven()[index]->Equip();
+
+        system("cls");
+    }
+    
+   
 }

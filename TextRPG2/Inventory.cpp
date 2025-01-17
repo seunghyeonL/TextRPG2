@@ -22,6 +22,21 @@ vector<pair<IEtcItem*, int>> Inventory::GetEtcInven()
     return EtcInven;
 }
 
+vector<IEquipmentItem*>* Inventory::GetEquipmentInven_Ptr()
+{
+    return &EquipmentInven;
+}
+
+vector<pair<IConsumptionItem*, int>>* Inventory::GetConsumptionInven_Ptr()
+{
+    return &ConsumptionInven;
+}
+
+vector<pair<IEtcItem*, int>>* Inventory::GetEtcInven_Ptr()
+{
+    return &EtcInven;
+}
+
 int Inventory::GetGold()
 {
     return Gold;
@@ -93,7 +108,8 @@ void Inventory::AddToConsumption(IConsumptionItem* item, int quantity)
             if (ConsumptionInven[i].first->GetName() == item->GetName())
             {
                 ConsumptionInven[i].second += quantity;
-                delete item;
+
+                //delete item;
                 return;
             }
         }

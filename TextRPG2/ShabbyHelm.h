@@ -15,6 +15,5 @@ private:
 public:
     ShabbyHelm();
     string GetName() override;
-    void Equip(Character* character) override;
 };
 

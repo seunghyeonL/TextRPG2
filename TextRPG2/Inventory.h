@@ -19,6 +19,11 @@ public:
     vector<IEquipmentItem *> GetEquipmentInven();
     vector<pair<IConsumptionItem *, int>> GetConsumptionInven();
     vector<pair<IEtcItem *, int>> GetEtcInven();
+
+    vector<IEquipmentItem*>* GetEquipmentInven_Ptr();
+    vector<pair<IConsumptionItem*, int>>* GetConsumptionInven_Ptr();
+    vector<pair<IEtcItem*, int>>* GetEtcInven_Ptr();
+
     int GetGold();
     void AddGold(int gold);
     void UseItem(int index);

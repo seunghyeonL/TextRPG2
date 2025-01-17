@@ -1,7 +1,7 @@
 #include "ShabbyHelm.h"
 
 ShabbyHelm::ShabbyHelm()
-	:Name("ShabbyHelm")
+	: IEquipmentItem(Helm, 0, 5),Name("ShabbyHelm") 
 {
 }
 
@@ -10,7 +10,3 @@ string ShabbyHelm::GetName()
 	return Name;
 }
 
-void ShabbyHelm::Equip(Character* character)
-{
-
-}

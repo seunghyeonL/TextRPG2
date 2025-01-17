@@ -10,6 +10,7 @@
 #include "Slime.h"
 #include "Troll.h"
 #include "Level.h"
+#include "Shop.h"
 #include "Orc.h"
 #include <windows.h>
 #include "Level_Dungeon.h"
@@ -29,6 +30,9 @@ void GameManager::Initialize()
 	m_pLevel_Manager = Level_Manager::Create();
 
 	m_pInput_Manager = Input_Manager::Create(hInstance, hWnd);
+
+	Shop::GetInstance()->Init();
+	
 }
 
 void GameManager::Exit()
@@ -248,6 +252,9 @@ void GameManager::Battle(IMonster *Monster)
 					{
 						int index;
 						lasyCout("\n사용할 아이템 번호를 입력해주세요.\n");
+
+						cout << "\n사용할 소비 아이템 번호를 입력해주세요.\n";
+
 						cin >> index;
 						Player->GetInventory()->UseItem(index - 1);
 						IncreasedAttack = Player->GetAttack() - OriginalAttack; // 공격력 증가 물약으로 증가한 공격력
@@ -360,11 +367,11 @@ void GameManager::Battle(IMonster *Monster)
 	delete boost;
 }
 
-void GameManager::VisitShop()
+bool GameManager::VisitShop()
 {
 	Character* Player = Character::GetInstance();
-	Shop* shop = Shop::GetInstance();
-	bool flag = false;
+	Shop* Shop = Shop::GetInstance();
+	int flag = 0;
 	cout << "상점에 오신 " << Player->GetName() << " 플레이어를 환영합니다.\n";
 	while (true)
 	{
@@ -376,24 +383,31 @@ void GameManager::VisitShop()
 		switch (choice)
 		{
 		case 1:
-			shop->OnSaleItem();
-			//Player->BuyItem();
+			Shop->OnSaleItem();
+			flag = Player->BuyItem();
+			if (flag > 0)
+			{
+				Player->GetInventory()->AddGold(-flag);
+			}
 			break;
 		case 2:
 			Player->DisplayInventory();
 			flag = Player->SellItem();
 			if (flag)
 			{
-				// Player->GetInventory()->AddGold();
+				Player->GetInventory()->AddGold(flag);
 			}
 			break;
 		case 3:
 			cout << "상점을 나갑니다.\n";
-			return;
+			system("cls");
+			return false;
 		default:
 			cout << "잘못된 입력입니다. 다시 시도하세요.\n";
 		}
 	}
+
+	return true;
 }
 
 

@@ -109,9 +109,11 @@ void Goblin::Update()
 {
 }
 
+
 // void Goblin::Interact() {
 //
 // }
+
 
 Goblin* Goblin::Create(string name, double health, double attack)
 {

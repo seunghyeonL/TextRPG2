@@ -122,8 +122,7 @@ void Troll::Update()
 
 Troll *Troll::Create(string name, double health, double attack)
 {
-    Troll *pTroll = new Troll();
-
+    Troll* pTroll = new Troll();
     pTroll->Initialize(name, health, attack);
 
     return pTroll;
@@ -131,7 +130,7 @@ Troll *Troll::Create(string name, double health, double attack)
 
 Troll *Troll::CreateBoss(string name, double health, double attack)
 {
-    Troll *pTroll = new Troll();
+    Troll* pTroll = new Troll();
 
     pTroll->Initialize(name, health, attack);
 
