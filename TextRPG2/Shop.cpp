@@ -128,5 +128,8 @@ vector<pair<IEtcItem*, int>>* Shop::GetOtherList_Ptr()
 
 void Shop::Interact()
 {
-
+    GameManager* pGameManager = GameManager::Get_Instance();
+    system("cls");
+    pGameManager->VisitShop();
+    system("cls");
 }

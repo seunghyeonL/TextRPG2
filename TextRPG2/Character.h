@@ -25,9 +25,9 @@ private:
 	double IncreasedAttak;
 	double IncreasedHealth;
 	shared_ptr<Inventory> Inven;
-	IEquipmentItem* HelmSlot;
-	IEquipmentItem* ArmorSlot;
-	IEquipmentItem* WeaponSlot;
+	IEquipmentItem *HelmSlot;
+	IEquipmentItem *ArmorSlot;
+	IEquipmentItem *WeaponSlot;
 
 	class GameManager *pGameManager{nullptr};
 	Character(string name);
@@ -56,12 +56,14 @@ public:
 	void LevelUp();
 	void AddExperience(double amount);
 	shared_ptr<Inventory> GetInventory();
-	void SetEquipmentSlots(IEquipmentItem* equipItem, EquipmentType type);
+	void SetEquipmentSlots(IEquipmentItem *equipItem, EquipmentType type);
 
 	int SellItem();
 	int BuyItem();
 
-	void ApplyItemHealthStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem = nullptr);
-	void ApplyItemAttackStatus(IEquipmentItem* equipItem, IEquipmentItem* exEquipItem = nullptr);
+	void ApplyItemHealthStatus(IEquipmentItem *equipItem, IEquipmentItem *exEquipItem = nullptr);
+	void ApplyItemAttackStatus(IEquipmentItem *equipItem, IEquipmentItem *exEquipItem = nullptr);
 	void Equip(int index);
+
+	int getInputInteger(int min, int max);
 };

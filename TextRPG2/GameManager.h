@@ -52,6 +52,9 @@ private:
 
 	int m_iPlayerPosX{ 0 };
 	int m_iPlayerPosY{ 0 };
+
+	int getInputInteger(int min, int max);
+
 public:
 	static GameManager* Create();
 	virtual void Free();
